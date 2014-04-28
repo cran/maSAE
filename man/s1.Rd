@@ -1,0 +1,24 @@
+\docType{data}
+\name{s1}
+\alias{s1}
+\title{Example s1 data set.}
+\format{A data frame with 786 observations on the following 5 variables.}
+\usage{
+data(s1)
+}
+\description{
+Artifical first phase sampling data used for examples in
+the maSAE package.
+}
+\details{
+\describe{ \item{\code{clustid}}{See
+\code{"\link[=s2]{?maSAE::s2}"}} \item{\code{x1}}{See
+\code{"\link[=s2]{?maSAE::s2}"}} \item{\code{x2}}{See
+\code{"\link[=s2]{?maSAE::s2}"}} \item{\code{x3}}{See
+\code{"\link[=s2]{?maSAE::s2}"}}
+\item{\code{inclusion}}{See
+\code{"\link[=s2]{?maSAE::s2}"}} \item{\code{g}}{See
+\code{"\link[=s2]{?maSAE::s2}"}} }
+}
+\keyword{datasets}
+

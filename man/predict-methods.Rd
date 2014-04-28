@@ -1,0 +1,95 @@
+\docType{methods}
+\name{predict}
+\alias{predict}
+\alias{predict,sadObj-method}
+\alias{predict,saeObj-method}
+\alias{predict-methods}
+\title{Methods for Function \code{predict}}
+\usage{
+predict(object, ...)
+
+\S4method{predict}{sadObj}(object)
+
+\S4method{predict}{saeObj}(object)
+}
+\arguments{
+  \item{object}{a model object for which prediction is
+  desired.}
+
+  \item{...}{Arguments to be passed to methods.}
+}
+\value{
+a data frame containing predictions and variances for each
+small area, attr(\dots, 'references') gives information on
+the literature used, attr(\dots$prediction, 'reference')
+and attr(\dots$variance, 'reference') specify these.
+}
+\description{
+Calculate small area predictions and their variances
+}
+\details{
+Based on the structure of the \code{saeObj} given,
+\code{predict} decides, which predictor to use:\cr If a
+smallAreaMeans-data.frame covering all fixed effects is
+given, the exhaustive estimator \eqn{\hat{\tilde{Y}}_{G,
+synth}} is calculated.  \cr If a smallAreaMeans-data.frame
+not covering all fixed effects is given, the partially
+exhaustive estimator \eqn{\hat{\tilde{Y}}_{G, greg}} is
+calculated.  \cr If no smallAreaMeans-data.frame but s1 is
+given, the three-phase estimator \eqn{\hat{\tilde{Y}}_{G,
+g3reg}} is calculated.  \cr If neither smallAreaMeans nor
+s1 are given, the non-exhaustive estimator
+\eqn{\hat{\tilde{Y}}_{G, psynth}} is calculated.  \cr If a
+clustering variable is given, the cluster sampling design
+equivalents of the above estimators are used.
+}
+\section{Methods}{
+  \describe{
+
+  \item{\code{signature(object = saeObj)}}{Calculate
+  predictions and variances according to the auxilliary
+  information given, see Details above.}
+
+  \item{\code{signature(object = sadObj)}}{Calculate
+  design-based predictions and variances.} }
+}
+\examples{
+library('maSAE')
+## ## design-based estimation
+## load data
+data('s2')
+## create object
+saeO  <- saObj(data = s2, f = y ~ NULL | g)
+## design-based estimation for all small areas given by g
+predict(saeO)
+## ## model-assisted estimation
+## load s1 data
+data('s1'); str(s1)
+## add sample indicators to s2
+s2$s1 <- s2$s2 <- TRUE
+## add sample indicators to s1
+s1$s1 <- TRUE
+s1$s2 <- FALSE
+## prepare s1 data
+eval(parse(text=(paste('s1$', setdiff(names(s2), names(s1)), ' <- NA' , sep = ''))))
+## union s1 and s2 data
+s12 <- rbind(s1, s2)
+## create object
+saeO <- saObj(data = s12, f = y ~x1 + x2 + x3 | g, s2 = 's2')
+## small area estimation
+p <- predict(saeO)
+## print p and view its attributes set by predict()
+p;
+str(p)
+cat(sep = '\\n', attr(p, 'references')[2])
+attributes(p$prediction)
+attributes(p$variance)
+}
+\seealso{
+\code{demo('maSAE')}
+}
+\keyword{area}
+\keyword{estimation}
+\keyword{methods,}
+\keyword{small}
+

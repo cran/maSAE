@@ -1,0 +1,36 @@
+\docType{class}
+\name{characterOrNULL-class}
+\alias{characterOrNULL-class}
+\alias{data.frameOrNULL-class}
+\alias{references}
+\title{Class \code{"characterOrNULL"}}
+\format{chr}
+\description{
+the _union_ of classes \code{character} and \code{NULL}
+
+the _union_ of classes \code{data.frame} and \code{NULL}
+
+internal character object to store information about the
+literature used in the reference-attribute of the objects
+returned by \code{\link[=predict]{?maSAE::predict}}.
+}
+\details{
+used by \linkS4class{savObj}, \linkS4class{saeObj}
+
+used by \linkS4class{saeObj}
+}
+\section{Objects from the Class}{
+  A virtual Class: No objects may be created from it.
+}
+\examples{
+showClass("characterOrNULL")
+showClass("data.frameOrNULL")
+}
+\seealso{
+\code{\link[methods:setClassUnion]{?methods::setClassUnion}}
+
+\code{\link[methods:setClassUnion]{?methods::setClassUnion}}
+}
+\keyword{classes}
+\keyword{internal}
+

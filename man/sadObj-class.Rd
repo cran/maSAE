@@ -1,0 +1,50 @@
+\docType{class}
+\name{sadObj-class}
+\alias{sadObj-class}
+\title{Class \code{"sadObj"}}
+\description{
+a class for design-based estimation only
+}
+\details{
+See \code{"\linkS4class{saeObj}"}. The fixed effects part
+of \code{f} has to be NULL: design-based estimation knows
+no fixed effects.
+}
+\section{Slots}{
+
+\describe{
+\item{\code{data}}{See \code{"\linkS4class{saeObj}"}.}
+
+\item{\code{f}}{See \code{"\linkS4class{saeObj}"}.}
+
+\item{\code{cluster}}{See \code{"\linkS4class{saeObj}"}.}
+
+\item{\code{include}}{See \code{"\linkS4class{saeObj}"}.}
+}}
+\note{
+the slots are described in
+\code{"\link[=saeObj-class]{class?maSAE::saeObj}"}, since
+this is the main class of the package.
+}
+\section{Extends}{
+  Class \code{"\linkS4class{savObj}"}, directly.
+}
+
+\section{Objects from the Class}{
+  Objects can be created by calls of the form
+  \code{new("sadObj", ...)} or via the constructor function
+  \code{"\link[=saObj]{?maSAE::saObj}"}.
+}
+
+\section{Methods}{
+  \code{\link{predict}}
+}
+\examples{
+showClass("sadObj")
+}
+\seealso{
+\code{"\linkS4class{saeObj}"}
+\code{"\link[=saObj]{?maSAE::saObj}"}
+}
+\keyword{classes}
+

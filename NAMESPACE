@@ -1,0 +1,9 @@
+import("methods")
+exportPattern("saObj")
+exportMethods(
+    "predict" 
+)
+exportClasses(
+     "saeObj",
+     "sadObj"
+)

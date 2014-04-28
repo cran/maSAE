@@ -1,0 +1,36 @@
+\docType{class}
+\name{savObj-class}
+\alias{savObj-class}
+\title{Class \code{"savObj"}}
+\description{
+Common slots for classes \code{sadObj} and \code{saeObj}.
+}
+\section{Slots}{
+
+\describe{
+\item{\code{data}}{See \code{"\linkS4class{saeObj}"}.}
+
+\item{\code{f}}{See \code{"\linkS4class{saeObj}"}.}
+
+\item{\code{cluster}}{See \code{"\linkS4class{saeObj}"}.}
+
+\item{\code{include}}{See \code{"\linkS4class{saeObj}"}.}
+}}
+\note{
+the slots are described in
+\code{"\link[=saeObj-class]{class?maSAE::saeObj}"}, since
+this is the main class of the package.
+}
+\section{Objects from the Class}{
+  A virtual Class: No objects may be created from it.
+}
+\examples{
+showClass("savObj")
+}
+\seealso{
+\code{"\link[stats:formula]{?stats::formula}"},
+\code{"\link[=sadObj-class]{class?maSAE::sadObj}"} and
+\code{"\link[=saeObj-class]{class?maSAE::saeObj}"}.
+}
+\keyword{classes}
+

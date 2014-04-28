@@ -1,0 +1,23 @@
+\docType{data}
+\name{s2}
+\alias{s2}
+\title{Example s2 data set.}
+\format{A data frame with 206 observations on the following 7 variables.}
+\usage{
+data(s2)
+}
+\description{
+Artifical second phase sampling data used for examples in
+the maSAE package.
+}
+\details{
+\describe{ \item{\code{clustid}}{index giving the
+clusters}.  \item{\code{x1}}{a potential fixed effect.}
+\item{\code{x2}}{another potential fixed effect.}
+\item{\code{x3}}{yet another potential fixed effect.}
+\item{\code{inclusion}}{a logical vector indicating whether
+or not to include the current observation. All TRUE.}
+\item{\code{y}}{the predictand} }
+}
+\keyword{datasets}
+
