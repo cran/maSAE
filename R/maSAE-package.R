@@ -22,7 +22,7 @@
 #' @seealso There are a couple packages for model-\strong{based} small area estimation, see 
 #' \code{\link[sae:sae-package]{sae}}, 
 #' \code{\link[rsae:rsae-package]{rsae}}, 
-#' \code{\link[hbsae:hbsae-package]{hbsae}} and
+#' hbsae and
 #' \code{\link[JoSAE:JoSAE-package]{JoSAE}}.
 #' @references 
 #' \cite{

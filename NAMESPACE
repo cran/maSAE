@@ -1,4 +1,5 @@
 import("methods")
+importFrom("stats", "var")
 exportPattern("saObj")
 exportMethods(
     "predict" 
