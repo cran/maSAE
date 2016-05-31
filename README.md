@@ -8,5 +8,5 @@ In R, try:
 ```R
 library("devtools")
 install_github("fvafrCU/maSAE")
-help("documentation-package", package = "maSAE")
+help("maSAE-package", package = "maSAE")
 ```

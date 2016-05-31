@@ -56,13 +56,13 @@ and asymtotically equivalent to the SRE's variance (see \cite{mandallaz2013a2}, 
 \section{non-exhaustive auxiliary information}
 \subsection{two-phase sampling}
 <<eval=true>>==
-library('maSAE')
+library("maSAE")
 @
 Let us suppose we have a two-phase sampling design, and the sample data can be loaded
 via 
 <<echo=true, eval=true>>==
-data('s2')
-data('s1')
+data("s2")
+data("s1")
 @
 We now add sampling phase indicators to the data and join (from a database point of view
 we do a union, but I'll keep calling it join) it into a single data.frame
@@ -71,15 +71,15 @@ we do a union, but I'll keep calling it join) it into a single data.frame
 s2$phase1 <- s2$phase2 <- TRUE
 s1$phase1 <- TRUE
 s1$phase2 <- FALSE
-eval(parse(text=(paste('s1$'
-		       , setdiff(names(s2), names(s1))
-		       , ' <- NA' , sep = ''))))
+eval(parse(text=(paste0("s1$",
+                        setdiff(names(s2), names(s1)),
+                        " <- NA"))))
 s12 <- rbind(s1, s2)
 @
 We build a small area Object
 <<echo=true, eval=true>>==
-saeO <- saObj(data = s12, f = y ~x1 + x2 + x3 | g
-	      , s2 = 'phase2')
+saeO <- saObj(data = s12, f = y ~x1 + x2 + x3 | g,
+              s2 = "phase2")
 @
 and get the small area estimations for the non-exhaustive case as
 <<echo=true, eval=true>>==
@@ -92,18 +92,18 @@ all the predictors of \rdata{s2}, but we keep only one -- if we kept all of them
 be back to two-phase sampling with more observations), and we join all three phases 
 into \rdata{s012}:
 <<echo=true, eval=true>>==
-data('s0')
+data("s0")
 s0$x1 <- s0$x3 <- NULL
 s0$phase1 <- s0$phase2 <- FALSE
-eval(parse(text=(paste('s0$'
-		       , setdiff(names(s12), names(s0))
-		       , ' <- NA' , sep = ''))))
+eval(parse(text=(paste0("s0$",
+                        setdiff(names(s12), names(s0)),
+                        " <- NA"))))
 s012 <- rbind(s0, s12)
 @
 from which again we do a predict:
 <<echo=true, eval=true>>==
-predict(saObj(data = s012,  f = y ~x1 + x2 + x3 | g
-	      , s2 = 'phase2', s1 = 'phase1'))
+predict(saObj(data = s012,  f = y ~x1 + x2 + x3 | g,
+              s2 = "phase2", s1 = "phase1"))
 @
 Note the drop in variance induced by the extensive null phase sampling.
 
@@ -111,10 +111,10 @@ Note the drop in variance induced by the extensive null phase sampling.
 Let us suppose we \emph{knew} the estimated small area means  of the fixed effect 
 sampled in all three phases to be the true small area means:
 <<echo=true, eval=true>>==
-tm1 <- as.data.frame(tapply(s012$x2 , s012$g, mean))
- names(tm1)[1] <- c('x2'); tm1$g <- row.names(tm1)
-predict(saObj(data = s12, f = y ~x1 + x2 + x3 | g
-	      , s2 = 'phase2', smallAreaMeans = tm1))
+tm1 <- as.data.frame(tapply(s012$x2, s012$g, mean))
+names(tm1)[1] <- c("x2"); tm1$g <- row.names(tm1)
+predict(saObj(data = s12, f = y ~x1 + x2 + x3 | g,
+              s2 = "phase2", smallAreaMeans = tm1))
 @
 Again, the variance estimation is reduced, but not as markedly as before: due to
 the extensive null phase the mean estimations had very small variances (which added to the
@@ -123,31 +123,27 @@ small area estimation variances).
 Of course we could also take our estimated small area means of all fixed effects 
 from the first and second phase to be the true means:
 <<echo=true, eval=true>>==
-preds <- paste('x',1:3, sep='')
-tm <- as.data.frame(
-    rbind(
-        colMeans(subset(s12, g =='a')[, preds])
-        , colMeans(subset(s12, g =='b')[, preds])
-        )
-    ); tm$g=c('a', 'b')
+preds <- paste("x",1:3, sep="")
+tm <- as.data.frame(rbind(colMeans(subset(s12, g == "a")[, preds]),
+                          colMeans(subset(s12, g == "b")[, preds])
+                          )
+); tm$g=c("a", "b")
 @
 That would give us the smallest variance estimates:
 <<echo=true, eval=true>>==
-predict(saObj(data = s12, f = y ~x1 + x2 + x3 | g
-	      , s2 = 'phase2', smallAreaMeans = tm))
+predict(saObj(data = s12, f = y ~x1 + x2 + x3 | g,
+              s2 = "phase2", smallAreaMeans = tm))
 @
 \section{model-based small area estimation}
 \textit{Wait! If I use the code in Appendix  \ref{RAO} to calculate the EBLUP for the basic unit
 level model given by \cite{rao2003}, chapter 7.2, I get at least a much smaller mse1:}
 
 <<echo=true, eval=true>>==
-source('Rao.R')
+source("Rao.R")
 library(nlme)
 dat <- subset(s2, ! is.na(s2$g))
-dat <- dat[with(dat, order(g)), ]
-aLmeObj <- lme(y ~x1 + x2 + x3
-               , data = dat
-               , random =  ~1|g)
+dat <- dat[with(dat, order(g)), TRUE]
+aLmeObj <- lme(y ~x1 + x2 + x3, data = dat, random =  ~1 | g)
 foo <- new(Class = "sae", lmeObj = aLmeObj, domain.df = tm)
 sae(foo)
 @
@@ -162,7 +158,7 @@ That's why I wrote \rcode{maSAE}.\\
 
 \section{cluster sampling}
 <<echo=true, eval=true>>==
- grep('.*clust', capture.output(str(s1)), value = TRUE)
+ grep(".*clust", capture.output(str(s1)), value = TRUE)
 @
 \textit{\ldots this ``clustid'' in the data.frames?}\\
 Dear, I forgot that sampling for my completely made up example data 
@@ -171,24 +167,23 @@ So all the above variances estimates are too optimistic. My fault.
 For the sake of CPU time on CRAN, I'll leave the following to you:
 
 <<echo=true, eval=false>>==
-predict(saObj(data = s12, f = y ~x1 + x2 + x3 | g
-	      , s2 = 'phase2'
-	      , cluster = 'clustid'))
+predict(saObj(data = s12, f = y ~x1 + x2 + x3 | g,
+              s2 = "phase2", cluster = "clustid"))
 @
 <<echo=true, eval=false>>==
-predict(saObj(data = s012,  f = y ~x1 + x2 + x3 | g
-	      , s2 = 'phase2', s1 = 'phase1'
-	      , cluster = 'clustid'))
+predict(saObj(data = s012,  f = y ~x1 + x2 + x3 | g,
+              s2 = "phase2", s1 = "phase1",
+              cluster = "clustid"))
 @
 <<echo=true, eval=false>>==
-predict(saObj(data = s12, f = y ~x1 + x2 + x3 | g
-	      , s2 = 'phase2', smallAreaMeans = tm1
-	      , cluster = 'clustid'))
+predict(saObj(data = s12, f = y ~x1 + x2 + x3 | g,
+              s2 = "phase2", smallAreaMeans = tm1,
+              cluster = "clustid"))
 @
 <<echo=true, eval=false>>==
-predict(saObj(data = s12, f = y ~x1 + x2 + x3 | g
-	      , s2 = 'phase2', smallAreaMeans = tm
-	      , cluster = 'clustid'))
+predict(saObj(data = s12, f = y ~x1 + x2 + x3 | g,
+              s2 = "phase2", smallAreaMeans = tm,
+              cluster = "clustid"))
 @
 \bibliography{bibliography}
 \appendix

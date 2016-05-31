@@ -1,4 +1,4 @@
-c8783c91a51f30f99a19afbc3ca3b6ae *DESCRIPTION
+7861fecd5c83db832c286c9fe1cfa4c3 *DESCRIPTION
 47c092c900030f36ee358e8fcb469715 *NAMESPACE
 74083c0bcaf5c9d9783e7d4ae045f497 *R/allClasses.R
 ab1deee3e6f6d4924233e7d2c6080905 *R/allConstructors.R
@@ -6,8 +6,8 @@ aea5ca34a74f675d93b7df366bc8af04 *R/allGenerics.R
 c60f23729fb15696b32771bff569c514 *R/data.R
 75582948ca45ca804a8f36fb1cc81b2a *R/maSAE-package.R
 b59aed599ca03ba82c48bfc05ac91f5b *R/predict-methods.R
-9a53b1808f7d8a71a633923e42e09e1b *README.md
-51e2577ffd35489492566fbc310922e1 *build/vignette.rds
+10ca2fff3fba9f3ffa7d16c66a3fa7c7 *README.md
+c7f84fc5b3e5c1e3222719997a64cda2 *build/vignette.rds
 9c17fa58275c16b730237c71f5328da5 *data/s0.txt.gz
 efb9cb242e576654acca5fd9d2b95b53 *data/s1.txt.gz
 8724a49c77d293ddd698324e123e04bf *data/s2.txt.gz
@@ -15,9 +15,9 @@ af29b920ba0289ebe838ec0c256a3be5 *demo/00Index
 a116e4b64d094b56f46825bda17c39de *demo/design.R
 58bc71d9872861c3c980cfdf01ac142d *demo/maSAE.R
 55c0367840d32a2c0b29c6720a8bbde1 *inst/doc/Rao.R
-e2833088cd33bf6ae8973238a6c99827 *inst/doc/maSAE.R
-b2b764b909030581313e13d3bb1989fb *inst/doc/maSAE.Rnw
-1f956b8dd58ea6e7dbf69ccf7f7e8381 *inst/doc/maSAE.pdf
+371003bc6e82655d75594c145274622b *inst/doc/maSAE.R
+6df4f5697185fbb3ff571a4d2129fe72 *inst/doc/maSAE.Rnw
+970c252e9c0ce5ea2e1c6992926ddd4d *inst/doc/maSAE.pdf
 c32e2b3f8d50804e4b50862b836d3911 *man/maSAE-internal.Rd
 0bb64c800d10fa4279726717686d2224 *man/maSAE-package.Rd
 1178d586d71f66e44898dd65839aa424 *man/predict-methods.Rd
@@ -34,4 +34,4 @@ f6a256daadbae5aa916df9eda6c367eb *tests/dontrun.R
 58bc71d9872861c3c980cfdf01ac142d *tests/maSAE.R
 55c0367840d32a2c0b29c6720a8bbde1 *vignettes/Rao.R
 9cd4878892d3fc01f283da95199196e4 *vignettes/bibliography.bib
-b2b764b909030581313e13d3bb1989fb *vignettes/maSAE.Rnw
+6df4f5697185fbb3ff571a4d2129fe72 *vignettes/maSAE.Rnw
