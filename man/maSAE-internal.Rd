@@ -25,19 +25,28 @@ used by \linkS4class{saeObj}
  A virtual Class: No objects may be created
 from it.
 }
+
 \examples{
 
 showClass("characterOrNULL")
 
-
 showClass("data.frameOrNULL")
-
 }
 \seealso{
 \code{\link[methods:setClassUnion]{?methods::setClassUnion}}
 
 \code{\link[methods:setClassUnion]{?methods::setClassUnion}}
+
+Other classes: 
+\code{\link{sadObj-class}},
+\code{\link{saeObj-class}},
+\code{\link{savObj-class}}
+
+Other classes: 
+\code{\link{sadObj-class}},
+\code{\link{saeObj-class}},
+\code{\link{savObj-class}}
 }
+\concept{classes}
 \keyword{classes}
 \keyword{internal}
-

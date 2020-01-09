@@ -3,7 +3,7 @@
 \docType{class}
 \name{savObj-class}
 \alias{savObj-class}
-\title{Class \code{"savObj"}}
+\title{Small Area Virtual Object Class}
 \description{
 Common slots for classes \code{sadObj} and \code{saeObj}.
 }
@@ -18,8 +18,9 @@ Common slots for classes \code{sadObj} and \code{saeObj}.
 
 \item{\code{include}}{See \code{"\linkS4class{saeObj}"}.}
 }}
+
 \note{
-the slots are described in
+The slots are described in
 \code{"\link[=saeObj-class]{class?maSAE::saeObj}"}, since this is the main class
 of the package.
 }
@@ -27,15 +28,21 @@ of the package.
  A virtual Class: No objects may be created
 from it.
 }
+
 \examples{
 
 showClass("savObj")
-
 }
 \seealso{
 \code{"\link[stats:formula]{?stats::formula}"},
-\code{"\link[=sadObj-class]{class?maSAE::sadObj}"} and 
+\code{"\link[=sadObj-class]{class?maSAE::sadObj}"} and
 \code{"\link[=saeObj-class]{class?maSAE::saeObj}"}.
-}
-\keyword{classes}
 
+Other classes: 
+\code{\link{characterOrNULL-class}},
+\code{\link{sadObj-class}},
+\code{\link{saeObj-class}}
+}
+\concept{classes}
+\keyword{classes}
+\keyword{internal}

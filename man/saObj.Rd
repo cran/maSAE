@@ -2,10 +2,17 @@
 % Please edit documentation in R/allConstructors.R
 \name{saObj}
 \alias{saObj}
-\title{An ui-constructor for classes sadObj and saeObj}
+\title{A Constructor for Objects of Class \code{sadObj} and \code{saeObj}}
 \usage{
-saObj(data, f, smallAreaMeans = NULL, s1 = NULL, s2 = NULL,
-  cluster = NULL, include = NULL)
+saObj(
+  data,
+  f,
+  smallAreaMeans = NULL,
+  s1 = NULL,
+  s2 = NULL,
+  cluster = NULL,
+  include = NULL
+)
 }
 \arguments{
 \item{data}{See \code{"\linkS4class{saeObj}"}.}
@@ -23,28 +30,27 @@ saObj(data, f, smallAreaMeans = NULL, s1 = NULL, s2 = NULL,
 \item{include}{See \code{"\linkS4class{saeObj}"}.}
 }
 \value{
-an object of class \code{sadObj} if \code{f} is of structure `x ~ NULL | g',
+An object of class \code{sadObj} if \code{f} is of structure `x ~ NULL | g',
 an object of class \code{saeObj} otherwise.
 }
 \description{
-simple wrapper to \code{new("sa[de]Obj")}. 
-If missing, it adds an inclusion variable to \code{data}; 
+Simple wrapper to \code{new("sa[de]Obj")}.
+If missing, it adds an inclusion variable to \code{data};
 it checks for missing in the clustering variable.
 Adds comments documenting changes made to the returned object.
 }
 \examples{
 
-library('maSAE')
 ## load data
-data('s2')
+data("s2", package = "maSAE")
 ## create sadObj object
-saeO  <- saObj(data = s2, f = y ~ NULL | g)
+sad <- maSAE::saObj(data = s2, f = y ~ NULL | g)
+class(sad)
 ## create saeObj object
 s2$s2 <- TRUE
-saeO <- saObj(data = s2, f = y ~x1 + x2 + x3 | g, s2 = 's2')
-
+sae <- maSAE::saObj(data = s2, f = y ~ x1 + x2 + x3 | g, s2 = "s2")
+class(sae)
 }
 \seealso{
 \code{"\linkS4class{saeObj}"}, \code{"\linkS4class{sadObj}"}.
 }
-

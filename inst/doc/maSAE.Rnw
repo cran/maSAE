@@ -14,7 +14,7 @@ basicstyle=\footnotesize
 , language=R
 }
 \usepackage[utf8]{inputenc}
-\title{Mandallaz' model-assisted small area estimators}
+\title{Mandallaz' Model-Assisted Small Area Estimators}
 \author{Andreas Dominik Cullmann}
 
 \SweaveOpts{echo=false}
@@ -32,7 +32,7 @@ depend on model assumptions to hold. This dependency doesn't make them very attr
 for official statistics. 
 
 Model-\emph{assisted} small area estimators do not depend on the model assumptions to hold,
-albeit their variances will be higher if the model is inappropiate (see
+albeit their variances will be higher if the model is inappropriate (see
 \cite{saerndal1992}, chapter 6.7). The synthetic-regression estimator (SRE) (for example
 \cite{rao2003}, chapter 4.2.2) is biased, and the variance of its biased-corrected version,
 the generalized regression estimator (for example \cite{rao2003}, chapter 2.5),
@@ -50,11 +50,11 @@ Daniel Mandallaz and others (
 )
 propose an unbiased extension of the SRE for two- and
 three-phase sampling designs with or without clustering. The variance of the  extended 
-SRE is, like the that of the SRE, based on all residuals in the second (or third) phase 
+SRE is, like that of the SRE, based on all residuals in the second (or third) phase 
 and asymtotically equivalent to the SRE's variance (see \cite{mandallaz2013a2}, p.~444).
 
-\section{non-exhaustive auxiliary information}
-\subsection{two-phase sampling}
+\section{Non-Exhaustive Auxiliary Information}
+\subsection{Two-Phase Sampling}
 <<eval=true>>==
 library("maSAE")
 @
@@ -86,7 +86,7 @@ and get the small area estimations for the non-exhaustive case as
 predict(saeO)
 @
 
-\subsection{three-phase sampling}
+\subsection{Three-Phase Sampling}
 Suddenly we stumble across data from a  third sampling phase, the null phase (\rdata{s0} has
 all the predictors of \rdata{s2}, but we keep only one -- if we kept all of them, we'ld
 be back to two-phase sampling with more observations), and we join all three phases 
@@ -107,7 +107,7 @@ predict(saObj(data = s012,  f = y ~x1 + x2 + x3 | g,
 @
 Note the drop in variance induced by the extensive null phase sampling.
 
-\section{partially exhaustive auxiliary information}
+\section{Partially Exhaustive Auxiliary Information}
 Let us suppose we \emph{knew} the estimated small area means  of the fixed effect 
 sampled in all three phases to be the true small area means:
 <<echo=true, eval=true>>==
@@ -119,7 +119,7 @@ predict(saObj(data = s12, f = y ~x1 + x2 + x3 | g,
 Again, the variance estimation is reduced, but not as markedly as before: due to
 the extensive null phase the mean estimations had very small variances (which added to the
 small area estimation variances).
-\section{exhaustive auxiliary information}
+\section{Exhaustive Auxiliary Information}
 Of course we could also take our estimated small area means of all fixed effects 
 from the first and second phase to be the true means:
 <<echo=true, eval=true>>==
@@ -134,7 +134,7 @@ That would give us the smallest variance estimates:
 predict(saObj(data = s12, f = y ~x1 + x2 + x3 | g,
               s2 = "phase2", smallAreaMeans = tm))
 @
-\section{model-based small area estimation}
+\section{Model-Based Small Area Estimation}
 \textit{Wait! If I use the code in Appendix  \ref{RAO} to calculate the EBLUP for the basic unit
 level model given by \cite{rao2003}, chapter 7.2, I get at least a much smaller mse1:}
 
@@ -156,7 +156,7 @@ be sure.}\\
 That's why I wrote \rcode{maSAE}.\\
 \textit{ I see, but wait again, what is \ldots}
 
-\section{cluster sampling}
+\section{Cluster Sampling}
 <<echo=true, eval=true>>==
  grep(".*clust", capture.output(str(s1)), value = TRUE)
 @

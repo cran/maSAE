@@ -3,9 +3,9 @@
 \docType{class}
 \name{sadObj-class}
 \alias{sadObj-class}
-\title{Class \code{"sadObj"}}
+\title{Small Area Design-based Objects}
 \description{
-a class for design-based estimation only
+A class for design-based estimation only.
 }
 \details{
 See \code{"\linkS4class{saeObj}"}. The fixed effects part of
@@ -22,8 +22,9 @@ See \code{"\linkS4class{saeObj}"}. The fixed effects part of
 
 \item{\code{include}}{See \code{"\linkS4class{saeObj}"}.}
 }}
+
 \note{
-the slots are described in
+The slots are described in
 \code{"\link[=saeObj-class]{class?maSAE::saeObj}"}, since this is the main class
 of the package.
 }
@@ -40,13 +41,18 @@ of the package.
 
 \code{\link{predict}}
 }
+
 \examples{
 showClass("sadObj")
-
 }
 \seealso{
 \code{"\linkS4class{saeObj}"}
 \code{"\link[=saObj]{?maSAE::saObj}"}
-}
-\keyword{classes}
 
+Other classes: 
+\code{\link{characterOrNULL-class}},
+\code{\link{saeObj-class}},
+\code{\link{savObj-class}}
+}
+\concept{classes}
+\keyword{classes}

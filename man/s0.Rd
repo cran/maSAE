@@ -3,13 +3,13 @@
 \docType{data}
 \name{s0}
 \alias{s0}
-\title{Example s0 data set.}
-\format{A data frame with 9008 observations on the following 5 variables.}
+\title{Example s0 Data Set}
+\format{A data frame with 9008 observations on the following 6 variables.}
 \usage{
-data(s0)
+data(s0, package = "maSAE")
 }
 \description{
-Artifical null phase sampling data used for examples in the maSAE package.
+Artificial null phase sampling data used for examples in \pkg{maSAE}.
 }
 \details{
 \describe{
@@ -22,4 +22,3 @@ Artifical null phase sampling data used for examples in the maSAE package.
  }
 }
 \keyword{datasets}
-

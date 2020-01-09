@@ -3,13 +3,13 @@
 \docType{data}
 \name{s1}
 \alias{s1}
-\title{Example s1 data set.}
-\format{A data frame with 786 observations on the following 5 variables.}
+\title{Example s1 Data Set}
+\format{A data frame with 786 observations on the following 6 variables.}
 \usage{
-data(s1)
+data(s1, package = "maSAE")
 }
 \description{
-Artifical first phase sampling data  used for examples in the maSAE package.
+Artificial first phase sampling data  used for examples  in \pkg{maSAE}.
 }
 \details{
 \describe{
@@ -22,4 +22,3 @@ Artifical first phase sampling data  used for examples in the maSAE package.
  }
 }
 \keyword{datasets}
-

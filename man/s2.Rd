@@ -3,13 +3,13 @@
 \docType{data}
 \name{s2}
 \alias{s2}
-\title{Example s2 data set.}
+\title{Example s2 Data Set}
 \format{A data frame with 206 observations on the following 7 variables.}
 \usage{
-data(s2)
+data(s2, package = "maSAE")
 }
 \description{
-Artifical second phase sampling data  used for examples in the maSAE package.
+Artificial second phase sampling data  used for examples in \pkg{maSAE}.
 }
 \details{
 \describe{
@@ -17,10 +17,10 @@ Artifical second phase sampling data  used for examples in the maSAE package.
    \item{\code{x1}}{a potential fixed effect.}
    \item{\code{x2}}{another potential fixed effect.}
    \item{\code{x3}}{yet another potential fixed effect.}
+   \item{\code{y}}{the predictand}
    \item{\code{inclusion}}{a logical vector indicating whether or not to include the
    current observation. All TRUE.}
-   \item{\code{y}}{the predictand}
+   \item{\code{g}}{A factor defining the small areas `a` and `b`}
  }
 }
 \keyword{datasets}
-

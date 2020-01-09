@@ -1,3 +1,4 @@
+library("methods")
 setOldClass(c('lme'))
 setClass(Class = "sae"
          , representation = representation(

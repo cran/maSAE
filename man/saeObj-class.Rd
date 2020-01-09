@@ -3,23 +3,23 @@
 \docType{class}
 \name{saeObj-class}
 \alias{saeObj-class}
-\title{Class \code{"saeObj"}}
+\title{Small Area Estimation Objects}
 \description{
-the class for small area estimation, the one you're probably looking for.
+Class for small area estimation, the one you're probably looking for.
 }
 \details{
 \code{cluster} optionally gives the name of a variable in slot \code{data}
-from which the cluster information for clustered sample designs is to be read. 
+from which the cluster information for clustered sample designs is to be read.
 See Manadallaz 2013, p. 445 for Details.\cr
 \code{include} optionally gives the name of a variable in slot \code{data}
-from which the inclusion indicator for cluster points is to be read. 
+from which the inclusion indicator for cluster points is to be read.
 See Manadallaz 2013, p. 445 for Details on \eqn{I_f}.\cr
 Also see the \bold{Details} for \code{\link{predict}}.
 }
 \section{Slots}{
 
 \describe{
-\item{\code{smallAreaMeans}}{An \emph{optional} \code{"data.frame"} 
+\item{\code{smallAreaMeans}}{An \emph{optional} \code{"data.frame"}
 giving the true means of fixed effects for the small areas.
 Must have a column with the random effect defining the small areas in slot
 \code{data}.}
@@ -32,8 +32,8 @@ variable in slot \code{data} indicating that an observation (a row in  slot
 variable in slot \code{data} indicating that an observation (a row in  slot
 \code{data}) belongs to subset 2.}
 
-\item{\code{data}}{Object of class \code{"data.frame"} to use for prediction, typically 
-constisting of a predictand and one or more predictors (zero or more fixed 
+\item{\code{data}}{Object of class \code{"data.frame"} to use for prediction, typically
+consisting of a predictand and one or more predictors (zero or more fixed
 effects and one random effect defining the small areas).
 See \bold{Details} for optional clustering variable and/or inclusion indicator.}
 
@@ -45,6 +45,7 @@ clustering variable in slot \code{data}.}
 \item{\code{include}}{An \emph{optional} \code{"character"} string giving the name of the
 inclusion indicator in slot \code{data}.}
 }}
+
 \section{Extends}{
  Class \code{"\linkS4class{savObj}"}, directly.
 }
@@ -58,25 +59,30 @@ inclusion indicator in slot \code{data}.}
 \section{Methods}{
  \code{\link{predict}}
 }
+
 \examples{
 showClass("saeObj")
-
 }
 \references{
 \cite{
-Mandallaz, D. 2013 
+Mandallaz, D. 2013
 Design-based properties of some small-area estimators in forest
-inventory with two-phase sampling. 
-Canadian Journal of Forest Research \bold{43}(5), pp. 441--449. 
+inventory with two-phase sampling.
+Canadian Journal of Forest Research \bold{43}(5), pp. 441--449.
 doi: \href{http://dx.doi.org/10.1139/cjfr-2012-0381}{10.1139/cjfr-2012-0381}.
 }
 }
 \seealso{
 \code{"\link[stats:formula]{?stats::formula}"},
-\code{"\link[=sadObj-class]{class?maSAE::saObj}"}, 
+\code{"\link[=sadObj-class]{class?maSAE::saObj}"},
 \code{"\link[=savObj-class]{class?maSAE::savObj}"},
 \code{"\link[=saObj]{?maSAE::saObj}"} and
 \code{"\link[=predict]{?maSAE::predict}"}
-}
-\keyword{classes}
 
+Other classes: 
+\code{\link{characterOrNULL-class}},
+\code{\link{sadObj-class}},
+\code{\link{savObj-class}}
+}
+\concept{classes}
+\keyword{classes}
