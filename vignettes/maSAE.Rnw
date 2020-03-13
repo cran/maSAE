@@ -51,7 +51,7 @@ Daniel Mandallaz and others (
 propose an unbiased extension of the SRE for two- and
 three-phase sampling designs with or without clustering. The variance of the  extended 
 SRE is, like that of the SRE, based on all residuals in the second (or third) phase 
-and asymtotically equivalent to the SRE's variance (see \cite{mandallaz2013a2}, p.~444).
+and asymptotically equivalent to the SRE's variance (see \cite{mandallaz2013a2}, p.~444).
 
 \section{Non-Exhaustive Auxiliary Information}
 \subsection{Two-Phase Sampling}
@@ -68,13 +68,7 @@ We now add sampling phase indicators to the data and join (from a database point
 we do a union, but I'll keep calling it join) it into a single data.frame
 \rcode{s12}:
 <<echo=true, eval=true>>==
-s2$phase1 <- s2$phase2 <- TRUE
-s1$phase1 <- TRUE
-s1$phase2 <- FALSE
-eval(parse(text=(paste0("s1$",
-                        setdiff(names(s2), names(s1)),
-                        " <- NA"))))
-s12 <- rbind(s1, s2)
+s12 <- bind_data(s1, s2)
 @
 We build a small area Object
 <<echo=true, eval=true>>==
@@ -94,13 +88,9 @@ into \rdata{s012}:
 <<echo=true, eval=true>>==
 data("s0")
 s0$x1 <- s0$x3 <- NULL
-s0$phase1 <- s0$phase2 <- FALSE
-eval(parse(text=(paste0("s0$",
-                        setdiff(names(s12), names(s0)),
-                        " <- NA"))))
-s012 <- rbind(s0, s12)
+s012 <- bind_data(s1, s2, s0)
 @
-from which again we do a predict:
+from which we predict again: 
 <<echo=true, eval=true>>==
 predict(saObj(data = s012,  f = y ~x1 + x2 + x3 | g,
               s2 = "phase2", s1 = "phase1"))

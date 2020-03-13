@@ -1,3 +1,3 @@
 test_exception <- function() {
-    RUnit::checkException(maSAE:::throw("Hello, error!"))
+  RUnit::checkException(maSAE:::throw("Hello, error!"))
 }

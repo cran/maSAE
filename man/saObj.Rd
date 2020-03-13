@@ -11,7 +11,8 @@ saObj(
   s1 = NULL,
   s2 = NULL,
   cluster = NULL,
-  include = NULL
+  include = NULL,
+  auxiliaryWeights = NULL
 )
 }
 \arguments{
@@ -28,6 +29,8 @@ saObj(
 \item{cluster}{See \code{"\linkS4class{saeObj}"}.}
 
 \item{include}{See \code{"\linkS4class{saeObj}"}.}
+
+\item{auxiliaryWeights}{See \code{"\linkS4class{saeObj}"}.}
 }
 \value{
 An object of class \code{sadObj} if \code{f} is of structure `x ~ NULL | g',

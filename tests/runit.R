@@ -25,9 +25,11 @@ if (! dir.exists(unit_dir)) {
     stop("Can not find RUnit test directory ", unit_dir,
          ". Try to (re)install the package first.")
 }
+setup_file <- file.path(unit_dir, "setup.R")
+if (file.exists(setup_file)) source(setup_file)
 package_suite <- RUnit::defineTestSuite("maSAE_unit_test",
                                         dirs = unit_dir,
-                                        testFileRegexp = "^.*\\.[rR]",
+                                        testFileRegexp = "^runit.*\\.[rR]",
                                         testFuncRegexp = "^test_+")
 test_result <- RUnit::runTestSuite(package_suite)
 RUnit::printTextProtocol(test_result, showDetails = TRUE, fileName = "")

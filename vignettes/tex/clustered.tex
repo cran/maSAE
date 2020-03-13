@@ -1,0 +1,94 @@
+\begin{table}
+    \centering
+\begin{tabular}{l l l l l r l}
+	 exh 	&  type 	&  ref & formula\\ \toprule
+			
+	 yes 	&  synthetic 	& \analogy{} & $\hat{Y}_{c,G,synth} = \bar{Z}^t_G\hat{\beta}_{c,s_2}$ \\
+	   	&    	& \analogy{} & $\hat{V}\left(\times\right) = \bar{Z}^t_G \hat{\Sigma}_{ \hat{\beta}_{s_2}} \bar{Z}_G $\\
+\lightrule
+			
+	 yes 	&  small 	& \analogy{} & $ \hat{Y}_{c,G,small} = \hat{Y}_{c,G,synth} + \mRc$\\
+	   	&    	& \analogy{} & $  \hat{V}(\times) = \hat{V}\left(\hat{Y}_{c,G,synth}\right) + \vRc$ \\
+\lightrule
+
+     yes 	&  extended 	& \cite[eq. 48]{Man13a} & $ \hat{\tilde{Y}}_{c,G,synth} = \bar{\eZ}^t_G\hat{\theta}_{c,s_2}$ \\
+    &    	& \cite[eq. 49]{Man13a} & $ \hat{V}\left(\times\right) = \bar{\eZ}^t_G \hat{\Sigma}_{ \hat{\theta}_{c,s_2}} \bar{\eZ}_G$ \\
+			
+\strongrule
+     no 	&  synthetic 	& \cite[eq. 42]{Man13a} & $ \hat{Y}_{c,G,psynth} = \hat{\bar{Z}}^{1}_{c,s_1,G} \hat{\beta}_{c,s_2}$ \\
+        &    	& \cite[eq. 43]{Man13a} & $ \hat{V}(\times) =\hat{\bar{Z}}^t_{c,s_1,G} \hat{\Sigma}_{ \hat{\beta}_{c,s_2}} \hat{\bar{Z}}_{c,s_1,G} + \hat{\beta}^t_{c,s_2} \hat{\Sigma}_{ \hat{\bar{Z}}_{c,s_1,G}  } \hat{\beta}_{c,s_2} $ \\
+\lightrule
+			
+     no 	&  small 	& \cite[eq. 44]{Man13a} & $ \hat{Y}_{c,G,psmall} = \hat{Y}_{c,G,psynth} + \mRc$ \\
+            &      	& \cite[eq. 45]{Man13a} & $ \hat{V}(\times) = \hat{V}\left(\hat{Y}_{c,G,psynth}\right) + \vRc$ \\
+\lightrule
+     no 	&  extended 	& \cite[eq. 46]{Man13a} & $ \hat{\tilde{Y}}_{c,G,psynth} = \hat{\bar{\eZ}}^t_{c,s_1,G}\hat{\theta}_{c,s_2}$ \\
+    &    	&  \cite[eq. 47]{Man13a} & $ \hat{V}\left(\times\right) = \hat{\bar{\eZ}}^t_{c,s_1,G} \hat{\Sigma}_{ \hat{\theta}_{c,s_2}} \hat{\bar{\eZ}}_{c,s_1,G} + \hat{\theta}^t_{c,s_2} \hat{\Sigma}_{ \hat{\bar{\eZ}}_{c,s_1,G}  } \hat{\theta}_{c,s_2}$ \\
+			
+			
+\strongrule
+	 part 	&  synthetic 	& \analogy{} & $\hat{Y}_{c,psynth, G,greg} = \left(
+\bar{Z}_G^{(1)}- \hat{\bar{Z}}_{c,s_1,G}^{(1)}\right) \hat{\alpha}_{c,2} + \hat{\bar{Z}}^t_{c,s_1,G}\hat{\beta}_{c,s_2}  $\\
+	   	&    	&     \analogy{} & $ \hat{V}\left(\times\right) = \frac{n_{s_2}}{n_{s_1}}\bar{Z}^{(1)t}_G \hat{\Sigma}_{ \hat{\alpha}_{c,s_2}} \bar{Z}^{(1)}_G + (1-\frac{n_{s_2}}{n_{s_1}})\hat{\bar{Z}}^{t}_{c,s_1,G} \hat{\Sigma}_{ \hat{\beta}_{c,s_2}} \hat{\bar{Z}}_{c,s_1,G} $\\
+\lightrule
+			
+ 	 part 	&  small 	& \analogy{} & $ \hat{Y}_{c,G,greg} = \hat{Y}_{c,G,psynth} + \mRc $\\
+	    	&      	& \analogy{} & $ \hat{V}\left(\times\right)  = \hat{V}\left(\hat{Y}_{c,psynth, G,greg}\right)  + \vRc$\\
+\lightrule
+     part 	&  extended 	& \cite[eq. 50]{Man13b.e} & $\hat{\tilde{Y}}_{c,G,greg} = \left( \bar{\eZ}_G^{(1)}- \hat{\bar{\eZ}}_{c,s_1,G}^{(1)}\right) \hat{\gamma}_{c,2} + \hat{\bar{\eZ}}^t_{c,s_1,G}\hat{\theta}_{c,2} $\\
+        &    	&     \cite[eq. 52]{Man13b.e} &$\hat{V}\left(\times\right) = \frac{n_{s_2}}{n_{s_1}}\bar{\eZ}^{(1)t}_G \hat{\Sigma}_{ \hat{\gamma}_{c,s_2}} \bar{\eZ}^{(1)}_G + (1-\frac{n_{s_2}}{n_{s_1}})\hat{\bar{\eZ}}^{t}_{c,s_1,G}
+\hat{\Sigma}_{ \hat{\theta}_{c,s_2}} \hat{\bar{\eZ}}_{c,s_1,G} $\\
+\end{tabular}
+\caption{Predictors for clustered two-phase sampling, 
+    \emph{exh} denotes exhaustiveness of auxiliary information (yes/no/part, the
+    latter meaning partially exhaustive auxiliary information),
+    \emph{small} denotes the area estimator. \label{tab:clustered2}
+}
+\end{table}
+\begin{table}
+    \centering
+\begin{tabular}{ l l r l}
+	 exh 	&  type	&  ref & formula\\ \toprule
+yes & synthetic & & $-$\\
+ &  &  & $-$ \\
+\lightrule
+yes & small &  & $-$\\
+ &  &  & $-$\\
+\lightrule
+yes & extended &  & $-$\\
+ &  &  & $-$\\
+\strongrule
+
+	 no 	&  synthetic 	& \analogy{} & $\hat{Y}_{G,psynth,3p} = \left( \hat{\bar{Z}}_{c,s_0,G}^{(1)}- \hat{\bar{Z}}_{c,s_1,G}^{(1)}\right) \hat{\alpha}_{c,2} + \hat{\bar{Z}}^t_{c,s_1,G}\hat{\beta}_{c,s_2} $\\
+	   	&    	&    \analogy{} & $ \hat{V}\left(\times\right) = \hat{\alpha}_{c,s_2}^t \hat{\Sigma}_{\hat{\bar{Z}}_{c,s_0,G}^{(1)}} \hat{\alpha}_{c,s_2} + \frac{n_{s_2}}{n_{s_1}} \hat{\bar{Z}}^{(1)t}_{c,s_0,G} \hat{\Sigma}_{ \hat{\alpha}_{c,s_2}} \hat{\bar{Z}}^{(1)}_{c,s_0,G} + (1-\frac{n_{s_2}}{n_{s_1}})\hat{\bar{Z}}^{t}_{c,s_1,G} \hat{\Sigma}_{ \hat{\beta}_{c,s_2}} \hat{\bar{Z}}_{c,s_1,G} $\\
+\lightrule
+			
+ 	 no 	&  small 	& \analogy{} & $ \hat{Y}_{c,G,psmall,3p} = \hat{Y}_{G,psynth,G,3p} + \mRc$\\
+	    	&      	& \analogy{} & $ \hat{V}\left(\times\right) \approx \hat{V}\left(\hat{\tilde{Y}}_{c,G,psynth,3p}\right) + \vRc$\\
+\lightrule
+
+     no 	&  extended 	& \cite[eq. 53]{Man13c.e} & $ \hat{\tilde{Y}}_{c,G,g3reg} = \left( \hat{\bar{\eZ}}_{c,s_0,G}^{(1)}- \hat{\bar{\eZ}}_{c,s_1,G}^{(1)}\right) \hat{\gamma}_{c,2} + \hat{\bar{\eZ}}^t_{c,s_1,G}\hat{\theta}_{c,2}$\\
+        &    	&     \cite[eq. 55]{Man13c.e} & $\hat{V}\left(\times\right) = \hat{\gamma}_{c,s_2}^t \hat{\Sigma}_{\hat{\bar{\eZ}}_{c,s_0,G}^{(1)}} \hat{\gamma}_{c,s_2} + \frac{n_{s_2}}{n_{s_1}} \hat{\bar{\eZ}}^{(1)t}_{c,s_0,G} \hat{\Sigma}_{ \hat{\gamma}_{c,s_2}} \hat{\bar{\eZ}}^{(1)}_{c,s_0,G} + (1-\frac{n_{s_2}}{n_{s_1}})\hat{\bar{\eZ}}^{t}_{c,s_1,G} \hat{\Sigma}_{ \hat{\theta}_{c,s_2}} \hat{\bar{\eZ}}_{c,s_1,G} $\\
+\strongrule
+	 part 	&  synthetic 	& \analogy{} & $\hat{Y}_{c,G,synth,3p} = \left(
+\bar{Z}_{G}^{(1)}- \hat{\bar{Z}}_{c,s_1,G}^{(1)}\right) \hat{\alpha}_{c,}2 + \hat{\bar{Z}}^t_{c,s_1,G}\hat{\beta}_{c,s_2} $\\
+	   	&    	&    \analogy{} & $ \hat{V}\left(\times\right) = \frac{n_{s_2}}{n_{s_1}} \hat{\bar{Z}}^{(1)t}_{c,s_0,G} \hat{\Sigma}_{ \hat{\alpha}_{c,s_2}} \hat{\bar{Z}}^{(1)}_{c,s_0,G} + (1-\frac{n_{s_2}}{n_{s_1}})\hat{\bar{Z}}^{t}_{c,s_1,G} \hat{\Sigma}_{ \hat{\beta}_{c,s_2}} \hat{\bar{Z}}_{c,s_1,G} $\\
+\lightrule
+			
+ 	 part 	&  small 	& \analogy{} & $ \hat{Y}_{c,G,small,3p} = \hat{Y}_{c,G,synth,3p} + \mRc$\\
+	    	&      	& \analogy{} & $ \hat{V}\left(\times\right) \approx \hat{V}\left(\hat{Y}_{c,G,synth,3p}\right) + \vRc$\\
+\lightrule
+
+	 part 	&  extended 	& \analogy{} & $\hat{\tilde{Y}}_{c,G,ext
+synth,3p} = \left( \bar{\eZ}_{G}^{(1)}- \hat{\bar{\eZ}}_{c,s_1,G}^{(1)}\right) \hat{\gamma}_{c,2} + \hat{\bar{\eZ}}^t_{c,s_1,G}\hat{\theta}_{c,2} $\\
+	   	&    	&    \analogy{} & $ \hat{V}\left(\times\right) = \frac{n_{s_2}}{n_{s_1}} \hat{\bar{\eZ}}^{(1)t}_{c,s_0,G} \hat{\Sigma}_{ \hat{\gamma}_{c,s_2}} \hat{\bar{\eZ}}^{(1)}_{c,s_0,G} + (1-\frac{n_{s_2}}{n_{s_1}})\hat{\bar{\eZ}}^{t}_{c,s_1,G} \hat{\Sigma}_{ \hat{\theta}_{c,s_2}} \hat{\bar{\eZ}}_{c,s_1,G}$\\
+
+\end{tabular}
+\caption{Predictors for clustered three-phase sampling, 
+    \emph{exh} denotes exhaustiveness of auxiliary information (yes/no/part, the
+    latter meaning partially exhaustive auxiliary information),
+    \emph{small} denotes the area estimator. \label{tab:clustered3}
+}
+
+\end{table}
+

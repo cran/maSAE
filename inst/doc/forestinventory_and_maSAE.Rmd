@@ -1,0 +1,545 @@
+---
+title: "A Comparison of maSAE to forestinventory"
+author: 
+date: 2020-03-13, 13:16:56
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{A Comparison of maSAE to forestinventory}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+# What is this about?
+
+In 2016, Andreas Hill published package 
+[forestinventory](https://CRAN.R-project.org/package=forestinventory).
+We thought about merging the packages, but never actually got to it: 
+`maSAE` is S4, `forestinventory` is S3, both of us are busy doing other stuff.
+So I am trying to at least compare functionality of both packages.
+
+```{r}
+library("forestinventory")
+library("maSAE")
+```
+
+# Setup
+
+I need some helpers for checking and comparing results from 
+`maSAE` and `forestinventory`:
+
+
+``` {r}
+clean <- function(x, which = NULL) {
+    if (identical(FALSE, which)) {
+        res <- as.matrix(unname(x[TRUE, TRUE]))
+    } else {
+        if (is.null(which)) {
+            if (all(c( "small_area", "prediction", "variance") %in% names(x))) {
+                res <- as.matrix(unname(x[TRUE, 1:3]))
+            } else {
+                res <- as.matrix(unname(x[["estimation"]][TRUE, c("area", "estimate", "g_variance")]))
+            }
+        } else {
+            res <- as.matrix(unname(x[TRUE, c(1, grep(which, names(x)))]))
+        }
+    }
+    return(res)
+} 
+
+compare <- function(maSAE, forestinventory, message = NULL) {
+    if(! isTRUE(all.equal(clean(maSAE), clean(forestinventory), 
+                          check.attributes = FALSE))) {
+        message <- c("Differing results from maSAE and forestinventory: ", 
+                     message)
+        warning(message)
+        return(FALSE)
+    } 
+    return(TRUE)
+}
+```
+
+I use the grisons data set from `forestinventory`:
+
+``` {r}
+data(grisons, package = "forestinventory")
+```
+
+I define regression models for simple and cluster sampling:
+
+``` {r}
+formula.s0 <- tvol ~ mean # reduced model:
+formula.s1 <- tvol ~ mean + stddev + max + q75 # full model
+formula.clust.s0 <- basal ~ stade
+formula.clust.s1 <- basal ~ stade + couver + melange
+
+```
+
+# Two-Phase 
+Some data handling,
+true means are taken from 
+[forestinventory`s vignette](https://CRAN.R-project.org/package=forestinventory/vignettes/forestinventory_vignette.pdf). :
+
+``` {r}
+truemeans.G <- data.frame(Intercept = rep(1, 4),
+                          mean = c(12.85, 12.21, 9.33, 10.45),
+                          stddev = c(9.31, 9.47, 7.90, 8.36),
+                          max = c(34.92, 35.36, 28.81, 30.22),
+                          q75 = c(19.77, 19.16, 15.40, 16.91))
+rownames(truemeans.G) <- c("A", "B", "C", "D")
+
+# data adjustments
+s1 <- grisons[grisons[["phase_id_2p"]] == 1, ]
+s2 <- grisons[grisons[["phase_id_2p"]] == 2, ]
+s12 <- rbind(s1, s2)
+s12$s1 <- s12$phase_id_2p %in% c(1, 2)
+s12$s2 <- s12$phase_id_2p == 2
+
+tm <- truemeans.G
+tm[["smallarea"]] <- row.names(tm)
+tm[["Intercept"]] <- NULL
+
+truemeans.G.partially <- truemeans.G[, -which(names(truemeans.G) %in% c("stddev", "mean"))]
+tm.partially <- tm[, -which(names(tm) %in% c("stddev", "mean"))]
+
+```
+
+##  No Exhaustive Auxiliary Information
+
+This is the estimation given on bottom of page 15 of 
+[forestinventory`s vignette](https://CRAN.R-project.org/package=forestinventory/vignettes/forestinventory_vignette.pdf):
+``` {r}
+summary(twophase(formula = formula.s1, 
+                 data = grisons,
+                 phase_id = list(phase.col = "phase_id_2p", terrgrid.id = 2),
+                 small_area = list(sa.col = "smallarea", 
+                                   areas = c("A", "B","C", "D"),
+                                   unbiased = TRUE),
+                 boundary_weights = "boundary_weights"
+                 ))
+```
+Now I`m using both packages to make predictions:
+
+``` {r}
+maSAE <- predict(saObj(data = s12,
+                       f = update(formula.s1, ~ . | smallarea),
+                       auxiliaryWeights = "boundary_weights",
+                       s2 = 's2')
+)
+
+forestinventory <- twophase(formula = formula.s1, 
+                            data = grisons,
+                            phase_id = list(phase.col = "phase_id_2p", terrgrid.id = 2),
+                            small_area = list(sa.col = "smallarea", 
+                                              areas = c("A", "B","C", "D"),
+                                              unbiased = TRUE),
+                            boundary_weights = "boundary_weights"
+                            )
+```
+
+Both packages deliver the same results:
+
+``` {r}
+compare(maSAE, forestinventory, "two-phase, ext. pseudo sae")
+```
+
+Now I benchmark them, calculating the small, synthetic and extended synthetic estimators:
+``` {r}
+wrap_two <- function(...) {
+    dots <- list(...)
+    dots$small_area$unbiased <- TRUE
+    ex <- do.call(twophase, dots)$estimation
+    dots$psmall <- TRUE
+    small <- do.call(twophase, dots)$estimation
+    dots$psmall <- FALSE
+    dots$small_area$unbiased <- FALSE
+    synth <- do.call(twophase, dots)$estimation
+    cbind(ex[TRUE, c("estimate", "g_variance")], 
+          synth[TRUE, c("estimate", "g_variance")], 
+          small[TRUE, c("estimate", "g_variance")])
+
+}
+mbmb <- microbenchmark::microbenchmark
+mb <- mbmb(
+           forestinventory = wrap_two(formula = formula.s1, 
+                                    data = grisons,
+                                    phase_id = list(phase.col = "phase_id_2p", terrgrid.id = 2),
+                                    small_area = list(sa.col = "smallarea", 
+                                                      areas = c("A", "B","C", "D"),
+                                                      unbiased = TRUE)
+                                    ), 
+           maSAE = predict(saObj(data = s12, 
+                                 f = update(formula.s1, ~ . | smallarea),
+                                 s2 = 's2'
+                                 ))[, -1],
+           check = "equivalent"
+           )
+```
+
+`maSAE` seems a bit faster:
+
+``` {r}
+print(mb)
+microbenchmark:::autoplot.microbenchmark(mb)
+
+```
+
+
+##  Full Exhaustive Auxiliary Information
+The estimation given on page 17 of 
+[forestinventory`s vignette](https://CRAN.R-project.org/package=forestinventory/vignettes/forestinventory_vignette.pdf) is
+ (there are no boundary weights here):
+
+``` {r}
+forestinventory <- twophase(formula = formula.s1, 
+                            data = grisons,
+                            phase_id = list(phase.col = "phase_id_2p", 
+                                            terrgrid.id = 2),
+                            small_area = list(sa.col ="smallarea", 
+                                              areas = c("A", "B", "C", "D"),
+                                              unbiased = TRUE),
+                            exhaustive = truemeans.G)
+summary(forestinventory)
+```
+
+Again, predictions from both packages are identical:
+
+
+``` {r}
+maSAE <- predict(saObj(data = s12, 
+                       f = update(formula.s1, ~ . | smallarea),
+                       s2 = 's2',
+                       smallAreaMeans = tm))
+compare(maSAE, forestinventory, "two-phase, ext. sae")
+```
+The benchmarks again:
+
+``` {r}
+mb <- mbmb(
+           forestinventory = wrap_two(formula = formula.s1, 
+                                            data = grisons,
+                                            phase_id = list(phase.col = "phase_id_2p", 
+                                                            terrgrid.id = 2),
+                                            small_area = list(sa.col ="smallarea", 
+                                                              areas = c("A", "B", "C", "D"),
+                                                              unbiased = TRUE),
+                                            exhaustive = truemeans.G),
+           maSAE = predict(saObj(data = s12, 
+                                       f = update(formula.s1, ~ . | smallarea),
+                                       s2 = 's2',
+                                       smallAreaMeans = tm))[, -1],
+
+           check = "equivalent")
+print(mb)
+microbenchmark:::autoplot.microbenchmark(mb)
+```
+
+
+# Three-Phase
+Some data handling,
+true means are taken from 
+[forestinventory`s vignette](https://CRAN.R-project.org/package=forestinventory/vignettes/forestinventory_vignette.pdf). :
+``` {r}
+truemeans.G <- data.frame(Intercept = rep(1, 4),
+                          mean = c(12.85, 12.21, 9.33, 10.45))
+rownames(truemeans.G) <- c("A", "B", "C", "D")
+
+## data adjustments
+s12_3p <- grisons[grisons[["phase_id_3p"]] %in% c(1,2), ]
+s0 <- grisons[grisons[["phase_id_3p"]] ==0 , ]
+s12_3p$s1 <- s12_3p$phase_id_3p %in% c(1, 2)
+s12_3p$s2 <- s12_3p$phase_id_3p == 2
+s0$s1 <- s0$s2 <- FALSE
+predictors_s0 <- all.vars(formula.s0)[-1]
+predictors_s1 <- all.vars(formula.s1)[-1]
+eval(parse(text=(paste0("s0$",
+                        setdiff(predictors_s1, predictors_s0),
+                        " <- NA"))))
+s012 <- rbind(s0, s12_3p)
+tm <- truemeans.G
+tm[["smallarea"]] <- row.names(tm)
+tm[["Intercept"]] <- NULL
+
+```
+
+##  No Exhaustive Auxiliary Information
+
+The estimation given on page 23 of 
+[forestinventory`s vignette](https://CRAN.R-project.org/package=forestinventory/vignettes/forestinventory_vignette.pdf) is:
+
+``` {r}
+summary(threephase(formula.s0,
+                   formula.s1,
+                   data = grisons,
+                   phase_id = list(phase.col = "phase_id_3p", s1.id = 1, terrgrid.id = 2),
+                   small_area=list(sa.col = "smallarea", areas = c("A", "B", "C", "D"),
+                                   unbiased = TRUE),
+                   boundary_weights = "boundary_weights"
+                   ))
+```
+_Wait, the `ext_variance` differs, but that`s a problem with `forestinventory`..._
+
+I make predictions omitting the boundary weights:
+
+``` {r}
+forestinventory <- threephase(formula.s0,
+                              formula.s1,
+                              data = grisons,
+                              phase_id = list(phase.col = "phase_id_3p", s1.id = 1, terrgrid.id = 2),
+                              small_area=list(sa.col = "smallarea", areas = c("A", "B", "C", "D"),
+                                              unbiased = TRUE),
+                              boundary_weights = "boundary_weights"
+                              )
+
+maSAE <- predict(saObj(data = s012, 
+                       f = update(formula.s1, ~ . | smallarea),
+                       s1 = 's1',
+                       auxiliaryWeights = "boundary_weights",
+                       s2 = 's2'))
+
+```
+
+``` {r}
+compare(maSAE, forestinventory, "three-phase, ext. pseudo sae")
+```
+The benchmarks again:
+
+``` {r}
+wrap_three <- function(...) {
+    dots <- list(...)
+    dots$small_area$unbiased <- TRUE
+    ex <- do.call(threephase, dots)$estimation
+    dots$psmall <- TRUE
+    small <- do.call(threephase, dots)$estimation
+    dots$psmall <- FALSE
+    dots$small_area$unbiased <- FALSE
+    synth <- do.call(threephase, dots)$estimation
+    cbind(ex[TRUE, c("estimate", "g_variance")], 
+          synth[TRUE, c("estimate", "g_variance")], 
+          small[TRUE, c("estimate", "g_variance")])
+
+}
+mb <- mbmb(
+           forestinventory = wrap_three(formula.s0,
+                              formula.s1,
+                              data = grisons,
+                              phase_id = list(phase.col = "phase_id_3p", s1.id = 1, terrgrid.id = 2),
+                              small_area=list(sa.col = "smallarea", areas = c("A", "B", "C", "D"),
+                                              unbiased = TRUE)
+                              ),
+           maSAE = predict(suppressMessages(saObj(data = s012, 
+                       f = update(formula.s1, ~ . | smallarea),
+                       s1 = 's1',
+                       s2 = 's2')))[, -1],
+
+           check = "equivalent")
+print(mb)
+microbenchmark:::autoplot.microbenchmark(mb)
+```
+
+# Partially Exhaustive Auxiliary Information
+Funny: `forestinventory` can`t deal with partially exhaustive auxiliary information for two-phase sampling:
+
+``` {r}
+try(twophase(formula = formula.s1, 
+             data = grisons,
+             phase_id = list(phase.col = "phase_id_2p", 
+                             terrgrid.id = 2),
+             small_area = list(sa.col ="smallarea", 
+                               areas = c("A", "B", "C", "D"),
+                               unbiased = TRUE),
+             exhaustive = truemeans.G.partially))
+predict(saObj(data = s12, 
+              f = update(formula.s1, ~ . | smallarea),
+              s2 = 's2',
+              smallAreaMeans = tm.partially))
+
+```
+Whereas `maSAE` can`t deal with partially exhaustive auxiliary information for three-phase sampling:
+``` {r}
+
+summary(forestinventory <- threephase(formula.s0,
+                              formula.s1,
+                              data = grisons,
+                              phase_id = list(phase.col = "phase_id_3p", s1.id = 1, terrgrid.id = 2),
+                              small_area = list(sa.col = "smallarea", areas = c("A", "B", "C", "D"),
+                                                unbiased = TRUE),
+                              exhaustive = truemeans.G))
+
+
+
+try(predict(saObj(data = s012, 
+              f = update(formula.s1, ~ . | smallarea),
+              s2 = 's2',
+              s1 = 's1',
+              smallAreaMeans = tm)))
+
+```
+I do not see what three-phase partially exhaustive information would be. 
+So: is partially exhaustive auxiliary information two- or three-phase?
+
+
+##  Is Partially Exhaustive Auxiliary Information Two- or Three-Phase?
+
+
+The (first) estimation given on page 22 of 
+[forestinventory`s vignette](https://CRAN.R-project.org/package=forestinventory/vignettes/forestinventory_vignette.pdf) is:
+
+``` {r}
+extsynth_3p <- threephase(formula.s0, formula.s1, data = grisons,
+                          phase_id = list(phase.col = "phase_id_3p",
+                                          s1.id = 1, terrgrid.id = 2),
+                          small_area = list(sa.col = "smallarea", areas = c("A", "B", "C", "D"),
+                                            unbiased = TRUE),
+                          exhaustive = truemeans.G,
+                          boundary_weights = "boundary_weights"
+                          )
+extsynth_3p$estimation
+```
+
+``` {r}
+s12_3p$s1 <- NULL
+s12_3p$phase_id_2p <- NULL
+s12_3p$phase_id_3p <- NULL
+maSAE <- predict(saObj(data = s12_3p, 
+                       f = update(formula.s1, ~ . | smallarea),
+                       auxiliaryWeights = "boundary_weights",
+                       s2 = 's2', smallAreaMeans = tm)
+)
+compare(maSAE, extsynth_3p, "three-phase, ext. sae")
+
+```
+
+So this is a two-phase setup, `forestinventory` seems to need the three-phase setup (the reduced model)
+to identify the partially exhaustive part of the auxiliary information. 
+The corresponding publication is 
+
+  Daniel Mandallaz, Jochen Breschan, and Andreas Hill. New regression
+  estimators in forest inventories with two-phase sampling and partially
+  exhaustive information: a design-based Monte Carlo approach with applications
+  to small-area estimation.
+  In: Canadian Journal of Forest Research 43.11 (2013), pp. 1023-1031.
+  doi: 10.1139/cjfr-2013-0181.
+
+
+
+The benchmarks again:
+
+``` {r}
+mb <- mbmb(
+           forestinventory = wrap_three(formula.s0,
+                              formula.s1,
+                              data = grisons,
+                              phase_id = list(phase.col = "phase_id_3p", s1.id = 1, terrgrid.id = 2),
+                              small_area = list(sa.col = "smallarea", areas = c("A", "B", "C", "D"),
+                                                unbiased = TRUE),
+                              exhaustive = truemeans.G),
+           maSAE = predict(suppressMessages(saObj(data = s12_3p, 
+                       f = update(formula.s1, ~ . | smallarea),
+                       s2 = 's2', smallAreaMeans = tm)))[, -1],
+           check = "equivalent")
+print(mb)
+microbenchmark:::autoplot.microbenchmark(mb)
+
+```
+
+
+# Cluster Sampling
+
+I adapt data from `maSAE` to  section 6.2 of 
+[forestinventory`s vignette](https://CRAN.R-project.org/package=forestinventory/vignettes/forestinventory_vignette.pdf):
+
+``` {r}
+
+suppressWarnings(rm("s1" ,"s2", "s12"))
+data("s1", "s2", package = "maSAE")
+s12 <- bind_data(s1, s2)
+# adapt for forestinventory
+s12[["g"]][is.na(s12[["g"]])] <- "a"
+s12[["phase"]]  <-  s12[["phase1"]] + s12[["phase2"]]
+maSAE <- predict(suppressMessages(saObj(data = s12, f = y ~x1 + x2 + x3 | g,
+              s2 = "phase2", cluster = "clustid")))
+extpsynth.clust <- twophase(y ~x1 + x2 + x3,
+         data = s12,
+         cluster = "clustid",
+         phase_id = list(phase.col = "phase", s1.id = 1, terrgrid.id = 2),
+         small_area = list(sa.col = "g", areas = c("a", "b"),
+                           unbiased = TRUE))
+compare(maSAE, extpsynth.clust, "three-phase, ext. sae")
+mb <- mbmb(
+           forestinventory = clean(twophase(y ~x1 + x2 + x3,
+         data = s12,
+         cluster = "clustid",
+         phase_id = list(phase.col = "phase", s1.id = 1, terrgrid.id = 2),
+         small_area = list(sa.col = "g", areas = c("a", "b"),
+                           unbiased = TRUE))),
+           maSAE = clean(predict(suppressMessages(saObj(data = s12, f = y ~x1 + x2 + x3 | g,
+              s2 = "phase2", cluster = "clustid")))),
+
+           check = "equivalent")
+print(mb)
+microbenchmark:::autoplot.microbenchmark(mb)
+
+```
+
+Now I use the example given in  section 6.2 of 
+[forestinventory`s vignette](https://CRAN.R-project.org/package=forestinventory/vignettes/forestinventory_vignette.pdf):
+
+``` {r}
+  data("zberg", package = "forestinventory")
+  forestinventory <- forestinventory::twophase(
+    formula = basal ~ stade + couver + melange, data = zberg,
+    phase_id = list(phase.col = "phase_id_2p", terrgrid.id = 2),
+    cluster = "cluster",
+    small_area = list(
+      sa.col = "ismallold", areas = c("1"),
+      unbiased = TRUE
+    )
+  )
+  s1 <- zberg[zberg[["phase_id_2p"]] == 1, ]
+  s2 <- zberg[zberg[["phase_id_2p"]] == 2, ]
+  s12 <- rbind(s1, s2)
+  s12[["s1"]] <- s12[["phase_id_2p"]] %in% c(1, 2)
+  s12[["s2"]] <- s12[["phase_id_2p"]] == 2
+  object <- maSAE::saObj(
+    data = s12,
+    f = basal ~ stade + couver + melange | ismallold,
+    s2 = "s2",
+    cluster = "cluster"
+  )
+  maSAE <- maSAE::predict(object)
+  compare(maSAE[2,], forestinventory, "clustered, ext. sae")
+```
+Obviously, something went wrong. The difference to the previous example? `zberg` contains nominally scaled predictors.
+If I ignore the cluster design, both packages give the same result:
+
+``` {r}
+  forestinventory <- forestinventory::twophase(
+    formula = basal ~ stade + couver + melange, data = zberg,
+    phase_id = list(phase.col = "phase_id_2p", terrgrid.id = 2),
+    small_area = list(
+      sa.col = "ismallold", areas = c("1"),
+      unbiased = TRUE
+    )
+  )
+  object <- maSAE::saObj(
+    data = s12,
+    f = basal ~ stade + couver + melange | ismallold,
+    s2 = "s2",
+  )
+  maSAE <- maSAE::predict(object)
+  compare(maSAE[2,], forestinventory, "clustered, ext. sae")
+```
+
+I do not know where that comes from. But since `maSAE` has very structured code compared to `forestinventory`
+(`maSAE` needs about 500 lines of code for its prediction functions, `forestinventory` more than 2200), I am biased to
+believe `maSAE`.
+
+
+# Conclusion
+- Both packages give mostly identical results, but different ones for clustered sampling designs with nominally scaled predictors.
+- `forestinventory` views partially exhaustive auxiliary information as a
+three-phase setup, `maSAE` (following Mandallaz' publications) uses a two-phase setup, but both packages give identical results after some data tweaking.
+- `maSAE` seems to be a bit faster.
+- `forestinventory` has global estimators implemented.
+
+

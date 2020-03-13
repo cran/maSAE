@@ -77,9 +77,9 @@ help("maSAE-package", package = "maSAE")
 #>      There are a couple packages for model-*based* small area
 #>      estimation, see 'sae', 'rsae', hbsae and 'JoSAE'. In 2016, Andreas
 #>      Hill published 'forestinventory', another implementation of
-#>      Mandallaz' model-assisted small area estimators. See
-#>      vignette("forestinventory_and_maASE", package = "maSAE") for a
-#>      comparison.
+#>      Mandallaz' model-assisted small area estimators (see
+#>      'vignette("forestinventory_and_maASE", package = "maSAE")' for a
+#>      comparison).
 #> 
 #> Examples:
 #> 

@@ -12,9 +12,11 @@
 #' @param s2 See \code{"\linkS4class{saeObj}"}.
 #' @param cluster See \code{"\linkS4class{saeObj}"}.
 #' @param include See \code{"\linkS4class{saeObj}"}.
+#' @param auxiliaryWeights See \code{"\linkS4class{saeObj}"}.
 #' @return An object of class \code{sadObj} if \code{f} is of structure `x ~ NULL | g',
 #' an object of class \code{saeObj} otherwise.
 #' @seealso \code{"\linkS4class{saeObj}"}, \code{"\linkS4class{sadObj}"}.
+#' @export
 #' @examples
 #'
 #' ## load data
@@ -29,7 +31,7 @@
 saObj <- function(data, f,
                   smallAreaMeans = NULL,
                   s1 = NULL, s2 = NULL,
-                  cluster = NULL, include = NULL) {
+                  cluster = NULL, include = NULL, auxiliaryWeights = NULL) {
   com <- NULL
   if (!is.null(cluster) & is.null(include)) {
     w <- "include is NULL, automatically adding it as TRUE to data."
@@ -40,7 +42,7 @@ saObj <- function(data, f,
   }
   if (!is.null(cluster) & any(is.na(data[, cluster]))) {
     w <- "
-    Found NA in cluster indicator, I automatically set NA to a default. 
+    Found NA in cluster indicator, I automatically set NA to a default.
     This might not be what you intended.
     "
     message(w)
@@ -52,7 +54,7 @@ saObj <- function(data, f,
     ))
   }
   if (length(all.vars(f)) > 2) {
-    ret <- new(
+    ret <- methods::new(
       Class = "saeObj",
       data = data,
       f = f,
@@ -60,10 +62,11 @@ saObj <- function(data, f,
       s1 = s1,
       s2 = s2,
       cluster = cluster,
-      include = include
+      include = include,
+      auxiliaryWeights = auxiliaryWeights
     )
   } else {
-    ret <- new(
+    ret <- methods::new(
       Class = "sadObj",
       data = data,
       f = f,

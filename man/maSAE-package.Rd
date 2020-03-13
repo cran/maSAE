@@ -68,8 +68,9 @@ There are a couple packages for model-\strong{based} small area estimation, see
 \code{\link[rsae:rsae-package]{rsae}},
 hbsae and
 \code{\link[JoSAE:JoSAE-package]{JoSAE}}.
-In 2016, Andreas Hill published 
+In 2016, Andreas Hill published
 \code{\link[forestinventory:forestinventory]{forestinventory}}, another
-implementation of Mandallaz' model-assisted small area estimators.
+implementation of Mandallaz' model-assisted small area estimators (see
+\code{vignette("forestinventory_and_maASE", package = "maSAE")} for a comparison).
 }
 \keyword{package}

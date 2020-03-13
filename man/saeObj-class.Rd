@@ -9,7 +9,8 @@ Class for small area estimation, the one you're probably looking for.
 }
 \details{
 \code{cluster} optionally gives the name of a variable in slot \code{data}
-from which the cluster information for clustered sample designs is to be read.
+from which the cluster information for clustered sample designs is to be
+read.
 See Manadallaz 2013, p. 445 for Details.\cr
 \code{include} optionally gives the name of a variable in slot \code{data}
 from which the inclusion indicator for cluster points is to be read.
@@ -21,29 +22,48 @@ Also see the \bold{Details} for \code{\link{predict}}.
 \describe{
 \item{\code{smallAreaMeans}}{An \emph{optional} \code{"data.frame"}
 giving the true means of fixed effects for the small areas.
-Must have a column with the random effect defining the small areas in slot
+Must have a column with the random effect defining the small areas in
+slot
 \code{data}.}
 
 \item{\code{s1}}{An \emph{optional} \code{"character"} string giving the name of a
-variable in slot \code{data} indicating that an observation (a row in  slot
+variable in slot \code{data} indicating that an observation (a row in
+slot
 \code{data}) belongs to subset 1.}
 
 \item{\code{s2}}{An \emph{optional} \code{"character"} string giving the name of a
-variable in slot \code{data} indicating that an observation (a row in  slot
+variable in slot \code{data} indicating that an observation (a row in
+slot
 \code{data}) belongs to subset 2.}
 
-\item{\code{data}}{Object of class \code{"data.frame"} to use for prediction, typically
-consisting of a predictand and one or more predictors (zero or more fixed
-effects and one random effect defining the small areas).
-See \bold{Details} for optional clustering variable and/or inclusion indicator.}
+\item{\code{data}}{Object of class \code{"data.frame"} to use for prediction,
+typically
+   consisting of a predictand and one or more predictors (zero or more fixed
+   effects and one random effect defining the small areas).
+   See \bold{Details} for optional clustering variable and/or inclusion
+   indicator.}
 
-\item{\code{f}}{Object of class \code{"formula"} a linear mixed effects model formula.}
+\item{\code{f}}{Object of class \code{"formula"} a linear mixed effects model
+formula.}
 
-\item{\code{cluster}}{An \emph{optional} \code{"character"} string giving the name of the
-clustering variable in slot \code{data}.}
+\item{\code{cluster}}{An \emph{optional} \code{"character"} string giving the name of
+the
+   clustering variable in slot \code{data}.}
 
-\item{\code{include}}{An \emph{optional} \code{"character"} string giving the name of the
-inclusion indicator in slot \code{data}.}
+\item{\code{include}}{An \emph{optional} \code{"character"} string giving the name of
+the
+   inclusion indicator in slot \code{data}.}
+
+\item{\code{auxiliaryWeights}}{An \emph{optional} \code{"character"} string giving
+the name of the
+   auxiliary weights in slot \code{data}. You will need it, if your
+   auxiliary
+   data does not have full spatial support for each observation (for example
+   when a shapefile does not completely cover all gird cells used to compute
+   auxiliary data on).
+   See
+   \code{vignette("forestinventory_vignette", package = "forestinventory")}
+   for details.}
 }}
 
 \section{Extends}{
