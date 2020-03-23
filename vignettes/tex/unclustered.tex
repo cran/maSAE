@@ -1,90 +1,94 @@
 \begin{table}
     \centering
 \begin{tabular}{l l l l l r l}
-	 exh 	&  type	&  ref & formula\\ \toprule
+	 exh 	&  Type	&  Reference & Formula\\ \toprule
 			
-     yes 	&  synthetic 	& \cite[eq. 18]{Man13a} & $\hat{Y}_{G,synth} = \bar{Z}^t_G\hat{\beta}_{s_2}$ \\
-        &    	& \cite[eq. 19]{Man13a} & $\hat{V}\left(\times\right) = \bar{Z}^t_G \hat{\Sigma}_{ \hat{\beta}_{s_2}} \bar{Z}_G$ \\
+     yes 	&  \psynthetic{} 	& \cite[eq. 18]{Man13a} & $\hat{Y}_{G,synth} = \bar{Z}^t_G\hat{\beta}_{s_2}$ \\
+        &    	& \cite[eq. 19]{Man13a} & $\hat{V} = \bar{Z}^t_G \hat{\Sigma}_{ \hat{\beta}_{s_2}} \bar{Z}_G$ \\
 			
 \lightrule
-     yes 	&  small 	& \cite[eq. 20]{Man13a} & $\hat{Y}_{G,small} = \hat{Y}_{G,synth} +\mR$ \\
-            &   	& \cite[eq. 21]{Man13a} & $\hat{V}\left(\times\right) \approx \hat{V}\left(\hat{Y}_{G,synth}\right) + \vR $ \\ 
+yes 	&  \psmall{} 	& \cite[eq. 20]{Man13a} & $\hat{Y}_{G,small} = \hat{Y}_{G,synth} +\mR$ \\
+            &   	& \cite[eq. 21]{Man13a} & $\hat{V} \approx \hat{V}\left(\hat{Y}_{G,synth}\right) + \vR $ \\ 
 \lightrule
-     yes 	&  extended 	& \cite[eq. 31]{Man13a} & $\hat{\tilde{Y}}_{G,synth} = \bar{\eZ}^t_G\hat{\theta}_{s_2}$ \\
-    &    	& \cite[eq. 33]{Man13a} & $\hat{V}\left(\times\right) = \bar{\eZ}^t_G \hat{\Sigma}_{ \hat{\theta}_{s_2}} \bar{\eZ}_G$ \\
+yes 	&  \pextended{} 	& \cite[eq. 31]{Man13a} & $\hat{\tilde{Y}}_{G,synth} = \bar{\eZ}^t_G\hat{\theta}_{s_2}$ \\
+    &    	& \cite[eq. 33]{Man13a} & $\hat{V} = \bar{\eZ}^t_G \hat{\Sigma}_{ \hat{\theta}_{s_2}} \bar{\eZ}_G$ \\
 \strongrule
 			
 
-     no 	&  synthetic 	& \cite[eq. 22]{Man13a} & $\hat{Y}_{G,psynth} = \hat{\bar{Z}}^t_{s_1,G}\hat{\beta}_{s_2}$ \\
-        &    	& \cite[eq. 23]{Man13a} & $\hat{V}\left(\times\right) = \hat{\bar{Z}}^t_{s_1,G} \hat{\Sigma}_{ \hat{\beta}_{s_2}} \hat{\bar{Z}}_{s_1,G} + \hat{\beta}^t_{s_2} \hat{\Sigma}_{ \hat{\bar{Z}}_{s_1,G}  } \hat{\beta}_{s_2}$ \\
+no 	&  \psynthetic{} 	& \cite[eq. 22]{Man13a} & $\hat{Y}_{G,psynth} = \hat{\bar{Z}}^t_{s_1,G}\hat{\beta}_{s_2}$ \\
+        &    	& \cite[eq. 23]{Man13a} & $\hat{V} = \hat{\bar{Z}}^t_{s_1,G} \hat{\Sigma}_{ \hat{\beta}_{s_2}} \hat{\bar{Z}}_{s_1,G} + \hat{\beta}^t_{s_2} \hat{\Sigma}_{ \hat{\bar{Z}}_{s_1,G}  } \hat{\beta}_{s_2}$ \\
 			
 \lightrule
-     no 	&  small 	& \cite[eq. 25]{Man13a} & $\hat{Y}_{G,psmall} = \hat{Y}_{G,psynth} + \mR$ \\
-            &      	& \cite[eq. 26]{Man13a} & $\hat{V}\left(\times\right) \approx \hat{V}\left(\hat{Y}_{G,synth}\right) + \vR$ \\
+no 	&  \psmall{} 	& \cite[eq. 25]{Man13a} & $\hat{Y}_{G,psmall} = \hat{Y}_{G,psynth} + \mR$ \\
+            &      	& \cite[eq. 26]{Man13a} & $\hat{V} \approx \hat{V}\left(\hat{Y}_{G,synth}\right) + \vR$ \\
 \lightrule
-     no 	&  extended 	& \cite[eq. 35]{Man13a} & $\hat{\tilde{Y}}_{G,psynth} = \hat{\bar{\eZ}}^t_{s_1,G}\hat{\theta}_{s_2}$ \\
-    &    	&  \cite[eq. 36]{Man13a} & $\hat{V}\left(\times\right) = \hat{\bar{\eZ}}^t_{s_1,G} \hat{\Sigma}_{ \hat{\theta}_{s_2}} \hat{\bar{\eZ}}_{s_1,G} + \hat{\theta}^t_{s_2} \hat{\Sigma}_{ \hat{\bar{\eZ}}_{s_1,G}  } \hat{\theta}_{s_2}$ \\
+no 	&  \pextended{} 	& \cite[eq. 35]{Man13a} & $\hat{\tilde{Y}}_{G,psynth} = \hat{\bar{\eZ}}^t_{s_1,G}\hat{\theta}_{s_2}$ \\
+    &    	&  \cite[eq. 36]{Man13a} & $\hat{V} = \hat{\bar{\eZ}}^t_{s_1,G} \hat{\Sigma}_{ \hat{\theta}_{s_2}} \hat{\bar{\eZ}}_{s_1,G} + \hat{\theta}^t_{s_2} \hat{\Sigma}_{ \hat{\bar{\eZ}}_{s_1,G}  } \hat{\theta}_{s_2}$ \\
 			
 \strongrule
 			
-     part 	&  synthetic 	& \cite[eq. 34]{Man13b} & $\hat{Y}_{psynth,G,greg} = \left( \bar{Z}_G^{(1)}- \hat{\bar{Z}}_{s_1,G}^{(1)}\right) \hat{\alpha}_{s_2} + \hat{\bar{Z}}^t_{s_1,G}\hat{\beta}_{s_2}$\\
-        &    	&     \cite[eq. 35]{Man13b} & $\hat{V}\left(\times\right) = \frac{n_{s_2}}{n_{s_1}}\bar{Z}^{(1)t}_G \hat{\Sigma}_{ \hat{\alpha}_{s_2}} \bar{Z}^{(1)}_G + (1-\frac{n_{s_2}}{n_{s_1}})\hat{\bar{Z}}^{t}_{s_1,G} \hat{\Sigma}_{ \hat{\beta}_{s_2}} \hat{\bar{Z}}_{s_1,G} $ \\
+part 	&  \psynthetic{} 	& \cite[eq. 34]{Man13b} & $\hat{Y}_{psynth,G,greg} = \left( \bar{Z}_G^{(1)}- \hat{\bar{Z}}_{s_1,G}^{(1)}\right) \hat{\alpha}_{s_2} + \hat{\bar{Z}}^t_{s_1,G}\hat{\beta}_{s_2}$\\
+        &    	&     \cite[eq. 35]{Man13b} & $\hat{V} = \frac{n_{s_2}}{n_{s_1}}\bar{Z}^{(1)t}_G \hat{\Sigma}_{ \hat{\alpha}_{s_2}} \bar{Z}^{(1)}_G + (1-\frac{n_{s_2}}{n_{s_1}})\hat{\bar{Z}}^{t}_{s_1,G} \hat{\Sigma}_{ \hat{\beta}_{s_2}} \hat{\bar{Z}}_{s_1,G} $ \\
 \lightrule
 			
-     part 	&  small 	& \cite[eq. 24]{Man13b} & $\hat{Y}_{G,greg} = \hat{Y}_{psynth,G,greg} + \mR$\\
-            &      	& \cite[eq. 23]{Man13b} & $\hat{V}\left(\times\right) \approx \hat{V}\left(\hat{Y}_{psynth,G,greg}\right) + \vR$\\
+part 	&  \psmall{} 	& \cite[eq. 24]{Man13b} & $\hat{Y}_{G,greg} = \hat{Y}_{psynth,G,greg} + \mR$\\
+            &      	& \cite[eq. 23]{Man13b} & $\hat{V} \approx \hat{V}\left(\hat{Y}_{psynth,G,greg}\right) + \vR$\\
 \lightrule
 
-     part 	&  extended 	& \cite[eq. 30]{Man13b} & $\hat{\tilde{Y}}_{G,greg} = \left( \bar{\eZ}_G^{(1)}- \hat{\bar{\eZ}}_{s_1,G}^{(1)}\right) \hat{\gamma}_{s_2} + \hat{\bar{\eZ}}^t_{s_1,G}\hat{\theta}_{s_2}$\\
-        &    	&     \cite[eq. 31]{Man13b} & $\hat{V}\left(\times\right) = \frac{n_{s_2}}{n_{s_1}}\bar{\eZ}^{(1)t}_G \hat{\Sigma}_{ \hat{\gamma}_{s_2}} \bar{\eZ}^{(1)}_G + (1-\frac{n_{s_2}}{n_{s_1}})\hat{\bar{\eZ}}^{t}_{s_1,G} \hat{\Sigma}_{ \hat{\theta}_{s_2}} \hat{\bar{\eZ}}_{s_1,G} $\\
+part 	&  \pextended{} 	& \cite[eq. 30]{Man13b} & $\hat{\tilde{Y}}_{G,greg} = \left( \bar{\eZ}_G^{(1)}- \hat{\bar{\eZ}}_{s_1,G}^{(1)}\right) \hat{\gamma}_{s_2} + \hat{\bar{\eZ}}^t_{s_1,G}\hat{\theta}_{s_2}$\\
+        &    	&     \cite[eq. 31]{Man13b} & $\hat{V} = \frac{n_{s_2}}{n_{s_1}}\bar{\eZ}^{(1)t}_G \hat{\Sigma}_{ \hat{\gamma}_{s_2}} \bar{\eZ}^{(1)}_G + (1-\frac{n_{s_2}}{n_{s_1}})\hat{\bar{\eZ}}^{t}_{s_1,G} \hat{\Sigma}_{ \hat{\theta}_{s_2}} \hat{\bar{\eZ}}_{s_1,G} $\\
 \end{tabular}
 \caption{Predictors for non-clustered two-phase sampling, 
     \emph{exh} denotes exhaustiveness of auxiliary information (yes/no/part, the
     latter meaning partially exhaustive auxiliary information),
-    \emph{small} denotes the area estimator. \label{tab:unclustered2}
+    \emph{Type} denotes the area estimator (\psynthetic{} for synthetic, \psmall{}
+    for small and \pextended{} for extended synthetic. \emph{Reference} gives the
+    refenerce where found, else I derived them by analogy. \label{tab:unclustered2}
 }
 \end{table}
 \begin{table}
     \centering
 \begin{tabular}{ l l r l}
-	 exh 	&  type	&  ref & formula\\ \toprule
-yes & synthetic & & $-$\\
+	 exh 	&  Type	&  Reference & Formula\\ \toprule
+     yes & \psynthetic{} & & $-$\\
  &  &  & $-$ \\
 \lightrule
-yes & small &  & $-$\\
+yes & \psmall{} &  & $-$\\
  &  &  & $-$\\
 \lightrule
-yes & extended &  & $-$\\
+yes & \pextended{} &  & $-$\\
  &  &  & $-$\\
 \strongrule
 
-     no 	&  synthetic 	& \cite[eq. 26b]{hill2017} & $\hat{Y}_{G,psynth,3p} = \left( \hat{\bar{Z}}_{s_0,G}^{(1)}- \hat{\bar{Z}}_{s_1,G}^{(1)}\right) \hat{\alpha}_{s_2} + \hat{\bar{Z}}^t_{s_1,G}\hat{\beta}_{s_2}$\\
-        &    	&    \cite[eq. 26d]{hill2017} & $\hat{V}\left(\times\right) = \hat{\alpha}_{s_2}^t \hat{\Sigma}_{\hat{\bar{Z}}_{s_0,G}^{(1)}} \hat{\alpha}_{s_2} + \frac{n_{s_2}}{n_{s_1}} \hat{\bar{Z}}^{(1)t}_{s_0,G} \hat{\Sigma}_{ \hat{\alpha}_{s_2}} \hat{\bar{Z}}^{(1)}_{s_0,G} + (1-\frac{n_{s_2}}{n_{s_1}})\hat{\bar{Z}}^{t}_{s_1,G} \hat{\Sigma}_{ \hat{\beta}_{s_2}} \hat{\bar{Z}}_{s_1,G} $\\
+no 	&  \psynthetic{} 	& \cite[eq. 26b]{hill2017} & $\hat{Y}_{G,psynth,3p} = \left( \hat{\bar{Z}}_{s_0,G}^{(1)}- \hat{\bar{Z}}_{s_1,G}^{(1)}\right) \hat{\alpha}_{s_2} + \hat{\bar{Z}}^t_{s_1,G}\hat{\beta}_{s_2}$\\
+        &    	&    \cite[eq. 26d]{hill2017} & $\hat{V} = \hat{\alpha}_{s_2}^t \hat{\Sigma}_{\hat{\bar{Z}}_{s_0,G}^{(1)}} \hat{\alpha}_{s_2} + \frac{n_{s_2}}{n_{s_1}} \hat{\bar{Z}}^{(1)t}_{s_0,G} \hat{\Sigma}_{ \hat{\alpha}_{s_2}} \hat{\bar{Z}}^{(1)}_{s_0,G} + (1-\frac{n_{s_2}}{n_{s_1}})\hat{\bar{Z}}^{t}_{s_1,G} \hat{\Sigma}_{ \hat{\beta}_{s_2}} \hat{\bar{Z}}_{s_1,G} $\\
 \lightrule
 			
-     no 	&  small 	& \cite[eq. 22b]{hill2017} & $\hat{Y}_{G,psmall,3p} = \hat{Y}_{G,psynth,G,3p} + \mR$\\
-          &       & \cite[eq. 23b]{hill2017} & $\hat{V}\left(\times\right) \approx \hat{V}\left(\hat{\tilde{Y}}_{G,psynth,3p}\right) + \vR$ \\ 
+no 	&  \psmall{} 	& \cite[eq. 22b]{hill2017} & $\hat{Y}_{G,psmall,3p} = \hat{Y}_{G,psynth,G,3p} + \mR$\\
+          &       & \cite[eq. 23b]{hill2017} & $\hat{V} \approx \hat{V}\left(\hat{\tilde{Y}}_{G,psynth,3p}\right) + \vR$ \\ 
 
 \lightrule
-     no 	&  extended 	& \cite[eq. 23]{Man13c} & $\hat{\tilde{Y}}_{G,g3reg} = \left( \hat{\bar{\eZ}}_{s_0,G}^{(1)}- \hat{\bar{\eZ}}_{s_1,G}^{(1)}\right) \hat{\gamma}_{s_2} + \hat{\bar{\eZ}}^t_{s_1,G}\hat{\theta}_{s_2}$\\
-        &    	&     \cite[eq. 24]{Man13c} & $\hat{V}\left(\times\right) = \hat{\gamma}_{s_2}^t \hat{\Sigma}_{\hat{\bar{\eZ}}_{s_0,G}^{(1)}} \hat{\gamma}_{s_2} + \frac{n_{s_2}}{n_{s_1}} \hat{\bar{\eZ}}^{(1)t}_{s_0,G} \hat{\Sigma}_{ \hat{\gamma}_{s_2}} \hat{\bar{\eZ}}^{(1)}_{s_0,G} + (1-\frac{n_{s_2}}{n_{s_1}})\hat{\bar{\eZ}}^{t}_{s_1,G} \hat{\Sigma}_{ \hat{\theta}_{s_2}} \hat{\bar{\eZ}}_{s_1,G} $\\
+no 	&  \pextended{} 	& \cite[eq. 23]{Man13c} & $\hat{\tilde{Y}}_{G,g3reg} = \left( \hat{\bar{\eZ}}_{s_0,G}^{(1)}- \hat{\bar{\eZ}}_{s_1,G}^{(1)}\right) \hat{\gamma}_{s_2} + \hat{\bar{\eZ}}^t_{s_1,G}\hat{\theta}_{s_2}$\\
+        &    	&     \cite[eq. 24]{Man13c} & $\hat{V} = \hat{\gamma}_{s_2}^t \hat{\Sigma}_{\hat{\bar{\eZ}}_{s_0,G}^{(1)}} \hat{\gamma}_{s_2} + \frac{n_{s_2}}{n_{s_1}} \hat{\bar{\eZ}}^{(1)t}_{s_0,G} \hat{\Sigma}_{ \hat{\gamma}_{s_2}} \hat{\bar{\eZ}}^{(1)}_{s_0,G} + (1-\frac{n_{s_2}}{n_{s_1}})\hat{\bar{\eZ}}^{t}_{s_1,G} \hat{\Sigma}_{ \hat{\theta}_{s_2}} \hat{\bar{\eZ}}_{s_1,G} $\\
 \strongrule
-     part 	&  synthetic 	& \cite[eq. 26a]{hill2017} & $\hat{Y}_{G,synth,3p} = \left( \bar{Z}_{G}^{(1)}- \hat{\bar{Z}}_{s_1,G}^{(1)}\right) \hat{\alpha}_{s_2} + \hat{\bar{Z}}^t_{s_1,G}\hat{\beta}_{s_2}$\\
-        &    	&    \cite[eq. 26c]{hill2017} & $\hat{V}\left(\times\right) = \frac{n_{s_2}}{n_{s_1}} \hat{\bar{Z}}^{(1)t}_{s_0,G} \hat{\Sigma}_{ \hat{\alpha}_{s_2}} \hat{\bar{Z}}^{(1)}_{s_0,G} + (1-\frac{n_{s_2}}{n_{s_1}})\hat{\bar{Z}}^{t}_{s_1,G} \hat{\Sigma}_{ \hat{\beta}_{s_2}} \hat{\bar{Z}}_{s_1,G} $\\
+part 	&  \psynthetic{} 	& \cite[eq. 26a]{hill2017} & $\hat{Y}_{G,synth,3p} = \left( \bar{Z}_{G}^{(1)}- \hat{\bar{Z}}_{s_1,G}^{(1)}\right) \hat{\alpha}_{s_2} + \hat{\bar{Z}}^t_{s_1,G}\hat{\beta}_{s_2}$\\
+        &    	&    \cite[eq. 26c]{hill2017} & $\hat{V} = \frac{n_{s_2}}{n_{s_1}} \hat{\bar{Z}}^{(1)t}_{s_0,G} \hat{\Sigma}_{ \hat{\alpha}_{s_2}} \hat{\bar{Z}}^{(1)}_{s_0,G} + (1-\frac{n_{s_2}}{n_{s_1}})\hat{\bar{Z}}^{t}_{s_1,G} \hat{\Sigma}_{ \hat{\beta}_{s_2}} \hat{\bar{Z}}_{s_1,G} $\\
 \lightrule
 			
-     part 	&  small 	& \cite[eq. 22a]{hill2017} & $\hat{Y}_{G,small,3p} = \hat{Y}_{G,synth,3p} + \mR$\\
-            &      	& \cite[eq. 23a]{hill2017} & $\hat{V}\left(\times\right) \approx \hat{V}\left(\hat{Y}_{G,synth,3p}\right) + \vR$ \\
+part 	&  \psmall{} 	& \cite[eq. 22a]{hill2017} & $\hat{Y}_{G,small,3p} = \hat{Y}_{G,synth,3p} + \mR$\\
+            &      	& \cite[eq. 23a]{hill2017} & $\hat{V} \approx \hat{V}\left(\hat{Y}_{G,synth,3p}\right) + \vR$ \\
 \lightrule
 
-	 part 	&  extended 	& \analogy{} & $\hat{\tilde{Y}}_{G,ext synth,3p} = \left( \bar{\eZ}_{G}^{(1)}- \hat{\bar{\eZ}}_{s_1,G}^{(1)}\right) \hat{\gamma}_{s_2} + \hat{\bar{\eZ}}^t_{s_1,G}\hat{\theta}_{s_2}$\\
-	   	&    	&    \analogy{} & $\hat{V}\left(\times\right) = \frac{n_{s_2}}{n_{s_1}} \bar{\eZ}^{(1)t}_{s_0,G} \hat{\Sigma}_{ \hat{\gamma}_{s_2}} \bar{\eZ}^{(1)}_{s_0,G} + (1-\frac{n_{s_2}}{n_{s_1}})\hat{\bar{\eZ}}^{t}_{s_1,G} \hat{\Sigma}_{ \hat{\theta}_{s_2}} \hat{\bar{\eZ}}_{s_1,G} $\\
+part 	&  \pextended{} 	& \analogy{} & $\hat{\tilde{Y}}_{G,ext synth,3p} = \left( \bar{\eZ}_{G}^{(1)}- \hat{\bar{\eZ}}_{s_1,G}^{(1)}\right) \hat{\gamma}_{s_2} + \hat{\bar{\eZ}}^t_{s_1,G}\hat{\theta}_{s_2}$\\
+	   	&    	&    \analogy{} & $\hat{V} = \frac{n_{s_2}}{n_{s_1}} \bar{\eZ}^{(1)t}_{s_0,G} \hat{\Sigma}_{ \hat{\gamma}_{s_2}} \bar{\eZ}^{(1)}_{s_0,G} + (1-\frac{n_{s_2}}{n_{s_1}})\hat{\bar{\eZ}}^{t}_{s_1,G} \hat{\Sigma}_{ \hat{\theta}_{s_2}} \hat{\bar{\eZ}}_{s_1,G} $\\
 
 \end{tabular}
 \caption{Predictors for non-clustered three-phase sampling, 
     \emph{exh} denotes exhaustiveness of auxiliary information (yes/no/part, the
     latter meaning partially exhaustive auxiliary information),
-    \emph{small} denotes the area estimator. \label{tab:unclustered3}
+    \emph{Type} denotes the area estimator (\psynthetic{} for synthetic, \psmall{}
+    for small and \pextended{} for extended synthetic. \emph{Reference} gives the
+    refenerce where found, else I derived them by analogy. \label{tab:unclustered3}
 }
 \end{table}
 

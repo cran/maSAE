@@ -1,3 +1,7 @@
+# maSAE 2.0.1
+
+* I have fixed the layout for tables in vignette "A Taxonomy of Estimators".
+
 # maSAE 2.0.0
 
 ## Major Modifications
