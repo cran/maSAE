@@ -4,7 +4,9 @@
 \name{s2}
 \alias{s2}
 \title{Example s2 Data Set}
-\format{A data frame with 206 observations on the following 7 variables.}
+\format{
+A data frame with 206 observations on the following 7 variables.
+}
 \usage{
 data(s2, package = "maSAE")
 }

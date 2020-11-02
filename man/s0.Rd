@@ -4,7 +4,9 @@
 \name{s0}
 \alias{s0}
 \title{Example s0 Data Set}
-\format{A data frame with 9008 observations on the following 6 variables.}
+\format{
+A data frame with 9008 observations on the following 6 variables.
+}
 \usage{
 data(s0, package = "maSAE")
 }

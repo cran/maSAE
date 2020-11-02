@@ -1,3 +1,7 @@
+# maSAE 2.0.2
+
+* Added `JoSAE`, `rsae` and `sae` to the Suggests-Field in file DESCRIPTION.
+
 # maSAE 2.0.1
 
 * I have fixed the layout for tables in vignette "A Taxonomy of Estimators".

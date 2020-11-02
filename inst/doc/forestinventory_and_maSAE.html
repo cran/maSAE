@@ -16,44 +16,140 @@
 <title>A Comparison of maSAE to forestinventory</title>
 
 
+<style type="text/css">
+  code{white-space: pre-wrap;}
+  span.smallcaps{font-variant: small-caps;}
+  span.underline{text-decoration: underline;}
+  div.column{display: inline-block; vertical-align: top; width: 50%;}
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+  ul.task-list{list-style: none;}
+      a.sourceLine { display: inline-block; line-height: 1.25; }
+  a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
+  a.sourceLine:empty { height: 1.2em; }
+  .sourceCode { overflow: visible; }
+  code.sourceCode { white-space: pre; position: relative; }
+  div.sourceCode { margin: 1em 0; }
+  pre.sourceCode { margin: 0; }
+  @media screen {
+  div.sourceCode { overflow: auto; }
+  }
+  @media print {
+  code.sourceCode { white-space: pre-wrap; }
+  a.sourceLine { text-indent: -1em; padding-left: 1em; }
+  }
+  pre.numberSource a.sourceLine
+    { position: relative; left: -4em; }
+  pre.numberSource a.sourceLine::before
+    { content: attr(title);
+      position: relative; left: -1em; text-align: right; vertical-align: baseline;
+      border: none; pointer-events: all; display: inline-block;
+      -webkit-touch-callout: none; -webkit-user-select: none;
+      -khtml-user-select: none; -moz-user-select: none;
+      -ms-user-select: none; user-select: none;
+      padding: 0 4px; width: 4em;
+      color: #aaaaaa;
+    }
+  pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+  div.sourceCode
+    {  }
+  @media screen {
+  a.sourceLine::before { text-decoration: underline; }
+  }
+  code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+  code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+  code span.at { color: #7d9029; } /* Attribute */
+  code span.bn { color: #40a070; } /* BaseN */
+  code span.bu { } /* BuiltIn */
+  code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+  code span.ch { color: #4070a0; } /* Char */
+  code span.cn { color: #880000; } /* Constant */
+  code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+  code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+  code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+  code span.dt { color: #902000; } /* DataType */
+  code span.dv { color: #40a070; } /* DecVal */
+  code span.er { color: #ff0000; font-weight: bold; } /* Error */
+  code span.ex { } /* Extension */
+  code span.fl { color: #40a070; } /* Float */
+  code span.fu { color: #06287e; } /* Function */
+  code span.im { } /* Import */
+  code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+  code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+  code span.op { color: #666666; } /* Operator */
+  code span.ot { color: #007020; } /* Other */
+  code span.pp { color: #bc7a00; } /* Preprocessor */
+  code span.sc { color: #4070a0; } /* SpecialChar */
+  code span.ss { color: #bb6688; } /* SpecialString */
+  code span.st { color: #4070a0; } /* String */
+  code span.va { color: #19177c; } /* Variable */
+  code span.vs { color: #4070a0; } /* VerbatimString */
+  code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+    </style>
+
 
 <style type="text/css">code{white-space: pre;}</style>
 <style type="text/css" data-origin="pandoc">
-div.sourceCode { overflow-x: auto; }
-table.sourceCode, tr.sourceCode, td.lineNumbers, td.sourceCode {
-  margin: 0; padding: 0; vertical-align: baseline; border: none; }
-table.sourceCode { width: 100%; line-height: 100%; }
-td.lineNumbers { text-align: right; padding-right: 4px; padding-left: 4px; color: #aaaaaa; border-right: 1px solid #aaaaaa; }
-td.sourceCode { padding-left: 5px; }
-code > span.kw { color: #007020; font-weight: bold; } /* Keyword */
-code > span.dt { color: #902000; } /* DataType */
-code > span.dv { color: #40a070; } /* DecVal */
-code > span.bn { color: #40a070; } /* BaseN */
-code > span.fl { color: #40a070; } /* Float */
-code > span.ch { color: #4070a0; } /* Char */
-code > span.st { color: #4070a0; } /* String */
-code > span.co { color: #60a0b0; font-style: italic; } /* Comment */
-code > span.ot { color: #007020; } /* Other */
-code > span.al { color: #ff0000; font-weight: bold; } /* Alert */
-code > span.fu { color: #06287e; } /* Function */
-code > span.er { color: #ff0000; font-weight: bold; } /* Error */
-code > span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
-code > span.cn { color: #880000; } /* Constant */
-code > span.sc { color: #4070a0; } /* SpecialChar */
-code > span.vs { color: #4070a0; } /* VerbatimString */
-code > span.ss { color: #bb6688; } /* SpecialString */
-code > span.im { } /* Import */
-code > span.va { color: #19177c; } /* Variable */
-code > span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
-code > span.op { color: #666666; } /* Operator */
-code > span.bu { } /* BuiltIn */
-code > span.ex { } /* Extension */
-code > span.pp { color: #bc7a00; } /* Preprocessor */
-code > span.at { color: #7d9029; } /* Attribute */
-code > span.do { color: #ba2121; font-style: italic; } /* Documentation */
-code > span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
-code > span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
-code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+a.sourceLine { display: inline-block; line-height: 1.25; }
+a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
+a.sourceLine:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode { white-space: pre; position: relative; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+code.sourceCode { white-space: pre-wrap; }
+a.sourceLine { text-indent: -1em; padding-left: 1em; }
+}
+pre.numberSource a.sourceLine
+  { position: relative; left: -4em; }
+pre.numberSource a.sourceLine::before
+  { content: attr(title);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; pointer-events: all; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {  }
+@media screen {
+a.sourceLine::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
 
 </style>
 <script>
@@ -80,7 +176,187 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 
 
 
-<link href="data:text/css;charset=utf-8,body%20%7B%0Abackground%2Dcolor%3A%20%23fff%3B%0Amargin%3A%201em%20auto%3B%0Amax%2Dwidth%3A%20700px%3B%0Aoverflow%3A%20visible%3B%0Apadding%2Dleft%3A%202em%3B%0Apadding%2Dright%3A%202em%3B%0Afont%2Dfamily%3A%20%22Open%20Sans%22%2C%20%22Helvetica%20Neue%22%2C%20Helvetica%2C%20Arial%2C%20sans%2Dserif%3B%0Afont%2Dsize%3A%2014px%3B%0Aline%2Dheight%3A%201%2E35%3B%0A%7D%0A%23TOC%20%7B%0Aclear%3A%20both%3B%0Amargin%3A%200%200%2010px%2010px%3B%0Apadding%3A%204px%3B%0Awidth%3A%20400px%3B%0Aborder%3A%201px%20solid%20%23CCCCCC%3B%0Aborder%2Dradius%3A%205px%3B%0Abackground%2Dcolor%3A%20%23f6f6f6%3B%0Afont%2Dsize%3A%2013px%3B%0Aline%2Dheight%3A%201%2E3%3B%0A%7D%0A%23TOC%20%2Etoctitle%20%7B%0Afont%2Dweight%3A%20bold%3B%0Afont%2Dsize%3A%2015px%3B%0Amargin%2Dleft%3A%205px%3B%0A%7D%0A%23TOC%20ul%20%7B%0Apadding%2Dleft%3A%2040px%3B%0Amargin%2Dleft%3A%20%2D1%2E5em%3B%0Amargin%2Dtop%3A%205px%3B%0Amargin%2Dbottom%3A%205px%3B%0A%7D%0A%23TOC%20ul%20ul%20%7B%0Amargin%2Dleft%3A%20%2D2em%3B%0A%7D%0A%23TOC%20li%20%7B%0Aline%2Dheight%3A%2016px%3B%0A%7D%0Atable%20%7B%0Amargin%3A%201em%20auto%3B%0Aborder%2Dwidth%3A%201px%3B%0Aborder%2Dcolor%3A%20%23DDDDDD%3B%0Aborder%2Dstyle%3A%20outset%3B%0Aborder%2Dcollapse%3A%20collapse%3B%0A%7D%0Atable%20th%20%7B%0Aborder%2Dwidth%3A%202px%3B%0Apadding%3A%205px%3B%0Aborder%2Dstyle%3A%20inset%3B%0A%7D%0Atable%20td%20%7B%0Aborder%2Dwidth%3A%201px%3B%0Aborder%2Dstyle%3A%20inset%3B%0Aline%2Dheight%3A%2018px%3B%0Apadding%3A%205px%205px%3B%0A%7D%0Atable%2C%20table%20th%2C%20table%20td%20%7B%0Aborder%2Dleft%2Dstyle%3A%20none%3B%0Aborder%2Dright%2Dstyle%3A%20none%3B%0A%7D%0Atable%20thead%2C%20table%20tr%2Eeven%20%7B%0Abackground%2Dcolor%3A%20%23f7f7f7%3B%0A%7D%0Ap%20%7B%0Amargin%3A%200%2E5em%200%3B%0A%7D%0Ablockquote%20%7B%0Abackground%2Dcolor%3A%20%23f6f6f6%3B%0Apadding%3A%200%2E25em%200%2E75em%3B%0A%7D%0Ahr%20%7B%0Aborder%2Dstyle%3A%20solid%3B%0Aborder%3A%20none%3B%0Aborder%2Dtop%3A%201px%20solid%20%23777%3B%0Amargin%3A%2028px%200%3B%0A%7D%0Adl%20%7B%0Amargin%2Dleft%3A%200%3B%0A%7D%0Adl%20dd%20%7B%0Amargin%2Dbottom%3A%2013px%3B%0Amargin%2Dleft%3A%2013px%3B%0A%7D%0Adl%20dt%20%7B%0Afont%2Dweight%3A%20bold%3B%0A%7D%0Aul%20%7B%0Amargin%2Dtop%3A%200%3B%0A%7D%0Aul%20li%20%7B%0Alist%2Dstyle%3A%20circle%20outside%3B%0A%7D%0Aul%20ul%20%7B%0Amargin%2Dbottom%3A%200%3B%0A%7D%0Apre%2C%20code%20%7B%0Abackground%2Dcolor%3A%20%23f7f7f7%3B%0Aborder%2Dradius%3A%203px%3B%0Acolor%3A%20%23333%3B%0Awhite%2Dspace%3A%20pre%2Dwrap%3B%20%0A%7D%0Apre%20%7B%0Aborder%2Dradius%3A%203px%3B%0Amargin%3A%205px%200px%2010px%200px%3B%0Apadding%3A%2010px%3B%0A%7D%0Apre%3Anot%28%5Bclass%5D%29%20%7B%0Abackground%2Dcolor%3A%20%23f7f7f7%3B%0A%7D%0Acode%20%7B%0Afont%2Dfamily%3A%20Consolas%2C%20Monaco%2C%20%27Courier%20New%27%2C%20monospace%3B%0Afont%2Dsize%3A%2085%25%3B%0A%7D%0Ap%20%3E%20code%2C%20li%20%3E%20code%20%7B%0Apadding%3A%202px%200px%3B%0A%7D%0Adiv%2Efigure%20%7B%0Atext%2Dalign%3A%20center%3B%0A%7D%0Aimg%20%7B%0Abackground%2Dcolor%3A%20%23FFFFFF%3B%0Apadding%3A%202px%3B%0Aborder%3A%201px%20solid%20%23DDDDDD%3B%0Aborder%2Dradius%3A%203px%3B%0Aborder%3A%201px%20solid%20%23CCCCCC%3B%0Amargin%3A%200%205px%3B%0A%7D%0Ah1%20%7B%0Amargin%2Dtop%3A%200%3B%0Afont%2Dsize%3A%2035px%3B%0Aline%2Dheight%3A%2040px%3B%0A%7D%0Ah2%20%7B%0Aborder%2Dbottom%3A%204px%20solid%20%23f7f7f7%3B%0Apadding%2Dtop%3A%2010px%3B%0Apadding%2Dbottom%3A%202px%3B%0Afont%2Dsize%3A%20145%25%3B%0A%7D%0Ah3%20%7B%0Aborder%2Dbottom%3A%202px%20solid%20%23f7f7f7%3B%0Apadding%2Dtop%3A%2010px%3B%0Afont%2Dsize%3A%20120%25%3B%0A%7D%0Ah4%20%7B%0Aborder%2Dbottom%3A%201px%20solid%20%23f7f7f7%3B%0Amargin%2Dleft%3A%208px%3B%0Afont%2Dsize%3A%20105%25%3B%0A%7D%0Ah5%2C%20h6%20%7B%0Aborder%2Dbottom%3A%201px%20solid%20%23ccc%3B%0Afont%2Dsize%3A%20105%25%3B%0A%7D%0Aa%20%7B%0Acolor%3A%20%230033dd%3B%0Atext%2Ddecoration%3A%20none%3B%0A%7D%0Aa%3Ahover%20%7B%0Acolor%3A%20%236666ff%3B%20%7D%0Aa%3Avisited%20%7B%0Acolor%3A%20%23800080%3B%20%7D%0Aa%3Avisited%3Ahover%20%7B%0Acolor%3A%20%23BB00BB%3B%20%7D%0Aa%5Bhref%5E%3D%22http%3A%22%5D%20%7B%0Atext%2Ddecoration%3A%20underline%3B%20%7D%0Aa%5Bhref%5E%3D%22https%3A%22%5D%20%7B%0Atext%2Ddecoration%3A%20underline%3B%20%7D%0A%0Acode%20%3E%20span%2Ekw%20%7B%20color%3A%20%23555%3B%20font%2Dweight%3A%20bold%3B%20%7D%20%0Acode%20%3E%20span%2Edt%20%7B%20color%3A%20%23902000%3B%20%7D%20%0Acode%20%3E%20span%2Edv%20%7B%20color%3A%20%2340a070%3B%20%7D%20%0Acode%20%3E%20span%2Ebn%20%7B%20color%3A%20%23d14%3B%20%7D%20%0Acode%20%3E%20span%2Efl%20%7B%20color%3A%20%23d14%3B%20%7D%20%0Acode%20%3E%20span%2Ech%20%7B%20color%3A%20%23d14%3B%20%7D%20%0Acode%20%3E%20span%2Est%20%7B%20color%3A%20%23d14%3B%20%7D%20%0Acode%20%3E%20span%2Eco%20%7B%20color%3A%20%23888888%3B%20font%2Dstyle%3A%20italic%3B%20%7D%20%0Acode%20%3E%20span%2Eot%20%7B%20color%3A%20%23007020%3B%20%7D%20%0Acode%20%3E%20span%2Eal%20%7B%20color%3A%20%23ff0000%3B%20font%2Dweight%3A%20bold%3B%20%7D%20%0Acode%20%3E%20span%2Efu%20%7B%20color%3A%20%23900%3B%20font%2Dweight%3A%20bold%3B%20%7D%20%0Acode%20%3E%20span%2Eer%20%7B%20color%3A%20%23a61717%3B%20background%2Dcolor%3A%20%23e3d2d2%3B%20%7D%20%0A" rel="stylesheet" type="text/css" />
+<style type="text/css">body {
+background-color: #fff;
+margin: 1em auto;
+max-width: 700px;
+overflow: visible;
+padding-left: 2em;
+padding-right: 2em;
+font-family: "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
+font-size: 14px;
+line-height: 1.35;
+}
+#TOC {
+clear: both;
+margin: 0 0 10px 10px;
+padding: 4px;
+width: 400px;
+border: 1px solid #CCCCCC;
+border-radius: 5px;
+background-color: #f6f6f6;
+font-size: 13px;
+line-height: 1.3;
+}
+#TOC .toctitle {
+font-weight: bold;
+font-size: 15px;
+margin-left: 5px;
+}
+#TOC ul {
+padding-left: 40px;
+margin-left: -1.5em;
+margin-top: 5px;
+margin-bottom: 5px;
+}
+#TOC ul ul {
+margin-left: -2em;
+}
+#TOC li {
+line-height: 16px;
+}
+table {
+margin: 1em auto;
+border-width: 1px;
+border-color: #DDDDDD;
+border-style: outset;
+border-collapse: collapse;
+}
+table th {
+border-width: 2px;
+padding: 5px;
+border-style: inset;
+}
+table td {
+border-width: 1px;
+border-style: inset;
+line-height: 18px;
+padding: 5px 5px;
+}
+table, table th, table td {
+border-left-style: none;
+border-right-style: none;
+}
+table thead, table tr.even {
+background-color: #f7f7f7;
+}
+p {
+margin: 0.5em 0;
+}
+blockquote {
+background-color: #f6f6f6;
+padding: 0.25em 0.75em;
+}
+hr {
+border-style: solid;
+border: none;
+border-top: 1px solid #777;
+margin: 28px 0;
+}
+dl {
+margin-left: 0;
+}
+dl dd {
+margin-bottom: 13px;
+margin-left: 13px;
+}
+dl dt {
+font-weight: bold;
+}
+ul {
+margin-top: 0;
+}
+ul li {
+list-style: circle outside;
+}
+ul ul {
+margin-bottom: 0;
+}
+pre, code {
+background-color: #f7f7f7;
+border-radius: 3px;
+color: #333;
+white-space: pre-wrap; 
+}
+pre {
+border-radius: 3px;
+margin: 5px 0px 10px 0px;
+padding: 10px;
+}
+pre:not([class]) {
+background-color: #f7f7f7;
+}
+code {
+font-family: Consolas, Monaco, 'Courier New', monospace;
+font-size: 85%;
+}
+p > code, li > code {
+padding: 2px 0px;
+}
+div.figure {
+text-align: center;
+}
+img {
+background-color: #FFFFFF;
+padding: 2px;
+border: 1px solid #DDDDDD;
+border-radius: 3px;
+border: 1px solid #CCCCCC;
+margin: 0 5px;
+}
+h1 {
+margin-top: 0;
+font-size: 35px;
+line-height: 40px;
+}
+h2 {
+border-bottom: 4px solid #f7f7f7;
+padding-top: 10px;
+padding-bottom: 2px;
+font-size: 145%;
+}
+h3 {
+border-bottom: 2px solid #f7f7f7;
+padding-top: 10px;
+font-size: 120%;
+}
+h4 {
+border-bottom: 1px solid #f7f7f7;
+margin-left: 8px;
+font-size: 105%;
+}
+h5, h6 {
+border-bottom: 1px solid #ccc;
+font-size: 105%;
+}
+a {
+color: #0033dd;
+text-decoration: none;
+}
+a:hover {
+color: #6666ff; }
+a:visited {
+color: #800080; }
+a:visited:hover {
+color: #BB00BB; }
+a[href^="http:"] {
+text-decoration: underline; }
+a[href^="https:"] {
+text-decoration: underline; }
+
+code > span.kw { color: #555; font-weight: bold; } 
+code > span.dt { color: #902000; } 
+code > span.dv { color: #40a070; } 
+code > span.bn { color: #d14; } 
+code > span.fl { color: #d14; } 
+code > span.ch { color: #d14; } 
+code > span.st { color: #d14; } 
+code > span.co { color: #888888; font-style: italic; } 
+code > span.ot { color: #007020; } 
+code > span.al { color: #ff0000; font-weight: bold; } 
+code > span.fu { color: #900; font-weight: bold; } 
+code > span.er { color: #a61717; background-color: #e3d2d2; } 
+</style>
 
 
 
@@ -100,81 +376,81 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <div id="what-is-this-about" class="section level1">
 <h1>What is this about?</h1>
 <p>In 2016, Andreas Hill published package <a href="https://CRAN.R-project.org/package=forestinventory">forestinventory</a>. We thought about merging the packages, but never actually got to it: <code>maSAE</code> is S4, <code>forestinventory</code> is S3, both of us are busy doing other stuff. So I am trying to at least compare functionality of both packages.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(<span class="st">&quot;forestinventory&quot;</span>)
-<span class="kw">library</span>(<span class="st">&quot;maSAE&quot;</span>)</code></pre></div>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1-1" title="1"><span class="kw">library</span>(<span class="st">&quot;forestinventory&quot;</span>)</a>
+<a class="sourceLine" id="cb1-2" title="2"><span class="kw">library</span>(<span class="st">&quot;maSAE&quot;</span>)</a></code></pre></div>
 </div>
 <div id="setup" class="section level1">
 <h1>Setup</h1>
 <p>I need some helpers for checking and comparing results from <code>maSAE</code> and <code>forestinventory</code>:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">clean &lt;-<span class="st"> </span>function(x, <span class="dt">which =</span> <span class="ot">NULL</span>) {
-    if (<span class="kw">identical</span>(<span class="ot">FALSE</span>, which)) {
-        res &lt;-<span class="st"> </span><span class="kw">as.matrix</span>(<span class="kw">unname</span>(x[<span class="ot">TRUE</span>, <span class="ot">TRUE</span>]))
-    } else {
-        if (<span class="kw">is.null</span>(which)) {
-            if (<span class="kw">all</span>(<span class="kw">c</span>( <span class="st">&quot;small_area&quot;</span>, <span class="st">&quot;prediction&quot;</span>, <span class="st">&quot;variance&quot;</span>) %in%<span class="st"> </span><span class="kw">names</span>(x))) {
-                res &lt;-<span class="st"> </span><span class="kw">as.matrix</span>(<span class="kw">unname</span>(x[<span class="ot">TRUE</span>, <span class="dv">1</span>:<span class="dv">3</span>]))
-            } else {
-                res &lt;-<span class="st"> </span><span class="kw">as.matrix</span>(<span class="kw">unname</span>(x[[<span class="st">&quot;estimation&quot;</span>]][<span class="ot">TRUE</span>, <span class="kw">c</span>(<span class="st">&quot;area&quot;</span>, <span class="st">&quot;estimate&quot;</span>, <span class="st">&quot;g_variance&quot;</span>)]))
-            }
-        } else {
-            res &lt;-<span class="st"> </span><span class="kw">as.matrix</span>(<span class="kw">unname</span>(x[<span class="ot">TRUE</span>, <span class="kw">c</span>(<span class="dv">1</span>, <span class="kw">grep</span>(which, <span class="kw">names</span>(x)))]))
-        }
-    }
-    <span class="kw">return</span>(res)
-} 
-
-compare &lt;-<span class="st"> </span>function(maSAE, forestinventory, <span class="dt">message =</span> <span class="ot">NULL</span>) {
-    if(!<span class="st"> </span><span class="kw">isTRUE</span>(<span class="kw">all.equal</span>(<span class="kw">clean</span>(maSAE), <span class="kw">clean</span>(forestinventory), 
-                          <span class="dt">check.attributes =</span> <span class="ot">FALSE</span>))) {
-        message &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;Differing results from maSAE and forestinventory: &quot;</span>, 
-                     message)
-        <span class="kw">warning</span>(message)
-        <span class="kw">return</span>(<span class="ot">FALSE</span>)
-    } 
-    <span class="kw">return</span>(<span class="ot">TRUE</span>)
-}</code></pre></div>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb2-1" title="1">clean &lt;-<span class="st"> </span><span class="cf">function</span>(x, <span class="dt">which =</span> <span class="ot">NULL</span>) {</a>
+<a class="sourceLine" id="cb2-2" title="2">    <span class="cf">if</span> (<span class="kw">identical</span>(<span class="ot">FALSE</span>, which)) {</a>
+<a class="sourceLine" id="cb2-3" title="3">        res &lt;-<span class="st"> </span><span class="kw">as.matrix</span>(<span class="kw">unname</span>(x[<span class="ot">TRUE</span>, <span class="ot">TRUE</span>]))</a>
+<a class="sourceLine" id="cb2-4" title="4">    } <span class="cf">else</span> {</a>
+<a class="sourceLine" id="cb2-5" title="5">        <span class="cf">if</span> (<span class="kw">is.null</span>(which)) {</a>
+<a class="sourceLine" id="cb2-6" title="6">            <span class="cf">if</span> (<span class="kw">all</span>(<span class="kw">c</span>( <span class="st">&quot;small_area&quot;</span>, <span class="st">&quot;prediction&quot;</span>, <span class="st">&quot;variance&quot;</span>) <span class="op">%in%</span><span class="st"> </span><span class="kw">names</span>(x))) {</a>
+<a class="sourceLine" id="cb2-7" title="7">                res &lt;-<span class="st"> </span><span class="kw">as.matrix</span>(<span class="kw">unname</span>(x[<span class="ot">TRUE</span>, <span class="dv">1</span><span class="op">:</span><span class="dv">3</span>]))</a>
+<a class="sourceLine" id="cb2-8" title="8">            } <span class="cf">else</span> {</a>
+<a class="sourceLine" id="cb2-9" title="9">                res &lt;-<span class="st"> </span><span class="kw">as.matrix</span>(<span class="kw">unname</span>(x[[<span class="st">&quot;estimation&quot;</span>]][<span class="ot">TRUE</span>, <span class="kw">c</span>(<span class="st">&quot;area&quot;</span>, <span class="st">&quot;estimate&quot;</span>, <span class="st">&quot;g_variance&quot;</span>)]))</a>
+<a class="sourceLine" id="cb2-10" title="10">            }</a>
+<a class="sourceLine" id="cb2-11" title="11">        } <span class="cf">else</span> {</a>
+<a class="sourceLine" id="cb2-12" title="12">            res &lt;-<span class="st"> </span><span class="kw">as.matrix</span>(<span class="kw">unname</span>(x[<span class="ot">TRUE</span>, <span class="kw">c</span>(<span class="dv">1</span>, <span class="kw">grep</span>(which, <span class="kw">names</span>(x)))]))</a>
+<a class="sourceLine" id="cb2-13" title="13">        }</a>
+<a class="sourceLine" id="cb2-14" title="14">    }</a>
+<a class="sourceLine" id="cb2-15" title="15">    <span class="kw">return</span>(res)</a>
+<a class="sourceLine" id="cb2-16" title="16">} </a>
+<a class="sourceLine" id="cb2-17" title="17"></a>
+<a class="sourceLine" id="cb2-18" title="18">compare &lt;-<span class="st"> </span><span class="cf">function</span>(maSAE, forestinventory, <span class="dt">message =</span> <span class="ot">NULL</span>) {</a>
+<a class="sourceLine" id="cb2-19" title="19">    <span class="cf">if</span>(<span class="op">!</span><span class="st"> </span><span class="kw">isTRUE</span>(<span class="kw">all.equal</span>(<span class="kw">clean</span>(maSAE), <span class="kw">clean</span>(forestinventory), </a>
+<a class="sourceLine" id="cb2-20" title="20">                          <span class="dt">check.attributes =</span> <span class="ot">FALSE</span>))) {</a>
+<a class="sourceLine" id="cb2-21" title="21">        message &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;Differing results from maSAE and forestinventory: &quot;</span>, </a>
+<a class="sourceLine" id="cb2-22" title="22">                     message)</a>
+<a class="sourceLine" id="cb2-23" title="23">        <span class="kw">warning</span>(message)</a>
+<a class="sourceLine" id="cb2-24" title="24">        <span class="kw">return</span>(<span class="ot">FALSE</span>)</a>
+<a class="sourceLine" id="cb2-25" title="25">    } </a>
+<a class="sourceLine" id="cb2-26" title="26">    <span class="kw">return</span>(<span class="ot">TRUE</span>)</a>
+<a class="sourceLine" id="cb2-27" title="27">}</a></code></pre></div>
 <p>I use the grisons data set from <code>forestinventory</code>:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">data</span>(grisons, <span class="dt">package =</span> <span class="st">&quot;forestinventory&quot;</span>)</code></pre></div>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb3-1" title="1"><span class="kw">data</span>(grisons, <span class="dt">package =</span> <span class="st">&quot;forestinventory&quot;</span>)</a></code></pre></div>
 <p>I define regression models for simple and cluster sampling:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">formula.s0 &lt;-<span class="st"> </span>tvol ~<span class="st"> </span>mean <span class="co"># reduced model:</span>
-formula.s1 &lt;-<span class="st"> </span>tvol ~<span class="st"> </span>mean +<span class="st"> </span>stddev +<span class="st"> </span>max +<span class="st"> </span>q75 <span class="co"># full model</span>
-formula.clust.s0 &lt;-<span class="st"> </span>basal ~<span class="st"> </span>stade
-formula.clust.s1 &lt;-<span class="st"> </span>basal ~<span class="st"> </span>stade +<span class="st"> </span>couver +<span class="st"> </span>melange</code></pre></div>
+<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb4-1" title="1">formula.s0 &lt;-<span class="st"> </span>tvol <span class="op">~</span><span class="st"> </span>mean <span class="co"># reduced model:</span></a>
+<a class="sourceLine" id="cb4-2" title="2">formula.s1 &lt;-<span class="st"> </span>tvol <span class="op">~</span><span class="st"> </span>mean <span class="op">+</span><span class="st"> </span>stddev <span class="op">+</span><span class="st"> </span>max <span class="op">+</span><span class="st"> </span>q75 <span class="co"># full model</span></a>
+<a class="sourceLine" id="cb4-3" title="3">formula.clust.s0 &lt;-<span class="st"> </span>basal <span class="op">~</span><span class="st"> </span>stade</a>
+<a class="sourceLine" id="cb4-4" title="4">formula.clust.s1 &lt;-<span class="st"> </span>basal <span class="op">~</span><span class="st"> </span>stade <span class="op">+</span><span class="st"> </span>couver <span class="op">+</span><span class="st"> </span>melange</a></code></pre></div>
 </div>
 <div id="two-phase" class="section level1">
 <h1>Two-Phase</h1>
 <p>Some data handling, true means are taken from <a href="https://CRAN.R-project.org/package=forestinventory/vignettes/forestinventory_vignette.pdf">forestinventory`s vignette</a>. :</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">truemeans.G &lt;-<span class="st"> </span><span class="kw">data.frame</span>(<span class="dt">Intercept =</span> <span class="kw">rep</span>(<span class="dv">1</span>, <span class="dv">4</span>),
-                          <span class="dt">mean =</span> <span class="kw">c</span>(<span class="fl">12.85</span>, <span class="fl">12.21</span>, <span class="fl">9.33</span>, <span class="fl">10.45</span>),
-                          <span class="dt">stddev =</span> <span class="kw">c</span>(<span class="fl">9.31</span>, <span class="fl">9.47</span>, <span class="fl">7.90</span>, <span class="fl">8.36</span>),
-                          <span class="dt">max =</span> <span class="kw">c</span>(<span class="fl">34.92</span>, <span class="fl">35.36</span>, <span class="fl">28.81</span>, <span class="fl">30.22</span>),
-                          <span class="dt">q75 =</span> <span class="kw">c</span>(<span class="fl">19.77</span>, <span class="fl">19.16</span>, <span class="fl">15.40</span>, <span class="fl">16.91</span>))
-<span class="kw">rownames</span>(truemeans.G) &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;A&quot;</span>, <span class="st">&quot;B&quot;</span>, <span class="st">&quot;C&quot;</span>, <span class="st">&quot;D&quot;</span>)
-
-<span class="co"># data adjustments</span>
-s1 &lt;-<span class="st"> </span>grisons[grisons[[<span class="st">&quot;phase_id_2p&quot;</span>]] ==<span class="st"> </span><span class="dv">1</span>, ]
-s2 &lt;-<span class="st"> </span>grisons[grisons[[<span class="st">&quot;phase_id_2p&quot;</span>]] ==<span class="st"> </span><span class="dv">2</span>, ]
-s12 &lt;-<span class="st"> </span><span class="kw">rbind</span>(s1, s2)
-s12$s1 &lt;-<span class="st"> </span>s12$phase_id_2p %in%<span class="st"> </span><span class="kw">c</span>(<span class="dv">1</span>, <span class="dv">2</span>)
-s12$s2 &lt;-<span class="st"> </span>s12$phase_id_2p ==<span class="st"> </span><span class="dv">2</span>
-
-tm &lt;-<span class="st"> </span>truemeans.G
-tm[[<span class="st">&quot;smallarea&quot;</span>]] &lt;-<span class="st"> </span><span class="kw">row.names</span>(tm)
-tm[[<span class="st">&quot;Intercept&quot;</span>]] &lt;-<span class="st"> </span><span class="ot">NULL</span>
-
-truemeans.G.partially &lt;-<span class="st"> </span>truemeans.G[, -<span class="kw">which</span>(<span class="kw">names</span>(truemeans.G) %in%<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;stddev&quot;</span>, <span class="st">&quot;mean&quot;</span>))]
-tm.partially &lt;-<span class="st"> </span>tm[, -<span class="kw">which</span>(<span class="kw">names</span>(tm) %in%<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;stddev&quot;</span>, <span class="st">&quot;mean&quot;</span>))]</code></pre></div>
+<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb5-1" title="1">truemeans.G &lt;-<span class="st"> </span><span class="kw">data.frame</span>(<span class="dt">Intercept =</span> <span class="kw">rep</span>(<span class="dv">1</span>, <span class="dv">4</span>),</a>
+<a class="sourceLine" id="cb5-2" title="2">                          <span class="dt">mean =</span> <span class="kw">c</span>(<span class="fl">12.85</span>, <span class="fl">12.21</span>, <span class="fl">9.33</span>, <span class="fl">10.45</span>),</a>
+<a class="sourceLine" id="cb5-3" title="3">                          <span class="dt">stddev =</span> <span class="kw">c</span>(<span class="fl">9.31</span>, <span class="fl">9.47</span>, <span class="fl">7.90</span>, <span class="fl">8.36</span>),</a>
+<a class="sourceLine" id="cb5-4" title="4">                          <span class="dt">max =</span> <span class="kw">c</span>(<span class="fl">34.92</span>, <span class="fl">35.36</span>, <span class="fl">28.81</span>, <span class="fl">30.22</span>),</a>
+<a class="sourceLine" id="cb5-5" title="5">                          <span class="dt">q75 =</span> <span class="kw">c</span>(<span class="fl">19.77</span>, <span class="fl">19.16</span>, <span class="fl">15.40</span>, <span class="fl">16.91</span>))</a>
+<a class="sourceLine" id="cb5-6" title="6"><span class="kw">rownames</span>(truemeans.G) &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;A&quot;</span>, <span class="st">&quot;B&quot;</span>, <span class="st">&quot;C&quot;</span>, <span class="st">&quot;D&quot;</span>)</a>
+<a class="sourceLine" id="cb5-7" title="7"></a>
+<a class="sourceLine" id="cb5-8" title="8"><span class="co"># data adjustments</span></a>
+<a class="sourceLine" id="cb5-9" title="9">s1 &lt;-<span class="st"> </span>grisons[grisons[[<span class="st">&quot;phase_id_2p&quot;</span>]] <span class="op">==</span><span class="st"> </span><span class="dv">1</span>, ]</a>
+<a class="sourceLine" id="cb5-10" title="10">s2 &lt;-<span class="st"> </span>grisons[grisons[[<span class="st">&quot;phase_id_2p&quot;</span>]] <span class="op">==</span><span class="st"> </span><span class="dv">2</span>, ]</a>
+<a class="sourceLine" id="cb5-11" title="11">s12 &lt;-<span class="st"> </span><span class="kw">rbind</span>(s1, s2)</a>
+<a class="sourceLine" id="cb5-12" title="12">s12<span class="op">$</span>s1 &lt;-<span class="st"> </span>s12<span class="op">$</span>phase_id_2p <span class="op">%in%</span><span class="st"> </span><span class="kw">c</span>(<span class="dv">1</span>, <span class="dv">2</span>)</a>
+<a class="sourceLine" id="cb5-13" title="13">s12<span class="op">$</span>s2 &lt;-<span class="st"> </span>s12<span class="op">$</span>phase_id_2p <span class="op">==</span><span class="st"> </span><span class="dv">2</span></a>
+<a class="sourceLine" id="cb5-14" title="14"></a>
+<a class="sourceLine" id="cb5-15" title="15">tm &lt;-<span class="st"> </span>truemeans.G</a>
+<a class="sourceLine" id="cb5-16" title="16">tm[[<span class="st">&quot;smallarea&quot;</span>]] &lt;-<span class="st"> </span><span class="kw">row.names</span>(tm)</a>
+<a class="sourceLine" id="cb5-17" title="17">tm[[<span class="st">&quot;Intercept&quot;</span>]] &lt;-<span class="st"> </span><span class="ot">NULL</span></a>
+<a class="sourceLine" id="cb5-18" title="18"></a>
+<a class="sourceLine" id="cb5-19" title="19">truemeans.G.partially &lt;-<span class="st"> </span>truemeans.G[, <span class="op">-</span><span class="kw">which</span>(<span class="kw">names</span>(truemeans.G) <span class="op">%in%</span><span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;stddev&quot;</span>, <span class="st">&quot;mean&quot;</span>))]</a>
+<a class="sourceLine" id="cb5-20" title="20">tm.partially &lt;-<span class="st"> </span>tm[, <span class="op">-</span><span class="kw">which</span>(<span class="kw">names</span>(tm) <span class="op">%in%</span><span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;stddev&quot;</span>, <span class="st">&quot;mean&quot;</span>))]</a></code></pre></div>
 <div id="no-exhaustive-auxiliary-information" class="section level2">
 <h2>No Exhaustive Auxiliary Information</h2>
 <p>This is the estimation given on bottom of page 15 of <a href="https://CRAN.R-project.org/package=forestinventory/vignettes/forestinventory_vignette.pdf">forestinventory`s vignette</a>:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">summary</span>(<span class="kw">twophase</span>(<span class="dt">formula =</span> formula.s1, 
-                 <span class="dt">data =</span> grisons,
-                 <span class="dt">phase_id =</span> <span class="kw">list</span>(<span class="dt">phase.col =</span> <span class="st">&quot;phase_id_2p&quot;</span>, <span class="dt">terrgrid.id =</span> <span class="dv">2</span>),
-                 <span class="dt">small_area =</span> <span class="kw">list</span>(<span class="dt">sa.col =</span> <span class="st">&quot;smallarea&quot;</span>, 
-                                   <span class="dt">areas =</span> <span class="kw">c</span>(<span class="st">&quot;A&quot;</span>, <span class="st">&quot;B&quot;</span>,<span class="st">&quot;C&quot;</span>, <span class="st">&quot;D&quot;</span>),
-                                   <span class="dt">unbiased =</span> <span class="ot">TRUE</span>),
-                 <span class="dt">boundary_weights =</span> <span class="st">&quot;boundary_weights&quot;</span>
-                 ))</code></pre></div>
+<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb6-1" title="1"><span class="kw">summary</span>(<span class="kw">twophase</span>(<span class="dt">formula =</span> formula.s1, </a>
+<a class="sourceLine" id="cb6-2" title="2">                 <span class="dt">data =</span> grisons,</a>
+<a class="sourceLine" id="cb6-3" title="3">                 <span class="dt">phase_id =</span> <span class="kw">list</span>(<span class="dt">phase.col =</span> <span class="st">&quot;phase_id_2p&quot;</span>, <span class="dt">terrgrid.id =</span> <span class="dv">2</span>),</a>
+<a class="sourceLine" id="cb6-4" title="4">                 <span class="dt">small_area =</span> <span class="kw">list</span>(<span class="dt">sa.col =</span> <span class="st">&quot;smallarea&quot;</span>, </a>
+<a class="sourceLine" id="cb6-5" title="5">                                   <span class="dt">areas =</span> <span class="kw">c</span>(<span class="st">&quot;A&quot;</span>, <span class="st">&quot;B&quot;</span>,<span class="st">&quot;C&quot;</span>, <span class="st">&quot;D&quot;</span>),</a>
+<a class="sourceLine" id="cb6-6" title="6">                                   <span class="dt">unbiased =</span> <span class="ot">TRUE</span>),</a>
+<a class="sourceLine" id="cb6-7" title="7">                 <span class="dt">boundary_weights =</span> <span class="st">&quot;boundary_weights&quot;</span></a>
+<a class="sourceLine" id="cb6-8" title="8">                 ))</a></code></pre></div>
 <pre><code>## 
 ## Two-phase small area estimation
 ##  
@@ -198,75 +474,75 @@ tm.partially &lt;-<span class="st"> </span>tm[, -<span class="kw">which</span>(<
 ## 
 ## 'boundary_weight'- option was used to calculate weighted means of auxiliary variables</code></pre>
 <p>Now I`m using both packages to make predictions:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">maSAE &lt;-<span class="st"> </span><span class="kw">predict</span>(<span class="kw">saObj</span>(<span class="dt">data =</span> s12,
-                       <span class="dt">f =</span> <span class="kw">update</span>(formula.s1, ~<span class="st"> </span>. |<span class="st"> </span>smallarea),
-                       <span class="dt">auxiliaryWeights =</span> <span class="st">&quot;boundary_weights&quot;</span>,
-                       <span class="dt">s2 =</span> <span class="st">'s2'</span>)
-)
-
-forestinventory &lt;-<span class="st"> </span><span class="kw">twophase</span>(<span class="dt">formula =</span> formula.s1, 
-                            <span class="dt">data =</span> grisons,
-                            <span class="dt">phase_id =</span> <span class="kw">list</span>(<span class="dt">phase.col =</span> <span class="st">&quot;phase_id_2p&quot;</span>, <span class="dt">terrgrid.id =</span> <span class="dv">2</span>),
-                            <span class="dt">small_area =</span> <span class="kw">list</span>(<span class="dt">sa.col =</span> <span class="st">&quot;smallarea&quot;</span>, 
-                                              <span class="dt">areas =</span> <span class="kw">c</span>(<span class="st">&quot;A&quot;</span>, <span class="st">&quot;B&quot;</span>,<span class="st">&quot;C&quot;</span>, <span class="st">&quot;D&quot;</span>),
-                                              <span class="dt">unbiased =</span> <span class="ot">TRUE</span>),
-                            <span class="dt">boundary_weights =</span> <span class="st">&quot;boundary_weights&quot;</span>
-                            )</code></pre></div>
+<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb8-1" title="1">maSAE &lt;-<span class="st"> </span><span class="kw">predict</span>(<span class="kw">saObj</span>(<span class="dt">data =</span> s12,</a>
+<a class="sourceLine" id="cb8-2" title="2">                       <span class="dt">f =</span> <span class="kw">update</span>(formula.s1, <span class="op">~</span><span class="st"> </span>. <span class="op">|</span><span class="st"> </span>smallarea),</a>
+<a class="sourceLine" id="cb8-3" title="3">                       <span class="dt">auxiliaryWeights =</span> <span class="st">&quot;boundary_weights&quot;</span>,</a>
+<a class="sourceLine" id="cb8-4" title="4">                       <span class="dt">s2 =</span> <span class="st">'s2'</span>)</a>
+<a class="sourceLine" id="cb8-5" title="5">)</a>
+<a class="sourceLine" id="cb8-6" title="6"></a>
+<a class="sourceLine" id="cb8-7" title="7">forestinventory &lt;-<span class="st"> </span><span class="kw">twophase</span>(<span class="dt">formula =</span> formula.s1, </a>
+<a class="sourceLine" id="cb8-8" title="8">                            <span class="dt">data =</span> grisons,</a>
+<a class="sourceLine" id="cb8-9" title="9">                            <span class="dt">phase_id =</span> <span class="kw">list</span>(<span class="dt">phase.col =</span> <span class="st">&quot;phase_id_2p&quot;</span>, <span class="dt">terrgrid.id =</span> <span class="dv">2</span>),</a>
+<a class="sourceLine" id="cb8-10" title="10">                            <span class="dt">small_area =</span> <span class="kw">list</span>(<span class="dt">sa.col =</span> <span class="st">&quot;smallarea&quot;</span>, </a>
+<a class="sourceLine" id="cb8-11" title="11">                                              <span class="dt">areas =</span> <span class="kw">c</span>(<span class="st">&quot;A&quot;</span>, <span class="st">&quot;B&quot;</span>,<span class="st">&quot;C&quot;</span>, <span class="st">&quot;D&quot;</span>),</a>
+<a class="sourceLine" id="cb8-12" title="12">                                              <span class="dt">unbiased =</span> <span class="ot">TRUE</span>),</a>
+<a class="sourceLine" id="cb8-13" title="13">                            <span class="dt">boundary_weights =</span> <span class="st">&quot;boundary_weights&quot;</span></a>
+<a class="sourceLine" id="cb8-14" title="14">                            )</a></code></pre></div>
 <p>Both packages deliver the same results:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">compare</span>(maSAE, forestinventory, <span class="st">&quot;two-phase, ext. pseudo sae&quot;</span>)</code></pre></div>
+<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb9-1" title="1"><span class="kw">compare</span>(maSAE, forestinventory, <span class="st">&quot;two-phase, ext. pseudo sae&quot;</span>)</a></code></pre></div>
 <pre><code>## [1] TRUE</code></pre>
 <p>Now I benchmark them, calculating the small, synthetic and extended synthetic estimators:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">wrap_two &lt;-<span class="st"> </span>function(...) {
-    dots &lt;-<span class="st"> </span><span class="kw">list</span>(...)
-    dots$small_area$unbiased &lt;-<span class="st"> </span><span class="ot">TRUE</span>
-    ex &lt;-<span class="st"> </span><span class="kw">do.call</span>(twophase, dots)$estimation
-    dots$psmall &lt;-<span class="st"> </span><span class="ot">TRUE</span>
-    small &lt;-<span class="st"> </span><span class="kw">do.call</span>(twophase, dots)$estimation
-    dots$psmall &lt;-<span class="st"> </span><span class="ot">FALSE</span>
-    dots$small_area$unbiased &lt;-<span class="st"> </span><span class="ot">FALSE</span>
-    synth &lt;-<span class="st"> </span><span class="kw">do.call</span>(twophase, dots)$estimation
-    <span class="kw">cbind</span>(ex[<span class="ot">TRUE</span>, <span class="kw">c</span>(<span class="st">&quot;estimate&quot;</span>, <span class="st">&quot;g_variance&quot;</span>)], 
-          synth[<span class="ot">TRUE</span>, <span class="kw">c</span>(<span class="st">&quot;estimate&quot;</span>, <span class="st">&quot;g_variance&quot;</span>)], 
-          small[<span class="ot">TRUE</span>, <span class="kw">c</span>(<span class="st">&quot;estimate&quot;</span>, <span class="st">&quot;g_variance&quot;</span>)])
-
-}
-mbmb &lt;-<span class="st"> </span>microbenchmark::microbenchmark
-mb &lt;-<span class="st"> </span><span class="kw">mbmb</span>(
-           <span class="dt">forestinventory =</span> <span class="kw">wrap_two</span>(<span class="dt">formula =</span> formula.s1, 
-                                    <span class="dt">data =</span> grisons,
-                                    <span class="dt">phase_id =</span> <span class="kw">list</span>(<span class="dt">phase.col =</span> <span class="st">&quot;phase_id_2p&quot;</span>, <span class="dt">terrgrid.id =</span> <span class="dv">2</span>),
-                                    <span class="dt">small_area =</span> <span class="kw">list</span>(<span class="dt">sa.col =</span> <span class="st">&quot;smallarea&quot;</span>, 
-                                                      <span class="dt">areas =</span> <span class="kw">c</span>(<span class="st">&quot;A&quot;</span>, <span class="st">&quot;B&quot;</span>,<span class="st">&quot;C&quot;</span>, <span class="st">&quot;D&quot;</span>),
-                                                      <span class="dt">unbiased =</span> <span class="ot">TRUE</span>)
-                                    ), 
-           <span class="dt">maSAE =</span> <span class="kw">predict</span>(<span class="kw">saObj</span>(<span class="dt">data =</span> s12, 
-                                 <span class="dt">f =</span> <span class="kw">update</span>(formula.s1, ~<span class="st"> </span>. |<span class="st"> </span>smallarea),
-                                 <span class="dt">s2 =</span> <span class="st">'s2'</span>
-                                 ))[, -<span class="dv">1</span>],
-           <span class="dt">check =</span> <span class="st">&quot;equivalent&quot;</span>
-           )</code></pre></div>
+<div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb11-1" title="1">wrap_two &lt;-<span class="st"> </span><span class="cf">function</span>(...) {</a>
+<a class="sourceLine" id="cb11-2" title="2">    dots &lt;-<span class="st"> </span><span class="kw">list</span>(...)</a>
+<a class="sourceLine" id="cb11-3" title="3">    dots<span class="op">$</span>small_area<span class="op">$</span>unbiased &lt;-<span class="st"> </span><span class="ot">TRUE</span></a>
+<a class="sourceLine" id="cb11-4" title="4">    ex &lt;-<span class="st"> </span><span class="kw">do.call</span>(twophase, dots)<span class="op">$</span>estimation</a>
+<a class="sourceLine" id="cb11-5" title="5">    dots<span class="op">$</span>psmall &lt;-<span class="st"> </span><span class="ot">TRUE</span></a>
+<a class="sourceLine" id="cb11-6" title="6">    small &lt;-<span class="st"> </span><span class="kw">do.call</span>(twophase, dots)<span class="op">$</span>estimation</a>
+<a class="sourceLine" id="cb11-7" title="7">    dots<span class="op">$</span>psmall &lt;-<span class="st"> </span><span class="ot">FALSE</span></a>
+<a class="sourceLine" id="cb11-8" title="8">    dots<span class="op">$</span>small_area<span class="op">$</span>unbiased &lt;-<span class="st"> </span><span class="ot">FALSE</span></a>
+<a class="sourceLine" id="cb11-9" title="9">    synth &lt;-<span class="st"> </span><span class="kw">do.call</span>(twophase, dots)<span class="op">$</span>estimation</a>
+<a class="sourceLine" id="cb11-10" title="10">    <span class="kw">cbind</span>(ex[<span class="ot">TRUE</span>, <span class="kw">c</span>(<span class="st">&quot;estimate&quot;</span>, <span class="st">&quot;g_variance&quot;</span>)], </a>
+<a class="sourceLine" id="cb11-11" title="11">          synth[<span class="ot">TRUE</span>, <span class="kw">c</span>(<span class="st">&quot;estimate&quot;</span>, <span class="st">&quot;g_variance&quot;</span>)], </a>
+<a class="sourceLine" id="cb11-12" title="12">          small[<span class="ot">TRUE</span>, <span class="kw">c</span>(<span class="st">&quot;estimate&quot;</span>, <span class="st">&quot;g_variance&quot;</span>)])</a>
+<a class="sourceLine" id="cb11-13" title="13"></a>
+<a class="sourceLine" id="cb11-14" title="14">}</a>
+<a class="sourceLine" id="cb11-15" title="15">mbmb &lt;-<span class="st"> </span>microbenchmark<span class="op">::</span>microbenchmark</a>
+<a class="sourceLine" id="cb11-16" title="16">mb &lt;-<span class="st"> </span><span class="kw">mbmb</span>(</a>
+<a class="sourceLine" id="cb11-17" title="17">           <span class="dt">forestinventory =</span> <span class="kw">wrap_two</span>(<span class="dt">formula =</span> formula.s1, </a>
+<a class="sourceLine" id="cb11-18" title="18">                                    <span class="dt">data =</span> grisons,</a>
+<a class="sourceLine" id="cb11-19" title="19">                                    <span class="dt">phase_id =</span> <span class="kw">list</span>(<span class="dt">phase.col =</span> <span class="st">&quot;phase_id_2p&quot;</span>, <span class="dt">terrgrid.id =</span> <span class="dv">2</span>),</a>
+<a class="sourceLine" id="cb11-20" title="20">                                    <span class="dt">small_area =</span> <span class="kw">list</span>(<span class="dt">sa.col =</span> <span class="st">&quot;smallarea&quot;</span>, </a>
+<a class="sourceLine" id="cb11-21" title="21">                                                      <span class="dt">areas =</span> <span class="kw">c</span>(<span class="st">&quot;A&quot;</span>, <span class="st">&quot;B&quot;</span>,<span class="st">&quot;C&quot;</span>, <span class="st">&quot;D&quot;</span>),</a>
+<a class="sourceLine" id="cb11-22" title="22">                                                      <span class="dt">unbiased =</span> <span class="ot">TRUE</span>)</a>
+<a class="sourceLine" id="cb11-23" title="23">                                    ), </a>
+<a class="sourceLine" id="cb11-24" title="24">           <span class="dt">maSAE =</span> <span class="kw">predict</span>(<span class="kw">saObj</span>(<span class="dt">data =</span> s12, </a>
+<a class="sourceLine" id="cb11-25" title="25">                                 <span class="dt">f =</span> <span class="kw">update</span>(formula.s1, <span class="op">~</span><span class="st"> </span>. <span class="op">|</span><span class="st"> </span>smallarea),</a>
+<a class="sourceLine" id="cb11-26" title="26">                                 <span class="dt">s2 =</span> <span class="st">'s2'</span></a>
+<a class="sourceLine" id="cb11-27" title="27">                                 ))[, <span class="dv">-1</span>],</a>
+<a class="sourceLine" id="cb11-28" title="28">           <span class="dt">check =</span> <span class="st">&quot;equivalent&quot;</span></a>
+<a class="sourceLine" id="cb11-29" title="29">           )</a></code></pre></div>
 <p><code>maSAE</code> seems a bit faster:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">print</span>(mb)</code></pre></div>
+<div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb12-1" title="1"><span class="kw">print</span>(mb)</a></code></pre></div>
 <pre><code>## Unit: milliseconds
 ##             expr      min        lq      mean    median       uq      max neval
-##  forestinventory 98.85116 102.37774 123.77240 106.85004 134.9373 283.7871   100
-##            maSAE 47.35372  48.35902  60.40626  52.76267  63.7353 176.7420   100</code></pre>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">microbenchmark:::<span class="kw">autoplot.microbenchmark</span>(mb)</code></pre></div>
+##  forestinventory 99.05001 102.38491 110.47926 107.19397 113.0910 203.1981   100
+##            maSAE 46.88318  47.56144  53.10617  48.85753  54.1285 165.7101   100</code></pre>
+<div class="sourceCode" id="cb14"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb14-1" title="1">microbenchmark<span class="op">:::</span><span class="kw">autoplot.microbenchmark</span>(mb)</a></code></pre></div>
 <pre><code>## Coordinate system already present. Adding new coordinate system, which will replace the existing one.</code></pre>
-<p><img src="data:image/png;base64,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" /><!-- --></p>
+<p><img src="data:image/png;base64,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" /><!-- --></p>
 </div>
 <div id="full-exhaustive-auxiliary-information" class="section level2">
 <h2>Full Exhaustive Auxiliary Information</h2>
 <p>The estimation given on page 17 of <a href="https://CRAN.R-project.org/package=forestinventory/vignettes/forestinventory_vignette.pdf">forestinventory`s vignette</a> is (there are no boundary weights here):</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">forestinventory &lt;-<span class="st"> </span><span class="kw">twophase</span>(<span class="dt">formula =</span> formula.s1, 
-                            <span class="dt">data =</span> grisons,
-                            <span class="dt">phase_id =</span> <span class="kw">list</span>(<span class="dt">phase.col =</span> <span class="st">&quot;phase_id_2p&quot;</span>, 
-                                            <span class="dt">terrgrid.id =</span> <span class="dv">2</span>),
-                            <span class="dt">small_area =</span> <span class="kw">list</span>(<span class="dt">sa.col =</span><span class="st">&quot;smallarea&quot;</span>, 
-                                              <span class="dt">areas =</span> <span class="kw">c</span>(<span class="st">&quot;A&quot;</span>, <span class="st">&quot;B&quot;</span>, <span class="st">&quot;C&quot;</span>, <span class="st">&quot;D&quot;</span>),
-                                              <span class="dt">unbiased =</span> <span class="ot">TRUE</span>),
-                            <span class="dt">exhaustive =</span> truemeans.G)
-<span class="kw">summary</span>(forestinventory)</code></pre></div>
+<div class="sourceCode" id="cb16"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb16-1" title="1">forestinventory &lt;-<span class="st"> </span><span class="kw">twophase</span>(<span class="dt">formula =</span> formula.s1, </a>
+<a class="sourceLine" id="cb16-2" title="2">                            <span class="dt">data =</span> grisons,</a>
+<a class="sourceLine" id="cb16-3" title="3">                            <span class="dt">phase_id =</span> <span class="kw">list</span>(<span class="dt">phase.col =</span> <span class="st">&quot;phase_id_2p&quot;</span>, </a>
+<a class="sourceLine" id="cb16-4" title="4">                                            <span class="dt">terrgrid.id =</span> <span class="dv">2</span>),</a>
+<a class="sourceLine" id="cb16-5" title="5">                            <span class="dt">small_area =</span> <span class="kw">list</span>(<span class="dt">sa.col =</span><span class="st">&quot;smallarea&quot;</span>, </a>
+<a class="sourceLine" id="cb16-6" title="6">                                              <span class="dt">areas =</span> <span class="kw">c</span>(<span class="st">&quot;A&quot;</span>, <span class="st">&quot;B&quot;</span>, <span class="st">&quot;C&quot;</span>, <span class="st">&quot;D&quot;</span>),</a>
+<a class="sourceLine" id="cb16-7" title="7">                                              <span class="dt">unbiased =</span> <span class="ot">TRUE</span>),</a>
+<a class="sourceLine" id="cb16-8" title="8">                            <span class="dt">exhaustive =</span> truemeans.G)</a>
+<a class="sourceLine" id="cb16-9" title="9"><span class="kw">summary</span>(forestinventory)</a></code></pre></div>
 <pre><code>## 
 ## Two-phase small area estimation
 ##  
@@ -288,71 +564,71 @@ mb &lt;-<span class="st"> </span><span class="kw">mbmb</span>(
 ##     C 334.8314     838.3953   801.4303 Inf 67 Inf  15 0.6430018
 ##     D 405.9667     940.3149   890.9536 Inf 67 Inf  16 0.6556178</code></pre>
 <p>Again, predictions from both packages are identical:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">maSAE &lt;-<span class="st"> </span><span class="kw">predict</span>(<span class="kw">saObj</span>(<span class="dt">data =</span> s12, 
-                       <span class="dt">f =</span> <span class="kw">update</span>(formula.s1, ~<span class="st"> </span>. |<span class="st"> </span>smallarea),
-                       <span class="dt">s2 =</span> <span class="st">'s2'</span>,
-                       <span class="dt">smallAreaMeans =</span> tm))
-<span class="kw">compare</span>(maSAE, forestinventory, <span class="st">&quot;two-phase, ext. sae&quot;</span>)</code></pre></div>
+<div class="sourceCode" id="cb18"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb18-1" title="1">maSAE &lt;-<span class="st"> </span><span class="kw">predict</span>(<span class="kw">saObj</span>(<span class="dt">data =</span> s12, </a>
+<a class="sourceLine" id="cb18-2" title="2">                       <span class="dt">f =</span> <span class="kw">update</span>(formula.s1, <span class="op">~</span><span class="st"> </span>. <span class="op">|</span><span class="st"> </span>smallarea),</a>
+<a class="sourceLine" id="cb18-3" title="3">                       <span class="dt">s2 =</span> <span class="st">'s2'</span>,</a>
+<a class="sourceLine" id="cb18-4" title="4">                       <span class="dt">smallAreaMeans =</span> tm))</a>
+<a class="sourceLine" id="cb18-5" title="5"><span class="kw">compare</span>(maSAE, forestinventory, <span class="st">&quot;two-phase, ext. sae&quot;</span>)</a></code></pre></div>
 <pre><code>## [1] TRUE</code></pre>
 <p>The benchmarks again:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">mb &lt;-<span class="st"> </span><span class="kw">mbmb</span>(
-           <span class="dt">forestinventory =</span> <span class="kw">wrap_two</span>(<span class="dt">formula =</span> formula.s1, 
-                                            <span class="dt">data =</span> grisons,
-                                            <span class="dt">phase_id =</span> <span class="kw">list</span>(<span class="dt">phase.col =</span> <span class="st">&quot;phase_id_2p&quot;</span>, 
-                                                            <span class="dt">terrgrid.id =</span> <span class="dv">2</span>),
-                                            <span class="dt">small_area =</span> <span class="kw">list</span>(<span class="dt">sa.col =</span><span class="st">&quot;smallarea&quot;</span>, 
-                                                              <span class="dt">areas =</span> <span class="kw">c</span>(<span class="st">&quot;A&quot;</span>, <span class="st">&quot;B&quot;</span>, <span class="st">&quot;C&quot;</span>, <span class="st">&quot;D&quot;</span>),
-                                                              <span class="dt">unbiased =</span> <span class="ot">TRUE</span>),
-                                            <span class="dt">exhaustive =</span> truemeans.G),
-           <span class="dt">maSAE =</span> <span class="kw">predict</span>(<span class="kw">saObj</span>(<span class="dt">data =</span> s12, 
-                                       <span class="dt">f =</span> <span class="kw">update</span>(formula.s1, ~<span class="st"> </span>. |<span class="st"> </span>smallarea),
-                                       <span class="dt">s2 =</span> <span class="st">'s2'</span>,
-                                       <span class="dt">smallAreaMeans =</span> tm))[, -<span class="dv">1</span>],
-
-           <span class="dt">check =</span> <span class="st">&quot;equivalent&quot;</span>)
-<span class="kw">print</span>(mb)</code></pre></div>
+<div class="sourceCode" id="cb20"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb20-1" title="1">mb &lt;-<span class="st"> </span><span class="kw">mbmb</span>(</a>
+<a class="sourceLine" id="cb20-2" title="2">           <span class="dt">forestinventory =</span> <span class="kw">wrap_two</span>(<span class="dt">formula =</span> formula.s1, </a>
+<a class="sourceLine" id="cb20-3" title="3">                                            <span class="dt">data =</span> grisons,</a>
+<a class="sourceLine" id="cb20-4" title="4">                                            <span class="dt">phase_id =</span> <span class="kw">list</span>(<span class="dt">phase.col =</span> <span class="st">&quot;phase_id_2p&quot;</span>, </a>
+<a class="sourceLine" id="cb20-5" title="5">                                                            <span class="dt">terrgrid.id =</span> <span class="dv">2</span>),</a>
+<a class="sourceLine" id="cb20-6" title="6">                                            <span class="dt">small_area =</span> <span class="kw">list</span>(<span class="dt">sa.col =</span><span class="st">&quot;smallarea&quot;</span>, </a>
+<a class="sourceLine" id="cb20-7" title="7">                                                              <span class="dt">areas =</span> <span class="kw">c</span>(<span class="st">&quot;A&quot;</span>, <span class="st">&quot;B&quot;</span>, <span class="st">&quot;C&quot;</span>, <span class="st">&quot;D&quot;</span>),</a>
+<a class="sourceLine" id="cb20-8" title="8">                                                              <span class="dt">unbiased =</span> <span class="ot">TRUE</span>),</a>
+<a class="sourceLine" id="cb20-9" title="9">                                            <span class="dt">exhaustive =</span> truemeans.G),</a>
+<a class="sourceLine" id="cb20-10" title="10">           <span class="dt">maSAE =</span> <span class="kw">predict</span>(<span class="kw">saObj</span>(<span class="dt">data =</span> s12, </a>
+<a class="sourceLine" id="cb20-11" title="11">                                       <span class="dt">f =</span> <span class="kw">update</span>(formula.s1, <span class="op">~</span><span class="st"> </span>. <span class="op">|</span><span class="st"> </span>smallarea),</a>
+<a class="sourceLine" id="cb20-12" title="12">                                       <span class="dt">s2 =</span> <span class="st">'s2'</span>,</a>
+<a class="sourceLine" id="cb20-13" title="13">                                       <span class="dt">smallAreaMeans =</span> tm))[, <span class="dv">-1</span>],</a>
+<a class="sourceLine" id="cb20-14" title="14"></a>
+<a class="sourceLine" id="cb20-15" title="15">           <span class="dt">check =</span> <span class="st">&quot;equivalent&quot;</span>)</a>
+<a class="sourceLine" id="cb20-16" title="16"><span class="kw">print</span>(mb)</a></code></pre></div>
 <pre><code>## Unit: milliseconds
 ##             expr      min       lq     mean   median       uq      max neval
-##  forestinventory 76.76511 78.20136 84.98524 83.27564 85.17648 189.7063   100
-##            maSAE 46.69741 47.26528 53.24503 49.17945 54.00728 109.8623   100</code></pre>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">microbenchmark:::<span class="kw">autoplot.microbenchmark</span>(mb)</code></pre></div>
+##  forestinventory 76.81003 77.40702 81.11205 79.73291 84.09388 98.24379   100
+##            maSAE 46.03427 46.36807 49.22237 46.82825 52.57498 72.98741   100</code></pre>
+<div class="sourceCode" id="cb22"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb22-1" title="1">microbenchmark<span class="op">:::</span><span class="kw">autoplot.microbenchmark</span>(mb)</a></code></pre></div>
 <pre><code>## Coordinate system already present. Adding new coordinate system, which will replace the existing one.</code></pre>
-<p><img src="data:image/png;base64,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" /><!-- --></p>
+<p><img src="data:image/png;base64,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" /><!-- --></p>
 </div>
 </div>
 <div id="three-phase" class="section level1">
 <h1>Three-Phase</h1>
 <p>Some data handling, true means are taken from <a href="https://CRAN.R-project.org/package=forestinventory/vignettes/forestinventory_vignette.pdf">forestinventory`s vignette</a>. :</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">truemeans.G &lt;-<span class="st"> </span><span class="kw">data.frame</span>(<span class="dt">Intercept =</span> <span class="kw">rep</span>(<span class="dv">1</span>, <span class="dv">4</span>),
-                          <span class="dt">mean =</span> <span class="kw">c</span>(<span class="fl">12.85</span>, <span class="fl">12.21</span>, <span class="fl">9.33</span>, <span class="fl">10.45</span>))
-<span class="kw">rownames</span>(truemeans.G) &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;A&quot;</span>, <span class="st">&quot;B&quot;</span>, <span class="st">&quot;C&quot;</span>, <span class="st">&quot;D&quot;</span>)
-
-## data adjustments
-s12_3p &lt;-<span class="st"> </span>grisons[grisons[[<span class="st">&quot;phase_id_3p&quot;</span>]] %in%<span class="st"> </span><span class="kw">c</span>(<span class="dv">1</span>,<span class="dv">2</span>), ]
-s0 &lt;-<span class="st"> </span>grisons[grisons[[<span class="st">&quot;phase_id_3p&quot;</span>]] ==<span class="dv">0</span> , ]
-s12_3p$s1 &lt;-<span class="st"> </span>s12_3p$phase_id_3p %in%<span class="st"> </span><span class="kw">c</span>(<span class="dv">1</span>, <span class="dv">2</span>)
-s12_3p$s2 &lt;-<span class="st"> </span>s12_3p$phase_id_3p ==<span class="st"> </span><span class="dv">2</span>
-s0$s1 &lt;-<span class="st"> </span>s0$s2 &lt;-<span class="st"> </span><span class="ot">FALSE</span>
-predictors_s0 &lt;-<span class="st"> </span><span class="kw">all.vars</span>(formula.s0)[-<span class="dv">1</span>]
-predictors_s1 &lt;-<span class="st"> </span><span class="kw">all.vars</span>(formula.s1)[-<span class="dv">1</span>]
-<span class="kw">eval</span>(<span class="kw">parse</span>(<span class="dt">text=</span>(<span class="kw">paste0</span>(<span class="st">&quot;s0$&quot;</span>,
-                        <span class="kw">setdiff</span>(predictors_s1, predictors_s0),
-                        <span class="st">&quot; &lt;- NA&quot;</span>))))
-s012 &lt;-<span class="st"> </span><span class="kw">rbind</span>(s0, s12_3p)
-tm &lt;-<span class="st"> </span>truemeans.G
-tm[[<span class="st">&quot;smallarea&quot;</span>]] &lt;-<span class="st"> </span><span class="kw">row.names</span>(tm)
-tm[[<span class="st">&quot;Intercept&quot;</span>]] &lt;-<span class="st"> </span><span class="ot">NULL</span></code></pre></div>
+<div class="sourceCode" id="cb24"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb24-1" title="1">truemeans.G &lt;-<span class="st"> </span><span class="kw">data.frame</span>(<span class="dt">Intercept =</span> <span class="kw">rep</span>(<span class="dv">1</span>, <span class="dv">4</span>),</a>
+<a class="sourceLine" id="cb24-2" title="2">                          <span class="dt">mean =</span> <span class="kw">c</span>(<span class="fl">12.85</span>, <span class="fl">12.21</span>, <span class="fl">9.33</span>, <span class="fl">10.45</span>))</a>
+<a class="sourceLine" id="cb24-3" title="3"><span class="kw">rownames</span>(truemeans.G) &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;A&quot;</span>, <span class="st">&quot;B&quot;</span>, <span class="st">&quot;C&quot;</span>, <span class="st">&quot;D&quot;</span>)</a>
+<a class="sourceLine" id="cb24-4" title="4"></a>
+<a class="sourceLine" id="cb24-5" title="5"><span class="co">## data adjustments</span></a>
+<a class="sourceLine" id="cb24-6" title="6">s12_3p &lt;-<span class="st"> </span>grisons[grisons[[<span class="st">&quot;phase_id_3p&quot;</span>]] <span class="op">%in%</span><span class="st"> </span><span class="kw">c</span>(<span class="dv">1</span>,<span class="dv">2</span>), ]</a>
+<a class="sourceLine" id="cb24-7" title="7">s0 &lt;-<span class="st"> </span>grisons[grisons[[<span class="st">&quot;phase_id_3p&quot;</span>]] <span class="op">==</span><span class="dv">0</span> , ]</a>
+<a class="sourceLine" id="cb24-8" title="8">s12_3p<span class="op">$</span>s1 &lt;-<span class="st"> </span>s12_3p<span class="op">$</span>phase_id_3p <span class="op">%in%</span><span class="st"> </span><span class="kw">c</span>(<span class="dv">1</span>, <span class="dv">2</span>)</a>
+<a class="sourceLine" id="cb24-9" title="9">s12_3p<span class="op">$</span>s2 &lt;-<span class="st"> </span>s12_3p<span class="op">$</span>phase_id_3p <span class="op">==</span><span class="st"> </span><span class="dv">2</span></a>
+<a class="sourceLine" id="cb24-10" title="10">s0<span class="op">$</span>s1 &lt;-<span class="st"> </span>s0<span class="op">$</span>s2 &lt;-<span class="st"> </span><span class="ot">FALSE</span></a>
+<a class="sourceLine" id="cb24-11" title="11">predictors_s0 &lt;-<span class="st"> </span><span class="kw">all.vars</span>(formula.s0)[<span class="op">-</span><span class="dv">1</span>]</a>
+<a class="sourceLine" id="cb24-12" title="12">predictors_s1 &lt;-<span class="st"> </span><span class="kw">all.vars</span>(formula.s1)[<span class="op">-</span><span class="dv">1</span>]</a>
+<a class="sourceLine" id="cb24-13" title="13"><span class="kw">eval</span>(<span class="kw">parse</span>(<span class="dt">text=</span>(<span class="kw">paste0</span>(<span class="st">&quot;s0$&quot;</span>,</a>
+<a class="sourceLine" id="cb24-14" title="14">                        <span class="kw">setdiff</span>(predictors_s1, predictors_s0),</a>
+<a class="sourceLine" id="cb24-15" title="15">                        <span class="st">&quot; &lt;- NA&quot;</span>))))</a>
+<a class="sourceLine" id="cb24-16" title="16">s012 &lt;-<span class="st"> </span><span class="kw">rbind</span>(s0, s12_3p)</a>
+<a class="sourceLine" id="cb24-17" title="17">tm &lt;-<span class="st"> </span>truemeans.G</a>
+<a class="sourceLine" id="cb24-18" title="18">tm[[<span class="st">&quot;smallarea&quot;</span>]] &lt;-<span class="st"> </span><span class="kw">row.names</span>(tm)</a>
+<a class="sourceLine" id="cb24-19" title="19">tm[[<span class="st">&quot;Intercept&quot;</span>]] &lt;-<span class="st"> </span><span class="ot">NULL</span></a></code></pre></div>
 <div id="no-exhaustive-auxiliary-information-1" class="section level2">
 <h2>No Exhaustive Auxiliary Information</h2>
 <p>The estimation given on page 23 of <a href="https://CRAN.R-project.org/package=forestinventory/vignettes/forestinventory_vignette.pdf">forestinventory`s vignette</a> is:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">summary</span>(<span class="kw">threephase</span>(formula.s0,
-                   formula.s1,
-                   <span class="dt">data =</span> grisons,
-                   <span class="dt">phase_id =</span> <span class="kw">list</span>(<span class="dt">phase.col =</span> <span class="st">&quot;phase_id_3p&quot;</span>, <span class="dt">s1.id =</span> <span class="dv">1</span>, <span class="dt">terrgrid.id =</span> <span class="dv">2</span>),
-                   <span class="dt">small_area=</span><span class="kw">list</span>(<span class="dt">sa.col =</span> <span class="st">&quot;smallarea&quot;</span>, <span class="dt">areas =</span> <span class="kw">c</span>(<span class="st">&quot;A&quot;</span>, <span class="st">&quot;B&quot;</span>, <span class="st">&quot;C&quot;</span>, <span class="st">&quot;D&quot;</span>),
-                                   <span class="dt">unbiased =</span> <span class="ot">TRUE</span>),
-                   <span class="dt">boundary_weights =</span> <span class="st">&quot;boundary_weights&quot;</span>
-                   ))</code></pre></div>
+<div class="sourceCode" id="cb25"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb25-1" title="1"><span class="kw">summary</span>(<span class="kw">threephase</span>(formula.s0,</a>
+<a class="sourceLine" id="cb25-2" title="2">                   formula.s1,</a>
+<a class="sourceLine" id="cb25-3" title="3">                   <span class="dt">data =</span> grisons,</a>
+<a class="sourceLine" id="cb25-4" title="4">                   <span class="dt">phase_id =</span> <span class="kw">list</span>(<span class="dt">phase.col =</span> <span class="st">&quot;phase_id_3p&quot;</span>, <span class="dt">s1.id =</span> <span class="dv">1</span>, <span class="dt">terrgrid.id =</span> <span class="dv">2</span>),</a>
+<a class="sourceLine" id="cb25-5" title="5">                   <span class="dt">small_area=</span><span class="kw">list</span>(<span class="dt">sa.col =</span> <span class="st">&quot;smallarea&quot;</span>, <span class="dt">areas =</span> <span class="kw">c</span>(<span class="st">&quot;A&quot;</span>, <span class="st">&quot;B&quot;</span>, <span class="st">&quot;C&quot;</span>, <span class="st">&quot;D&quot;</span>),</a>
+<a class="sourceLine" id="cb25-6" title="6">                                   <span class="dt">unbiased =</span> <span class="ot">TRUE</span>),</a>
+<a class="sourceLine" id="cb25-7" title="7">                   <span class="dt">boundary_weights =</span> <span class="st">&quot;boundary_weights&quot;</span></a>
+<a class="sourceLine" id="cb25-8" title="8">                   ))</a></code></pre></div>
 <pre><code>## 
 ## Three-phase small area estimation
 ##  
@@ -386,92 +662,95 @@ tm[[<span class="st">&quot;Intercept&quot;</span>]] &lt;-<span class="st"> </spa
 ## 'boundary_weight'- option was used to calculate weighted means of auxiliary variables</code></pre>
 <p><em>Wait, the <code>ext_variance</code> differs, but that<code>s a problem with</code>forestinventory`…</em></p>
 <p>I make predictions omitting the boundary weights:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">forestinventory &lt;-<span class="st"> </span><span class="kw">threephase</span>(formula.s0,
-                              formula.s1,
-                              <span class="dt">data =</span> grisons,
-                              <span class="dt">phase_id =</span> <span class="kw">list</span>(<span class="dt">phase.col =</span> <span class="st">&quot;phase_id_3p&quot;</span>, <span class="dt">s1.id =</span> <span class="dv">1</span>, <span class="dt">terrgrid.id =</span> <span class="dv">2</span>),
-                              <span class="dt">small_area=</span><span class="kw">list</span>(<span class="dt">sa.col =</span> <span class="st">&quot;smallarea&quot;</span>, <span class="dt">areas =</span> <span class="kw">c</span>(<span class="st">&quot;A&quot;</span>, <span class="st">&quot;B&quot;</span>, <span class="st">&quot;C&quot;</span>, <span class="st">&quot;D&quot;</span>),
-                                              <span class="dt">unbiased =</span> <span class="ot">TRUE</span>),
-                              <span class="dt">boundary_weights =</span> <span class="st">&quot;boundary_weights&quot;</span>
-                              )
-
-maSAE &lt;-<span class="st"> </span><span class="kw">predict</span>(<span class="kw">saObj</span>(<span class="dt">data =</span> s012, 
-                       <span class="dt">f =</span> <span class="kw">update</span>(formula.s1, ~<span class="st"> </span>. |<span class="st"> </span>smallarea),
-                       <span class="dt">s1 =</span> <span class="st">'s1'</span>,
-                       <span class="dt">auxiliaryWeights =</span> <span class="st">&quot;boundary_weights&quot;</span>,
-                       <span class="dt">s2 =</span> <span class="st">'s2'</span>))</code></pre></div>
+<div class="sourceCode" id="cb27"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb27-1" title="1">forestinventory &lt;-<span class="st"> </span><span class="kw">threephase</span>(formula.s0,</a>
+<a class="sourceLine" id="cb27-2" title="2">                              formula.s1,</a>
+<a class="sourceLine" id="cb27-3" title="3">                              <span class="dt">data =</span> grisons,</a>
+<a class="sourceLine" id="cb27-4" title="4">                              <span class="dt">phase_id =</span> <span class="kw">list</span>(<span class="dt">phase.col =</span> <span class="st">&quot;phase_id_3p&quot;</span>, <span class="dt">s1.id =</span> <span class="dv">1</span>, <span class="dt">terrgrid.id =</span> <span class="dv">2</span>),</a>
+<a class="sourceLine" id="cb27-5" title="5">                              <span class="dt">small_area=</span><span class="kw">list</span>(<span class="dt">sa.col =</span> <span class="st">&quot;smallarea&quot;</span>, <span class="dt">areas =</span> <span class="kw">c</span>(<span class="st">&quot;A&quot;</span>, <span class="st">&quot;B&quot;</span>, <span class="st">&quot;C&quot;</span>, <span class="st">&quot;D&quot;</span>),</a>
+<a class="sourceLine" id="cb27-6" title="6">                                              <span class="dt">unbiased =</span> <span class="ot">TRUE</span>),</a>
+<a class="sourceLine" id="cb27-7" title="7">                              <span class="dt">boundary_weights =</span> <span class="st">&quot;boundary_weights&quot;</span></a>
+<a class="sourceLine" id="cb27-8" title="8">                              )</a>
+<a class="sourceLine" id="cb27-9" title="9"></a>
+<a class="sourceLine" id="cb27-10" title="10">maSAE &lt;-<span class="st"> </span><span class="kw">predict</span>(<span class="kw">saObj</span>(<span class="dt">data =</span> s012, </a>
+<a class="sourceLine" id="cb27-11" title="11">                       <span class="dt">f =</span> <span class="kw">update</span>(formula.s1, <span class="op">~</span><span class="st"> </span>. <span class="op">|</span><span class="st"> </span>smallarea),</a>
+<a class="sourceLine" id="cb27-12" title="12">                       <span class="dt">s1 =</span> <span class="st">'s1'</span>,</a>
+<a class="sourceLine" id="cb27-13" title="13">                       <span class="dt">auxiliaryWeights =</span> <span class="st">&quot;boundary_weights&quot;</span>,</a>
+<a class="sourceLine" id="cb27-14" title="14">                       <span class="dt">s2 =</span> <span class="st">'s2'</span>))</a></code></pre></div>
 <pre><code>## n(s0) &gt;&gt; n(s1) should hold, but you've given s1 resulting in n(s1)/n(s0) =  0.418300653594771</code></pre>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">compare</span>(maSAE, forestinventory, <span class="st">&quot;three-phase, ext. pseudo sae&quot;</span>)</code></pre></div>
+<div class="sourceCode" id="cb29"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb29-1" title="1"><span class="kw">compare</span>(maSAE, forestinventory, <span class="st">&quot;three-phase, ext. pseudo sae&quot;</span>)</a></code></pre></div>
 <pre><code>## [1] TRUE</code></pre>
 <p>The benchmarks again:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">wrap_three &lt;-<span class="st"> </span>function(...) {
-    dots &lt;-<span class="st"> </span><span class="kw">list</span>(...)
-    dots$small_area$unbiased &lt;-<span class="st"> </span><span class="ot">TRUE</span>
-    ex &lt;-<span class="st"> </span><span class="kw">do.call</span>(threephase, dots)$estimation
-    dots$psmall &lt;-<span class="st"> </span><span class="ot">TRUE</span>
-    small &lt;-<span class="st"> </span><span class="kw">do.call</span>(threephase, dots)$estimation
-    dots$psmall &lt;-<span class="st"> </span><span class="ot">FALSE</span>
-    dots$small_area$unbiased &lt;-<span class="st"> </span><span class="ot">FALSE</span>
-    synth &lt;-<span class="st"> </span><span class="kw">do.call</span>(threephase, dots)$estimation
-    <span class="kw">cbind</span>(ex[<span class="ot">TRUE</span>, <span class="kw">c</span>(<span class="st">&quot;estimate&quot;</span>, <span class="st">&quot;g_variance&quot;</span>)], 
-          synth[<span class="ot">TRUE</span>, <span class="kw">c</span>(<span class="st">&quot;estimate&quot;</span>, <span class="st">&quot;g_variance&quot;</span>)], 
-          small[<span class="ot">TRUE</span>, <span class="kw">c</span>(<span class="st">&quot;estimate&quot;</span>, <span class="st">&quot;g_variance&quot;</span>)])
-
-}
-mb &lt;-<span class="st"> </span><span class="kw">mbmb</span>(
-           <span class="dt">forestinventory =</span> <span class="kw">wrap_three</span>(formula.s0,
-                              formula.s1,
-                              <span class="dt">data =</span> grisons,
-                              <span class="dt">phase_id =</span> <span class="kw">list</span>(<span class="dt">phase.col =</span> <span class="st">&quot;phase_id_3p&quot;</span>, <span class="dt">s1.id =</span> <span class="dv">1</span>, <span class="dt">terrgrid.id =</span> <span class="dv">2</span>),
-                              <span class="dt">small_area=</span><span class="kw">list</span>(<span class="dt">sa.col =</span> <span class="st">&quot;smallarea&quot;</span>, <span class="dt">areas =</span> <span class="kw">c</span>(<span class="st">&quot;A&quot;</span>, <span class="st">&quot;B&quot;</span>, <span class="st">&quot;C&quot;</span>, <span class="st">&quot;D&quot;</span>),
-                                              <span class="dt">unbiased =</span> <span class="ot">TRUE</span>)
-                              ),
-           <span class="dt">maSAE =</span> <span class="kw">predict</span>(<span class="kw">suppressMessages</span>(<span class="kw">saObj</span>(<span class="dt">data =</span> s012, 
-                       <span class="dt">f =</span> <span class="kw">update</span>(formula.s1, ~<span class="st"> </span>. |<span class="st"> </span>smallarea),
-                       <span class="dt">s1 =</span> <span class="st">'s1'</span>,
-                       <span class="dt">s2 =</span> <span class="st">'s2'</span>)))[, -<span class="dv">1</span>],
-
-           <span class="dt">check =</span> <span class="st">&quot;equivalent&quot;</span>)
-<span class="kw">print</span>(mb)</code></pre></div>
+<div class="sourceCode" id="cb31"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb31-1" title="1">wrap_three &lt;-<span class="st"> </span><span class="cf">function</span>(...) {</a>
+<a class="sourceLine" id="cb31-2" title="2">    dots &lt;-<span class="st"> </span><span class="kw">list</span>(...)</a>
+<a class="sourceLine" id="cb31-3" title="3">    dots<span class="op">$</span>small_area<span class="op">$</span>unbiased &lt;-<span class="st"> </span><span class="ot">TRUE</span></a>
+<a class="sourceLine" id="cb31-4" title="4">    ex &lt;-<span class="st"> </span><span class="kw">do.call</span>(threephase, dots)<span class="op">$</span>estimation</a>
+<a class="sourceLine" id="cb31-5" title="5">    dots<span class="op">$</span>psmall &lt;-<span class="st"> </span><span class="ot">TRUE</span></a>
+<a class="sourceLine" id="cb31-6" title="6">    small &lt;-<span class="st"> </span><span class="kw">do.call</span>(threephase, dots)<span class="op">$</span>estimation</a>
+<a class="sourceLine" id="cb31-7" title="7">    dots<span class="op">$</span>psmall &lt;-<span class="st"> </span><span class="ot">FALSE</span></a>
+<a class="sourceLine" id="cb31-8" title="8">    dots<span class="op">$</span>small_area<span class="op">$</span>unbiased &lt;-<span class="st"> </span><span class="ot">FALSE</span></a>
+<a class="sourceLine" id="cb31-9" title="9">    synth &lt;-<span class="st"> </span><span class="kw">do.call</span>(threephase, dots)<span class="op">$</span>estimation</a>
+<a class="sourceLine" id="cb31-10" title="10">    <span class="kw">cbind</span>(ex[<span class="ot">TRUE</span>, <span class="kw">c</span>(<span class="st">&quot;estimate&quot;</span>, <span class="st">&quot;g_variance&quot;</span>)], </a>
+<a class="sourceLine" id="cb31-11" title="11">          synth[<span class="ot">TRUE</span>, <span class="kw">c</span>(<span class="st">&quot;estimate&quot;</span>, <span class="st">&quot;g_variance&quot;</span>)], </a>
+<a class="sourceLine" id="cb31-12" title="12">          small[<span class="ot">TRUE</span>, <span class="kw">c</span>(<span class="st">&quot;estimate&quot;</span>, <span class="st">&quot;g_variance&quot;</span>)])</a>
+<a class="sourceLine" id="cb31-13" title="13"></a>
+<a class="sourceLine" id="cb31-14" title="14">}</a>
+<a class="sourceLine" id="cb31-15" title="15">mb &lt;-<span class="st"> </span><span class="kw">mbmb</span>(</a>
+<a class="sourceLine" id="cb31-16" title="16">           <span class="dt">forestinventory =</span> <span class="kw">wrap_three</span>(formula.s0,</a>
+<a class="sourceLine" id="cb31-17" title="17">                              formula.s1,</a>
+<a class="sourceLine" id="cb31-18" title="18">                              <span class="dt">data =</span> grisons,</a>
+<a class="sourceLine" id="cb31-19" title="19">                              <span class="dt">phase_id =</span> <span class="kw">list</span>(<span class="dt">phase.col =</span> <span class="st">&quot;phase_id_3p&quot;</span>, <span class="dt">s1.id =</span> <span class="dv">1</span>, <span class="dt">terrgrid.id =</span> <span class="dv">2</span>),</a>
+<a class="sourceLine" id="cb31-20" title="20">                              <span class="dt">small_area=</span><span class="kw">list</span>(<span class="dt">sa.col =</span> <span class="st">&quot;smallarea&quot;</span>, <span class="dt">areas =</span> <span class="kw">c</span>(<span class="st">&quot;A&quot;</span>, <span class="st">&quot;B&quot;</span>, <span class="st">&quot;C&quot;</span>, <span class="st">&quot;D&quot;</span>),</a>
+<a class="sourceLine" id="cb31-21" title="21">                                              <span class="dt">unbiased =</span> <span class="ot">TRUE</span>)</a>
+<a class="sourceLine" id="cb31-22" title="22">                              ),</a>
+<a class="sourceLine" id="cb31-23" title="23">           <span class="dt">maSAE =</span> <span class="kw">predict</span>(<span class="kw">suppressMessages</span>(<span class="kw">saObj</span>(<span class="dt">data =</span> s012, </a>
+<a class="sourceLine" id="cb31-24" title="24">                       <span class="dt">f =</span> <span class="kw">update</span>(formula.s1, <span class="op">~</span><span class="st"> </span>. <span class="op">|</span><span class="st"> </span>smallarea),</a>
+<a class="sourceLine" id="cb31-25" title="25">                       <span class="dt">s1 =</span> <span class="st">'s1'</span>,</a>
+<a class="sourceLine" id="cb31-26" title="26">                       <span class="dt">s2 =</span> <span class="st">'s2'</span>)))[, <span class="dv">-1</span>],</a>
+<a class="sourceLine" id="cb31-27" title="27"></a>
+<a class="sourceLine" id="cb31-28" title="28">           <span class="dt">check =</span> <span class="st">&quot;equivalent&quot;</span>)</a>
+<a class="sourceLine" id="cb31-29" title="29"><span class="kw">print</span>(mb)</a></code></pre></div>
 <pre><code>## Unit: milliseconds
-##             expr      min        lq      mean    median       uq      max neval
-##  forestinventory 157.4305 164.84847 185.65485 167.09254 181.8722 315.0075   100
-##            maSAE  77.7873  79.02483  89.29775  84.27565  86.8072 218.0158   100</code></pre>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">microbenchmark:::<span class="kw">autoplot.microbenchmark</span>(mb)</code></pre></div>
+##             expr       min        lq      mean    median        uq      max
+##  forestinventory 157.81069 165.83821 174.25472 167.94399 174.37054 298.1265
+##            maSAE  77.31124  78.72537  83.52233  83.15628  86.25088 116.0863
+##  neval
+##    100
+##    100</code></pre>
+<div class="sourceCode" id="cb33"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb33-1" title="1">microbenchmark<span class="op">:::</span><span class="kw">autoplot.microbenchmark</span>(mb)</a></code></pre></div>
 <pre><code>## Coordinate system already present. Adding new coordinate system, which will replace the existing one.</code></pre>
-<p><img src="data:image/png;base64,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" /><!-- --></p>
+<p><img src="data:image/png;base64,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" /><!-- --></p>
 </div>
 </div>
 <div id="partially-exhaustive-auxiliary-information" class="section level1">
 <h1>Partially Exhaustive Auxiliary Information</h1>
 <p>Funny: <code>forestinventory</code> can`t deal with partially exhaustive auxiliary information for two-phase sampling:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">try</span>(<span class="kw">twophase</span>(<span class="dt">formula =</span> formula.s1, 
-             <span class="dt">data =</span> grisons,
-             <span class="dt">phase_id =</span> <span class="kw">list</span>(<span class="dt">phase.col =</span> <span class="st">&quot;phase_id_2p&quot;</span>, 
-                             <span class="dt">terrgrid.id =</span> <span class="dv">2</span>),
-             <span class="dt">small_area =</span> <span class="kw">list</span>(<span class="dt">sa.col =</span><span class="st">&quot;smallarea&quot;</span>, 
-                               <span class="dt">areas =</span> <span class="kw">c</span>(<span class="st">&quot;A&quot;</span>, <span class="st">&quot;B&quot;</span>, <span class="st">&quot;C&quot;</span>, <span class="st">&quot;D&quot;</span>),
-                               <span class="dt">unbiased =</span> <span class="ot">TRUE</span>),
-             <span class="dt">exhaustive =</span> truemeans.G.partially))</code></pre></div>
+<div class="sourceCode" id="cb35"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb35-1" title="1"><span class="kw">try</span>(<span class="kw">twophase</span>(<span class="dt">formula =</span> formula.s1, </a>
+<a class="sourceLine" id="cb35-2" title="2">             <span class="dt">data =</span> grisons,</a>
+<a class="sourceLine" id="cb35-3" title="3">             <span class="dt">phase_id =</span> <span class="kw">list</span>(<span class="dt">phase.col =</span> <span class="st">&quot;phase_id_2p&quot;</span>, </a>
+<a class="sourceLine" id="cb35-4" title="4">                             <span class="dt">terrgrid.id =</span> <span class="dv">2</span>),</a>
+<a class="sourceLine" id="cb35-5" title="5">             <span class="dt">small_area =</span> <span class="kw">list</span>(<span class="dt">sa.col =</span><span class="st">&quot;smallarea&quot;</span>, </a>
+<a class="sourceLine" id="cb35-6" title="6">                               <span class="dt">areas =</span> <span class="kw">c</span>(<span class="st">&quot;A&quot;</span>, <span class="st">&quot;B&quot;</span>, <span class="st">&quot;C&quot;</span>, <span class="st">&quot;D&quot;</span>),</a>
+<a class="sourceLine" id="cb35-7" title="7">                               <span class="dt">unbiased =</span> <span class="ot">TRUE</span>),</a>
+<a class="sourceLine" id="cb35-8" title="8">             <span class="dt">exhaustive =</span> truemeans.G.partially))</a></code></pre></div>
 <pre><code>## Error in names(Z_bar_1G) &lt;- colnames(design_matrix.s2) : 
 ##   'names' attribute [6] must be the same length as the vector [4]</code></pre>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">predict</span>(<span class="kw">saObj</span>(<span class="dt">data =</span> s12, 
-              <span class="dt">f =</span> <span class="kw">update</span>(formula.s1, ~<span class="st"> </span>. |<span class="st"> </span>smallarea),
-              <span class="dt">s2 =</span> <span class="st">'s2'</span>,
-              <span class="dt">smallAreaMeans =</span> tm.partially))</code></pre></div>
+<div class="sourceCode" id="cb37"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb37-1" title="1"><span class="kw">predict</span>(<span class="kw">saObj</span>(<span class="dt">data =</span> s12, </a>
+<a class="sourceLine" id="cb37-2" title="2">              <span class="dt">f =</span> <span class="kw">update</span>(formula.s1, <span class="op">~</span><span class="st"> </span>. <span class="op">|</span><span class="st"> </span>smallarea),</a>
+<a class="sourceLine" id="cb37-3" title="3">              <span class="dt">s2 =</span> <span class="st">'s2'</span>,</a>
+<a class="sourceLine" id="cb37-4" title="4">              <span class="dt">smallAreaMeans =</span> tm.partially))</a></code></pre></div>
 <pre><code>##   small_area prediction variance   psynth var_psynth   psmall var_psmall
 ## 1          A   371.0402 712.3895 401.8953   287.3151 373.9803  1048.5674
 ## 2          B   398.9159 944.4190 398.5562   303.4478 399.4579   996.5841
 ## 3          C   330.4869 863.1605 334.5188   261.8389 330.6825  1104.9620
 ## 4          D   384.7398 999.1490 345.1298   227.8379 380.9174  1203.8859</code></pre>
 <p>Whereas <code>maSAE</code> can`t deal with partially exhaustive auxiliary information for three-phase sampling:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">summary</span>(forestinventory &lt;-<span class="st"> </span><span class="kw">threephase</span>(formula.s0,
-                              formula.s1,
-                              <span class="dt">data =</span> grisons,
-                              <span class="dt">phase_id =</span> <span class="kw">list</span>(<span class="dt">phase.col =</span> <span class="st">&quot;phase_id_3p&quot;</span>, <span class="dt">s1.id =</span> <span class="dv">1</span>, <span class="dt">terrgrid.id =</span> <span class="dv">2</span>),
-                              <span class="dt">small_area =</span> <span class="kw">list</span>(<span class="dt">sa.col =</span> <span class="st">&quot;smallarea&quot;</span>, <span class="dt">areas =</span> <span class="kw">c</span>(<span class="st">&quot;A&quot;</span>, <span class="st">&quot;B&quot;</span>, <span class="st">&quot;C&quot;</span>, <span class="st">&quot;D&quot;</span>),
-                                                <span class="dt">unbiased =</span> <span class="ot">TRUE</span>),
-                              <span class="dt">exhaustive =</span> truemeans.G))</code></pre></div>
+<div class="sourceCode" id="cb39"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb39-1" title="1"><span class="kw">summary</span>(forestinventory &lt;-<span class="st"> </span><span class="kw">threephase</span>(formula.s0,</a>
+<a class="sourceLine" id="cb39-2" title="2">                              formula.s1,</a>
+<a class="sourceLine" id="cb39-3" title="3">                              <span class="dt">data =</span> grisons,</a>
+<a class="sourceLine" id="cb39-4" title="4">                              <span class="dt">phase_id =</span> <span class="kw">list</span>(<span class="dt">phase.col =</span> <span class="st">&quot;phase_id_3p&quot;</span>, <span class="dt">s1.id =</span> <span class="dv">1</span>, <span class="dt">terrgrid.id =</span> <span class="dv">2</span>),</a>
+<a class="sourceLine" id="cb39-5" title="5">                              <span class="dt">small_area =</span> <span class="kw">list</span>(<span class="dt">sa.col =</span> <span class="st">&quot;smallarea&quot;</span>, <span class="dt">areas =</span> <span class="kw">c</span>(<span class="st">&quot;A&quot;</span>, <span class="st">&quot;B&quot;</span>, <span class="st">&quot;C&quot;</span>, <span class="st">&quot;D&quot;</span>),</a>
+<a class="sourceLine" id="cb39-6" title="6">                                                <span class="dt">unbiased =</span> <span class="ot">TRUE</span>),</a>
+<a class="sourceLine" id="cb39-7" title="7">                              <span class="dt">exhaustive =</span> truemeans.G))</a></code></pre></div>
 <pre><code>## 
 ## Three-phase small area estimation
 ##  
@@ -501,27 +780,27 @@ mb &lt;-<span class="st"> </span><span class="kw">mbmb</span>(
 ##       0.7171512
 ##       0.7172375
 ##       0.7268820</code></pre>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">try</span>(<span class="kw">predict</span>(<span class="kw">saObj</span>(<span class="dt">data =</span> s012, 
-              <span class="dt">f =</span> <span class="kw">update</span>(formula.s1, ~<span class="st"> </span>. |<span class="st"> </span>smallarea),
-              <span class="dt">s2 =</span> <span class="st">'s2'</span>,
-              <span class="dt">s1 =</span> <span class="st">'s1'</span>,
-              <span class="dt">smallAreaMeans =</span> tm)))</code></pre></div>
+<div class="sourceCode" id="cb41"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb41-1" title="1"><span class="kw">try</span>(<span class="kw">predict</span>(<span class="kw">saObj</span>(<span class="dt">data =</span> s012, </a>
+<a class="sourceLine" id="cb41-2" title="2">              <span class="dt">f =</span> <span class="kw">update</span>(formula.s1, <span class="op">~</span><span class="st"> </span>. <span class="op">|</span><span class="st"> </span>smallarea),</a>
+<a class="sourceLine" id="cb41-3" title="3">              <span class="dt">s2 =</span> <span class="st">'s2'</span>,</a>
+<a class="sourceLine" id="cb41-4" title="4">              <span class="dt">s1 =</span> <span class="st">'s1'</span>,</a>
+<a class="sourceLine" id="cb41-5" title="5">              <span class="dt">smallAreaMeans =</span> tm)))</a></code></pre></div>
 <pre><code>## n(s0) &gt;&gt; n(s1) should hold, but you've given s1 resulting in n(s1)/n(s0) =  0.418300653594771</code></pre>
-<pre><code>## Error in validObject(.Object) : 
-##   invalid class &quot;saeObj&quot; object: Got both partial true means and s1. There is no theoretical description for this so far!</code></pre>
+<pre><code>## Error in h(simpleError(msg, call)) : 
+##   error in evaluating the argument 'object' in selecting a method for function 'predict': invalid class &quot;saeObj&quot; object: Got both partial true means and s1. There is no theoretical description for this so far!</code></pre>
 <p>I do not see what three-phase partially exhaustive information would be. So: is partially exhaustive auxiliary information two- or three-phase?</p>
 <div id="is-partially-exhaustive-auxiliary-information-two--or-three-phase" class="section level2">
 <h2>Is Partially Exhaustive Auxiliary Information Two- or Three-Phase?</h2>
 <p>The (first) estimation given on page 22 of <a href="https://CRAN.R-project.org/package=forestinventory/vignettes/forestinventory_vignette.pdf">forestinventory`s vignette</a> is:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">extsynth_3p &lt;-<span class="st"> </span><span class="kw">threephase</span>(formula.s0, formula.s1, <span class="dt">data =</span> grisons,
-                          <span class="dt">phase_id =</span> <span class="kw">list</span>(<span class="dt">phase.col =</span> <span class="st">&quot;phase_id_3p&quot;</span>,
-                                          <span class="dt">s1.id =</span> <span class="dv">1</span>, <span class="dt">terrgrid.id =</span> <span class="dv">2</span>),
-                          <span class="dt">small_area =</span> <span class="kw">list</span>(<span class="dt">sa.col =</span> <span class="st">&quot;smallarea&quot;</span>, <span class="dt">areas =</span> <span class="kw">c</span>(<span class="st">&quot;A&quot;</span>, <span class="st">&quot;B&quot;</span>, <span class="st">&quot;C&quot;</span>, <span class="st">&quot;D&quot;</span>),
-                                            <span class="dt">unbiased =</span> <span class="ot">TRUE</span>),
-                          <span class="dt">exhaustive =</span> truemeans.G,
-                          <span class="dt">boundary_weights =</span> <span class="st">&quot;boundary_weights&quot;</span>
-                          )
-extsynth_3p$estimation</code></pre></div>
+<div class="sourceCode" id="cb44"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb44-1" title="1">extsynth_3p &lt;-<span class="st"> </span><span class="kw">threephase</span>(formula.s0, formula.s1, <span class="dt">data =</span> grisons,</a>
+<a class="sourceLine" id="cb44-2" title="2">                          <span class="dt">phase_id =</span> <span class="kw">list</span>(<span class="dt">phase.col =</span> <span class="st">&quot;phase_id_3p&quot;</span>,</a>
+<a class="sourceLine" id="cb44-3" title="3">                                          <span class="dt">s1.id =</span> <span class="dv">1</span>, <span class="dt">terrgrid.id =</span> <span class="dv">2</span>),</a>
+<a class="sourceLine" id="cb44-4" title="4">                          <span class="dt">small_area =</span> <span class="kw">list</span>(<span class="dt">sa.col =</span> <span class="st">&quot;smallarea&quot;</span>, <span class="dt">areas =</span> <span class="kw">c</span>(<span class="st">&quot;A&quot;</span>, <span class="st">&quot;B&quot;</span>, <span class="st">&quot;C&quot;</span>, <span class="st">&quot;D&quot;</span>),</a>
+<a class="sourceLine" id="cb44-5" title="5">                                            <span class="dt">unbiased =</span> <span class="ot">TRUE</span>),</a>
+<a class="sourceLine" id="cb44-6" title="6">                          <span class="dt">exhaustive =</span> truemeans.G,</a>
+<a class="sourceLine" id="cb44-7" title="7">                          <span class="dt">boundary_weights =</span> <span class="st">&quot;boundary_weights&quot;</span></a>
+<a class="sourceLine" id="cb44-8" title="8">                          )</a>
+<a class="sourceLine" id="cb44-9" title="9">extsynth_3p<span class="op">$</span>estimation</a></code></pre></div>
 <pre><code>##   area estimate ext_variance g_variance  n0  n1 n2 n0G n1G n2G
 ## 1    A 382.6405    1642.0551  1518.7407 Inf 128 40 Inf  38  12
 ## 2    B 368.9013    1501.2108  1530.5759 Inf 128 40 Inf  34  11
@@ -532,132 +811,132 @@ extsynth_3p$estimation</code></pre></div>
 ## 2         0.5354637      0.7171512
 ## 3         0.5282291      0.7172375
 ## 4         0.5339996      0.7268820</code></pre>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">s12_3p$s1 &lt;-<span class="st"> </span><span class="ot">NULL</span>
-s12_3p$phase_id_2p &lt;-<span class="st"> </span><span class="ot">NULL</span>
-s12_3p$phase_id_3p &lt;-<span class="st"> </span><span class="ot">NULL</span>
-maSAE &lt;-<span class="st"> </span><span class="kw">predict</span>(<span class="kw">saObj</span>(<span class="dt">data =</span> s12_3p, 
-                       <span class="dt">f =</span> <span class="kw">update</span>(formula.s1, ~<span class="st"> </span>. |<span class="st"> </span>smallarea),
-                       <span class="dt">auxiliaryWeights =</span> <span class="st">&quot;boundary_weights&quot;</span>,
-                       <span class="dt">s2 =</span> <span class="st">'s2'</span>, <span class="dt">smallAreaMeans =</span> tm)
-)
-<span class="kw">compare</span>(maSAE, extsynth_3p, <span class="st">&quot;three-phase, ext. sae&quot;</span>)</code></pre></div>
+<div class="sourceCode" id="cb46"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb46-1" title="1">s12_3p<span class="op">$</span>s1 &lt;-<span class="st"> </span><span class="ot">NULL</span></a>
+<a class="sourceLine" id="cb46-2" title="2">s12_3p<span class="op">$</span>phase_id_2p &lt;-<span class="st"> </span><span class="ot">NULL</span></a>
+<a class="sourceLine" id="cb46-3" title="3">s12_3p<span class="op">$</span>phase_id_3p &lt;-<span class="st"> </span><span class="ot">NULL</span></a>
+<a class="sourceLine" id="cb46-4" title="4">maSAE &lt;-<span class="st"> </span><span class="kw">predict</span>(<span class="kw">saObj</span>(<span class="dt">data =</span> s12_3p, </a>
+<a class="sourceLine" id="cb46-5" title="5">                       <span class="dt">f =</span> <span class="kw">update</span>(formula.s1, <span class="op">~</span><span class="st"> </span>. <span class="op">|</span><span class="st"> </span>smallarea),</a>
+<a class="sourceLine" id="cb46-6" title="6">                       <span class="dt">auxiliaryWeights =</span> <span class="st">&quot;boundary_weights&quot;</span>,</a>
+<a class="sourceLine" id="cb46-7" title="7">                       <span class="dt">s2 =</span> <span class="st">'s2'</span>, <span class="dt">smallAreaMeans =</span> tm)</a>
+<a class="sourceLine" id="cb46-8" title="8">)</a>
+<a class="sourceLine" id="cb46-9" title="9"><span class="kw">compare</span>(maSAE, extsynth_3p, <span class="st">&quot;three-phase, ext. sae&quot;</span>)</a></code></pre></div>
 <pre><code>## [1] TRUE</code></pre>
 <p>So this is a two-phase setup, <code>forestinventory</code> seems to need the three-phase setup (the reduced model) to identify the partially exhaustive part of the auxiliary information. The corresponding publication is</p>
 <p>Daniel Mandallaz, Jochen Breschan, and Andreas Hill. New regression estimators in forest inventories with two-phase sampling and partially exhaustive information: a design-based Monte Carlo approach with applications to small-area estimation. In: Canadian Journal of Forest Research 43.11 (2013), pp. 1023-1031. doi: 10.1139/cjfr-2013-0181.</p>
 <p>The benchmarks again:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">mb &lt;-<span class="st"> </span><span class="kw">mbmb</span>(
-           <span class="dt">forestinventory =</span> <span class="kw">wrap_three</span>(formula.s0,
-                              formula.s1,
-                              <span class="dt">data =</span> grisons,
-                              <span class="dt">phase_id =</span> <span class="kw">list</span>(<span class="dt">phase.col =</span> <span class="st">&quot;phase_id_3p&quot;</span>, <span class="dt">s1.id =</span> <span class="dv">1</span>, <span class="dt">terrgrid.id =</span> <span class="dv">2</span>),
-                              <span class="dt">small_area =</span> <span class="kw">list</span>(<span class="dt">sa.col =</span> <span class="st">&quot;smallarea&quot;</span>, <span class="dt">areas =</span> <span class="kw">c</span>(<span class="st">&quot;A&quot;</span>, <span class="st">&quot;B&quot;</span>, <span class="st">&quot;C&quot;</span>, <span class="st">&quot;D&quot;</span>),
-                                                <span class="dt">unbiased =</span> <span class="ot">TRUE</span>),
-                              <span class="dt">exhaustive =</span> truemeans.G),
-           <span class="dt">maSAE =</span> <span class="kw">predict</span>(<span class="kw">suppressMessages</span>(<span class="kw">saObj</span>(<span class="dt">data =</span> s12_3p, 
-                       <span class="dt">f =</span> <span class="kw">update</span>(formula.s1, ~<span class="st"> </span>. |<span class="st"> </span>smallarea),
-                       <span class="dt">s2 =</span> <span class="st">'s2'</span>, <span class="dt">smallAreaMeans =</span> tm)))[, -<span class="dv">1</span>],
-           <span class="dt">check =</span> <span class="st">&quot;equivalent&quot;</span>)
-<span class="kw">print</span>(mb)</code></pre></div>
+<div class="sourceCode" id="cb48"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb48-1" title="1">mb &lt;-<span class="st"> </span><span class="kw">mbmb</span>(</a>
+<a class="sourceLine" id="cb48-2" title="2">           <span class="dt">forestinventory =</span> <span class="kw">wrap_three</span>(formula.s0,</a>
+<a class="sourceLine" id="cb48-3" title="3">                              formula.s1,</a>
+<a class="sourceLine" id="cb48-4" title="4">                              <span class="dt">data =</span> grisons,</a>
+<a class="sourceLine" id="cb48-5" title="5">                              <span class="dt">phase_id =</span> <span class="kw">list</span>(<span class="dt">phase.col =</span> <span class="st">&quot;phase_id_3p&quot;</span>, <span class="dt">s1.id =</span> <span class="dv">1</span>, <span class="dt">terrgrid.id =</span> <span class="dv">2</span>),</a>
+<a class="sourceLine" id="cb48-6" title="6">                              <span class="dt">small_area =</span> <span class="kw">list</span>(<span class="dt">sa.col =</span> <span class="st">&quot;smallarea&quot;</span>, <span class="dt">areas =</span> <span class="kw">c</span>(<span class="st">&quot;A&quot;</span>, <span class="st">&quot;B&quot;</span>, <span class="st">&quot;C&quot;</span>, <span class="st">&quot;D&quot;</span>),</a>
+<a class="sourceLine" id="cb48-7" title="7">                                                <span class="dt">unbiased =</span> <span class="ot">TRUE</span>),</a>
+<a class="sourceLine" id="cb48-8" title="8">                              <span class="dt">exhaustive =</span> truemeans.G),</a>
+<a class="sourceLine" id="cb48-9" title="9">           <span class="dt">maSAE =</span> <span class="kw">predict</span>(<span class="kw">suppressMessages</span>(<span class="kw">saObj</span>(<span class="dt">data =</span> s12_3p, </a>
+<a class="sourceLine" id="cb48-10" title="10">                       <span class="dt">f =</span> <span class="kw">update</span>(formula.s1, <span class="op">~</span><span class="st"> </span>. <span class="op">|</span><span class="st"> </span>smallarea),</a>
+<a class="sourceLine" id="cb48-11" title="11">                       <span class="dt">s2 =</span> <span class="st">'s2'</span>, <span class="dt">smallAreaMeans =</span> tm)))[, <span class="dv">-1</span>],</a>
+<a class="sourceLine" id="cb48-12" title="12">           <span class="dt">check =</span> <span class="st">&quot;equivalent&quot;</span>)</a>
+<a class="sourceLine" id="cb48-13" title="13"><span class="kw">print</span>(mb)</a></code></pre></div>
 <pre><code>## Unit: milliseconds
-##             expr       min       lq      mean    median        uq      max
-##  forestinventory 146.61496 153.2485 155.41512 155.47778 157.13663 164.7975
-##            maSAE  75.46065  76.8773  82.28143  81.64077  84.26352 194.3349
+##             expr       min        lq      mean    median        uq      max
+##  forestinventory 147.60877 155.38166 170.62054 158.49756 178.25596 276.3504
+##            maSAE  74.74929  76.93124  87.06018  83.05022  90.18082 139.8529
 ##  neval
 ##    100
 ##    100</code></pre>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">microbenchmark:::<span class="kw">autoplot.microbenchmark</span>(mb)</code></pre></div>
+<div class="sourceCode" id="cb50"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb50-1" title="1">microbenchmark<span class="op">:::</span><span class="kw">autoplot.microbenchmark</span>(mb)</a></code></pre></div>
 <pre><code>## Coordinate system already present. Adding new coordinate system, which will replace the existing one.</code></pre>
-<p><img src="data:image/png;base64,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" /><!-- --></p>
+<p><img src="data:image/png;base64,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" /><!-- --></p>
 </div>
 </div>
 <div id="cluster-sampling" class="section level1">
 <h1>Cluster Sampling</h1>
 <p>I adapt data from <code>maSAE</code> to section 6.2 of <a href="https://CRAN.R-project.org/package=forestinventory/vignettes/forestinventory_vignette.pdf">forestinventory`s vignette</a>:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">suppressWarnings</span>(<span class="kw">rm</span>(<span class="st">&quot;s1&quot;</span> ,<span class="st">&quot;s2&quot;</span>, <span class="st">&quot;s12&quot;</span>))
-<span class="kw">data</span>(<span class="st">&quot;s1&quot;</span>, <span class="st">&quot;s2&quot;</span>, <span class="dt">package =</span> <span class="st">&quot;maSAE&quot;</span>)
-s12 &lt;-<span class="st"> </span><span class="kw">bind_data</span>(s1, s2)
-<span class="co"># adapt for forestinventory</span>
-s12[[<span class="st">&quot;g&quot;</span>]][<span class="kw">is.na</span>(s12[[<span class="st">&quot;g&quot;</span>]])] &lt;-<span class="st"> &quot;a&quot;</span>
-s12[[<span class="st">&quot;phase&quot;</span>]]  &lt;-<span class="st">  </span>s12[[<span class="st">&quot;phase1&quot;</span>]] +<span class="st"> </span>s12[[<span class="st">&quot;phase2&quot;</span>]]
-maSAE &lt;-<span class="st"> </span><span class="kw">predict</span>(<span class="kw">suppressMessages</span>(<span class="kw">saObj</span>(<span class="dt">data =</span> s12, <span class="dt">f =</span> y ~x1 +<span class="st"> </span>x2 +<span class="st"> </span>x3 |<span class="st"> </span>g,
-              <span class="dt">s2 =</span> <span class="st">&quot;phase2&quot;</span>, <span class="dt">cluster =</span> <span class="st">&quot;clustid&quot;</span>)))
-extpsynth.clust &lt;-<span class="st"> </span><span class="kw">twophase</span>(y ~x1 +<span class="st"> </span>x2 +<span class="st"> </span>x3,
-         <span class="dt">data =</span> s12,
-         <span class="dt">cluster =</span> <span class="st">&quot;clustid&quot;</span>,
-         <span class="dt">phase_id =</span> <span class="kw">list</span>(<span class="dt">phase.col =</span> <span class="st">&quot;phase&quot;</span>, <span class="dt">s1.id =</span> <span class="dv">1</span>, <span class="dt">terrgrid.id =</span> <span class="dv">2</span>),
-         <span class="dt">small_area =</span> <span class="kw">list</span>(<span class="dt">sa.col =</span> <span class="st">&quot;g&quot;</span>, <span class="dt">areas =</span> <span class="kw">c</span>(<span class="st">&quot;a&quot;</span>, <span class="st">&quot;b&quot;</span>),
-                           <span class="dt">unbiased =</span> <span class="ot">TRUE</span>))
-<span class="kw">compare</span>(maSAE, extpsynth.clust, <span class="st">&quot;three-phase, ext. sae&quot;</span>)</code></pre></div>
+<div class="sourceCode" id="cb52"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb52-1" title="1"><span class="kw">suppressWarnings</span>(<span class="kw">rm</span>(<span class="st">&quot;s1&quot;</span> ,<span class="st">&quot;s2&quot;</span>, <span class="st">&quot;s12&quot;</span>))</a>
+<a class="sourceLine" id="cb52-2" title="2"><span class="kw">data</span>(<span class="st">&quot;s1&quot;</span>, <span class="st">&quot;s2&quot;</span>, <span class="dt">package =</span> <span class="st">&quot;maSAE&quot;</span>)</a>
+<a class="sourceLine" id="cb52-3" title="3">s12 &lt;-<span class="st"> </span><span class="kw">bind_data</span>(s1, s2)</a>
+<a class="sourceLine" id="cb52-4" title="4"><span class="co"># adapt for forestinventory</span></a>
+<a class="sourceLine" id="cb52-5" title="5">s12[[<span class="st">&quot;g&quot;</span>]][<span class="kw">is.na</span>(s12[[<span class="st">&quot;g&quot;</span>]])] &lt;-<span class="st"> &quot;a&quot;</span></a>
+<a class="sourceLine" id="cb52-6" title="6">s12[[<span class="st">&quot;phase&quot;</span>]]  &lt;-<span class="st">  </span>s12[[<span class="st">&quot;phase1&quot;</span>]] <span class="op">+</span><span class="st"> </span>s12[[<span class="st">&quot;phase2&quot;</span>]]</a>
+<a class="sourceLine" id="cb52-7" title="7">maSAE &lt;-<span class="st"> </span><span class="kw">predict</span>(<span class="kw">suppressMessages</span>(<span class="kw">saObj</span>(<span class="dt">data =</span> s12, <span class="dt">f =</span> y <span class="op">~</span>x1 <span class="op">+</span><span class="st"> </span>x2 <span class="op">+</span><span class="st"> </span>x3 <span class="op">|</span><span class="st"> </span>g,</a>
+<a class="sourceLine" id="cb52-8" title="8">              <span class="dt">s2 =</span> <span class="st">&quot;phase2&quot;</span>, <span class="dt">cluster =</span> <span class="st">&quot;clustid&quot;</span>)))</a>
+<a class="sourceLine" id="cb52-9" title="9">extpsynth.clust &lt;-<span class="st"> </span><span class="kw">twophase</span>(y <span class="op">~</span>x1 <span class="op">+</span><span class="st"> </span>x2 <span class="op">+</span><span class="st"> </span>x3,</a>
+<a class="sourceLine" id="cb52-10" title="10">         <span class="dt">data =</span> s12,</a>
+<a class="sourceLine" id="cb52-11" title="11">         <span class="dt">cluster =</span> <span class="st">&quot;clustid&quot;</span>,</a>
+<a class="sourceLine" id="cb52-12" title="12">         <span class="dt">phase_id =</span> <span class="kw">list</span>(<span class="dt">phase.col =</span> <span class="st">&quot;phase&quot;</span>, <span class="dt">s1.id =</span> <span class="dv">1</span>, <span class="dt">terrgrid.id =</span> <span class="dv">2</span>),</a>
+<a class="sourceLine" id="cb52-13" title="13">         <span class="dt">small_area =</span> <span class="kw">list</span>(<span class="dt">sa.col =</span> <span class="st">&quot;g&quot;</span>, <span class="dt">areas =</span> <span class="kw">c</span>(<span class="st">&quot;a&quot;</span>, <span class="st">&quot;b&quot;</span>),</a>
+<a class="sourceLine" id="cb52-14" title="14">                           <span class="dt">unbiased =</span> <span class="ot">TRUE</span>))</a>
+<a class="sourceLine" id="cb52-15" title="15"><span class="kw">compare</span>(maSAE, extpsynth.clust, <span class="st">&quot;three-phase, ext. sae&quot;</span>)</a></code></pre></div>
 <pre><code>## [1] TRUE</code></pre>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">mb &lt;-<span class="st"> </span><span class="kw">mbmb</span>(
-           <span class="dt">forestinventory =</span> <span class="kw">clean</span>(<span class="kw">twophase</span>(y ~x1 +<span class="st"> </span>x2 +<span class="st"> </span>x3,
-         <span class="dt">data =</span> s12,
-         <span class="dt">cluster =</span> <span class="st">&quot;clustid&quot;</span>,
-         <span class="dt">phase_id =</span> <span class="kw">list</span>(<span class="dt">phase.col =</span> <span class="st">&quot;phase&quot;</span>, <span class="dt">s1.id =</span> <span class="dv">1</span>, <span class="dt">terrgrid.id =</span> <span class="dv">2</span>),
-         <span class="dt">small_area =</span> <span class="kw">list</span>(<span class="dt">sa.col =</span> <span class="st">&quot;g&quot;</span>, <span class="dt">areas =</span> <span class="kw">c</span>(<span class="st">&quot;a&quot;</span>, <span class="st">&quot;b&quot;</span>),
-                           <span class="dt">unbiased =</span> <span class="ot">TRUE</span>))),
-           <span class="dt">maSAE =</span> <span class="kw">clean</span>(<span class="kw">predict</span>(<span class="kw">suppressMessages</span>(<span class="kw">saObj</span>(<span class="dt">data =</span> s12, <span class="dt">f =</span> y ~x1 +<span class="st"> </span>x2 +<span class="st"> </span>x3 |<span class="st"> </span>g,
-              <span class="dt">s2 =</span> <span class="st">&quot;phase2&quot;</span>, <span class="dt">cluster =</span> <span class="st">&quot;clustid&quot;</span>)))),
-
-           <span class="dt">check =</span> <span class="st">&quot;equivalent&quot;</span>)
-<span class="kw">print</span>(mb)</code></pre></div>
+<div class="sourceCode" id="cb54"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb54-1" title="1">mb &lt;-<span class="st"> </span><span class="kw">mbmb</span>(</a>
+<a class="sourceLine" id="cb54-2" title="2">           <span class="dt">forestinventory =</span> <span class="kw">clean</span>(<span class="kw">twophase</span>(y <span class="op">~</span>x1 <span class="op">+</span><span class="st"> </span>x2 <span class="op">+</span><span class="st"> </span>x3,</a>
+<a class="sourceLine" id="cb54-3" title="3">         <span class="dt">data =</span> s12,</a>
+<a class="sourceLine" id="cb54-4" title="4">         <span class="dt">cluster =</span> <span class="st">&quot;clustid&quot;</span>,</a>
+<a class="sourceLine" id="cb54-5" title="5">         <span class="dt">phase_id =</span> <span class="kw">list</span>(<span class="dt">phase.col =</span> <span class="st">&quot;phase&quot;</span>, <span class="dt">s1.id =</span> <span class="dv">1</span>, <span class="dt">terrgrid.id =</span> <span class="dv">2</span>),</a>
+<a class="sourceLine" id="cb54-6" title="6">         <span class="dt">small_area =</span> <span class="kw">list</span>(<span class="dt">sa.col =</span> <span class="st">&quot;g&quot;</span>, <span class="dt">areas =</span> <span class="kw">c</span>(<span class="st">&quot;a&quot;</span>, <span class="st">&quot;b&quot;</span>),</a>
+<a class="sourceLine" id="cb54-7" title="7">                           <span class="dt">unbiased =</span> <span class="ot">TRUE</span>))),</a>
+<a class="sourceLine" id="cb54-8" title="8">           <span class="dt">maSAE =</span> <span class="kw">clean</span>(<span class="kw">predict</span>(<span class="kw">suppressMessages</span>(<span class="kw">saObj</span>(<span class="dt">data =</span> s12, <span class="dt">f =</span> y <span class="op">~</span>x1 <span class="op">+</span><span class="st"> </span>x2 <span class="op">+</span><span class="st"> </span>x3 <span class="op">|</span><span class="st"> </span>g,</a>
+<a class="sourceLine" id="cb54-9" title="9">              <span class="dt">s2 =</span> <span class="st">&quot;phase2&quot;</span>, <span class="dt">cluster =</span> <span class="st">&quot;clustid&quot;</span>)))),</a>
+<a class="sourceLine" id="cb54-10" title="10"></a>
+<a class="sourceLine" id="cb54-11" title="11">           <span class="dt">check =</span> <span class="st">&quot;equivalent&quot;</span>)</a>
+<a class="sourceLine" id="cb54-12" title="12"><span class="kw">print</span>(mb)</a></code></pre></div>
 <pre><code>## Unit: milliseconds
-##             expr       min        lq      mean    median        uq      max
-##  forestinventory 101.40998 104.35406 108.06734 108.63562 110.02908 119.6293
-##            maSAE  43.45934  44.15177  47.77613  44.79822  50.47928 162.9771
+##             expr       min        lq      mean    median        uq       max
+##  forestinventory 100.31116 103.29630 111.21847 107.85945 113.14509 228.92764
+##            maSAE  41.25872  42.04113  45.94833  44.13972  48.30483  72.41759
 ##  neval
 ##    100
 ##    100</code></pre>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">microbenchmark:::<span class="kw">autoplot.microbenchmark</span>(mb)</code></pre></div>
+<div class="sourceCode" id="cb56"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb56-1" title="1">microbenchmark<span class="op">:::</span><span class="kw">autoplot.microbenchmark</span>(mb)</a></code></pre></div>
 <pre><code>## Coordinate system already present. Adding new coordinate system, which will replace the existing one.</code></pre>
-<p><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAASAAAAEgCAMAAAAjXV6yAAACzVBMVEUAAAABAQECAgIGBgYHBwcICAgJCQkKCgoLCwsMDAwNDQ0ODg4PDw8QEBARERETExMUFBQXFxcYGBgZGRkaGhofHx8gICAhISEkJCQlJSUmJiYnJycrKyssLCwtLS0uLi4vLy8yMjIzMzM0NDQ1NTU2NjY3Nzc4ODg5OTk6Ojo7Ozs8PDw9PT0+Pj4/Pz9AQEBBQUFCQkJDQ0NERERFRUVGRkZHR0dISEhJSUlKSkpLS0tMTExNTU1OTk5PT09QUFBRUVFSUlJTU1NUVFRVVVVWVlZXV1dYWFhZWVlaWlpbW1tcXFxdXV1eXl5fX19gYGBhYWFiYmJjY2NkZGRlZWVmZmZnZ2doaGhpaWlqampra2tsbGxtbW1ubm5vb29wcHBxcXFycnJzc3N0dHR1dXV2dnZ3d3d4eHh5eXl6enp7e3t8fHx9fX1+fn5/f3+AgICBgYGCgoKDg4OEhISFhYWGhoaHh4eIiIiJiYmKioqLi4uMjIyNjY2Ojo6Pj4+QkJCRkZGSkpKTk5OUlJSVlZWWlpaXl5eYmJiZmZmampqbm5ucnJydnZ2enp6fn5+goKChoaGioqKjo6OkpKSlpaWmpqanp6eoqKipqamqqqqrq6usrKytra2urq6vr6+wsLCxsbGysrKzs7O0tLS1tbW2tra3t7e4uLi5ubm6urq7u7u8vLy9vb2+vr6/v7/AwMDBwcHCwsLDw8PExMTFxcXGxsbHx8fIyMjJycnKysrLy8vMzMzNzc3Ozs7Pz8/Q0NDR0dHS0tLT09PU1NTV1dXW1tbX19fY2NjZ2dna2trb29vc3Nzd3d3e3t7f39/g4ODh4eHi4uLj4+Pk5OTl5eXm5ubn5+fo6Ojp6enq6urr6+vs7Ozt7e3u7u7v7+/w8PDx8fHy8vLz8/P09PT19fX29vb39/f4+Pj5+fn6+vr7+/v8/Pz9/f3+/v7///+pVpdOAAAACXBIWXMAAA7DAAAOwwHHb6hkAAANuUlEQVR4nO3diV8U5xkH8G3TIxpTm6Zpkh5p+oKigsZUaj02NiABAUWjYCSHEg8SIwHEoEbwADQJxni0eMQA3hopGDUaCah4IFrUcInCVEQQhN1ln7+hM7s77AyzMwOfkO5Cfr8PH5h932fmffbr7CxrzK6BEM0Y3N2ApwdAOgGQTgCkEwDpBEA6+f8DNTU1tT5o6poWc7NizGWZYshlXVOz2cXOLcq6NhfHsx/UbUAcxzXf57rmPt1VjLXcUww1k2LI5eG4BmpUjDU1KevaXRzP0RCAhABIEgBJAiDpIICcFgCSBECyfgAEIAABCECShgAkBECSAEgSAEkHAeS0AJAkAJL1AyAAAQhAAJI0BCAhAJIEQJIASDoIIKcFgCQBkKwfAAEIQAACkKQhAAkBkCQAkgRA0kEAOS1+RED1xTUA0gC6Hc3GngWQOlC6d3ZA4B0AqQFV+C2nErYdQGpAm71vEUUHAkgN6MNx/OYJdgxAWkAd494BkBYQZfhWA0gL6Cb7HEBaQDR1NoA0gXZ4XwWQFlCDTwaAtIDo3Ql1ANICOsdy7f1c/2D+5loAKYBoRpBwCtWt8/aP8A4pB5ACqNjrE46resMrvZ0u+gdWAqgrEK0Ykp410Tdf2Lzm93o9gLoCmZd7s6gb9u089hGAugIRNd3t3Fw59ASAFECStE8d67xQ91ugumVh4SuEs6I96H3htjFASLeAqNZ/SlW/B1qc02LaupTf+GZ+UJMAJJvVBqJLfmH/6e9AwbzKwzR+IyUvKa+nQHRhzF+zavsVkHF7xNatUSFf0Ono0JhD/EBy7JmHwkR7eMtXiT0GoroYNnrRxoNnLt+pqu/a9g8HdPPmlZLTR/fk/LOo94FOVhn3Wy4G0ry91puB/IApNyYwtZHozApqDX7AF9jCT9xmjKXZd0pXByK6Op+5L1H2Hsy9CGS2Gi1kNZK14niG42ypT+GvQamCS4HkDGrJzs6+1Nzc3PawOVUDqHAW8zJGv/fhho2ZmVu3y7Ire7syu3Yqx3ZkKwd3uqjbbfu+LTMzc31K0uJ5UWGhG5ptaelFIDuBkdauLLwrbAXVEjWGUnsIfxYdSurpQ8z0AXtlxw3hLO831yARKLiK8vlziVakNDVuT6bChfxoXUBLz4Dao30+dVx6+h3QnvA3dy9J55/B1k6bktxAqz8XZqO/6tHvQR0LfQ6LPfYXoB5GG+gTr+zOHgGkTKH3KmePALLnWuK7+eKc/3Tnv2cAkD2Fw8YHsZhmYdM068UySY8AEtLoP/0Wl+0bVElkeW9onrRHAAlJGXGFHyma6Lfh4Kveu2Q9AojP3eGrbP3UrhjBAo7KewQQn099yh393Pmua48A4n8vnLBI7Af/4dAV0DesAEBaQEvG1wNIA6jFd3VnPwByAXSAlQBIC2hOuLMfACmBbnlvAZAKUOooE9E630pnPwCSAZ1h+6lpVKKkHwDJgLioic3LfUoBpApUMtKffSLtB0ByIK4wYZesHwB1AeraD4AABCAAAUjSEICEAEgSAEkCIOkggJwWAJIEQLJ+AAQgAAEIQJKGACQEQJIASBIASQcB5LQAkCQAkvUDIAABCEAAkjQEICEAkgRAkgBIOgggpwWAJAGQrB8AuQnoxqStANIC2sGmAEgLKIn51AFIA+i1oewygDSAAiJYPoA0gEamsl0AUgeqZnuGfQQgdaAL7NTE5QBSBzrOyqYuApA6UC6rmxsFIHWgrV6m+BAAqQOte4HWjgOQOlDiy7R5OIDUgebPoFx2C0CqQLNiqICVAUgVKGgpnWWFAFIFGptGN1gegFSBfLYRx3IApAZUyfaTiW0BkBrQRfY1kV86gNSAjrNSIuMyAKkB7We1ROGxAFID2sbaiV6fAyA1oLQX+CXfCwOQK6DqWo5LEN5DfpURQC6AqsZOruPems0v+ekoALkAymHsKDcljl8y26sWQEqgxAn+y7kx6fyS+fZXqwCSA01bsGjKLa9sfsnz9lerAJIDjd6QNfRrdoZfspIdAZACqJodLGXJ7A6/5AP7x5IDSAZ0hl3oGD18jG1N3wwAKYBy2V1KZEtsa/4jEUAKoA0jrMSl3LKtGTkXQAqgFMkHUywJBZAmUPoYAGkCZXvVAEgLqJAVA0gLqJbtAZAWUIdvOoC0gCgiBkCaQMsnAEgT6CC7CiAtIM5rG3codh+A1IAoMiTLe4JXTu8C7ZipdUeNWpMeB1TozeI6Yl7sXaBXmlSnlhFt0WRY5mFAVHLMSrtY7wJpnCO6p496gZuAhPQyULIxpmn1tOlr+PPImP9qQ3z44jp+9PC0sH3ClO3TQ0/ERB6g+HyiFUfEefuYfN+0w0SJp4juxcbGHmprazOb2rrGRO2KMYuyzEyKIZeHa2unda6AFHUdLo5ny0N9IJ5gdYbJlLGW38q8vfJra/FifjC4sjZe/GxVYy5dDKSCpdQa2iLO28fk+xbFU3NoO9F/w8PDd5rN5g6LuWsspBhyVdbhosxVHX+8NFdAijqri+PZ0t4toNBG/o89nN9qpFCj0RjCD6Ykf2vtBGoVfrSGtBSs6Zy3j8n3NYW25K0Rj9p/HmKOO9kYarvHwRxZOX7QemVNUieQrYg+LIi/3DnvGJPtSx+eiD/rZqDqqz8EUOp6syljte1OJv2r40AyPxjJVfAnitEiASpcOMfaOS8CWST70sm4CIt7gUqHsXR637e3gZpSp0XYLrREdYunLBIuwvtCp35JFD9LAmQO3e2cd4zFz5LsS60BH3ce1T1Ab01aw2awTb0L1IuJLnMvUOOQjdy26UofDwGyXIm0uhcoj13y5BerJ6eec95wC1DqWM6TgWRxC9DMNwGkBWQdtQZAWkD1LBtAWkDFtn8gBCBVoL2sCkBaQBtGcwDSAno/GEAKoAw/ouasRtuar70BIAXQbtZIq9gHtjUDEgCkADrFSq1/G2J/nI1MB5AC6Dv25XUWx+7yS7ayLAApgBpHZu72LmDF/JLV7BCAlEBh7yyZXMX28EteYKcBpASKe3l8IvfiBn7JY+wKgJRAOxnbzwXH80vmMPzPLC6Abo4aV8u9PodfcpP976IBJAfiSss5Li6IXzJ1AoBcAQlZM5pfMm4KgNSAtniZiN6cDSA1oD2sjsjxJmYAcgF0nJURvZQEIDWgEnaaaNQ6AKkBfccOktnrMwCpAdUPzaK77AsAqQFx/hl0kx0FkCpQ4DI6z84ASBVo5nz6ipUCSBUoZibtZdUAUgVKDKCtPhyAVIH4F2PrxgJIHegzL3NiEIDUgXIYFxMJIHWgY+xaxAIAqQOVsG9eWgYgdaBKtn/EegCpA3G+69gOAGkATYp0vBQDkGugqGGsBEAaQIlsyG0AaQBtY4EcgDSAyhzvBQwgFSCuVtwAkCT4jEPpIICcFgCSBECyfgAEIAABCECShgAkBECSAEgSAEkHAeS0+BEAuc71tAfdKbuU1tG94zWkVX6fdpzxFKB8Vt+dsmxm7t7xKmzv9t8LAZBOAKQTTwFqrenWxeVBjVW/SIi5pu37tOOMpwB5bACkEwDpxAOAko1G48dk3hQRsUnrCmwUol/WNoP/5qjSLe5GPAAo+o7F0kH7ElpaEvZrlFkslkurdcsOvD2J/+6o0j1mN+J+IEvQgqCkezS3nKh8nmal9V1Ot+zytwKQo6obx9SN+4G4BVeb1q6i0IdED8M0Kwu2UzfKBCBHVTeOqRv3AwlpCKMQ/s60hmgVWaL5Ev0yAchRpV+sH/cD1Vwiap5Bb90gujFXq/Ci8EYl+mWTnFX6xfpxP1B1cIVl88eUu8JiWb5XqzDzCP9Nv2ySs0q/WD/uB6L82eFrWsmyKSryM4tGmXWm8F66umU2IEeVfrF+PADIswMgnQBIJwDSCYB0AiCdAEgnHgMUaLAnngxlqkUGwx/kt8ucX91PmUH8611+Ub1ijwG6XlS021BUVHSLYutUiwyF92W3+VK7jsY+ypQZTI6tB4V9B4iExvUqXJwoPT19bOu09mDJnh37B42jW+EuH/37oOeOb/zd46v42we8fvlcNolTsjnpQ6zY//HH/Es7yztWPvOrl6qofe5vfjuvna88Hfirp3cSZT030G+3oVms7rNAz+edH/8z45UFP22k/Eczz839yVFxSjYnATINfvvkial/6SxPfepgvp83LXw2v+DZWH6vIbmXZzzyIPeRVcVpAw33xOo+C8S/BD9pqKAGfnu08ElcYyaKU7I5yVeN4QLRvb1iufWJfUSXx9wfeITo8CArGT4i4gxlw+L42QQDJ1b3WaArwi2rbXvwaX4s9Y/ilGxO8mWNfnT8yhoSyzlDg7DDbYPwCUOGejKcs+3+2CkSeO+I1X0WqMxxi98YZHv2f0ycks3Jnubr0ycPiBPLaw225zvbj0ZDrf1CbigbLACdNtSI1f0BaPgx/ufNi+KUGlDDIv6XmwMDxHLrIP6xVfrEtQFfEh0ZaBWBRgoPsaWGCrG6PwDtfSbn4uYBS8QpNSDz4HdK/j3Zr7M84elD58f8qWPB748VPLuIRKADj6ScXf+k4YZY3R+AaNfzP38q3iJOqT7Ejnv/4tdBVZ3lloSnB44rp7a5Tz5pe5q3A9HOPw8YVmK4Jlb3LSD99PRXQt0ASCf9DqjLi9Xvm770YrVbKS+v6NXj1ZaX65X0LSA3BEA6AZBOAKQTAOkEQDoBkE7+B98dk71yBMCiAAAAAElFTkSuQmCC" /><!-- --></p>
+<p><img src="data:image/png;base64,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" /><!-- --></p>
 <p>Now I use the example given in section 6.2 of <a href="https://CRAN.R-project.org/package=forestinventory/vignettes/forestinventory_vignette.pdf">forestinventory`s vignette</a>:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">  <span class="kw">data</span>(<span class="st">&quot;zberg&quot;</span>, <span class="dt">package =</span> <span class="st">&quot;forestinventory&quot;</span>)
-  forestinventory &lt;-<span class="st"> </span>forestinventory::<span class="kw">twophase</span>(
-    <span class="dt">formula =</span> basal ~<span class="st"> </span>stade +<span class="st"> </span>couver +<span class="st"> </span>melange, <span class="dt">data =</span> zberg,
-    <span class="dt">phase_id =</span> <span class="kw">list</span>(<span class="dt">phase.col =</span> <span class="st">&quot;phase_id_2p&quot;</span>, <span class="dt">terrgrid.id =</span> <span class="dv">2</span>),
-    <span class="dt">cluster =</span> <span class="st">&quot;cluster&quot;</span>,
-    <span class="dt">small_area =</span> <span class="kw">list</span>(
-      <span class="dt">sa.col =</span> <span class="st">&quot;ismallold&quot;</span>, <span class="dt">areas =</span> <span class="kw">c</span>(<span class="st">&quot;1&quot;</span>),
-      <span class="dt">unbiased =</span> <span class="ot">TRUE</span>
-    )
-  )</code></pre></div>
+<div class="sourceCode" id="cb58"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb58-1" title="1">  <span class="kw">data</span>(<span class="st">&quot;zberg&quot;</span>, <span class="dt">package =</span> <span class="st">&quot;forestinventory&quot;</span>)</a>
+<a class="sourceLine" id="cb58-2" title="2">  forestinventory &lt;-<span class="st"> </span>forestinventory<span class="op">::</span><span class="kw">twophase</span>(</a>
+<a class="sourceLine" id="cb58-3" title="3">    <span class="dt">formula =</span> basal <span class="op">~</span><span class="st"> </span>stade <span class="op">+</span><span class="st"> </span>couver <span class="op">+</span><span class="st"> </span>melange, <span class="dt">data =</span> zberg,</a>
+<a class="sourceLine" id="cb58-4" title="4">    <span class="dt">phase_id =</span> <span class="kw">list</span>(<span class="dt">phase.col =</span> <span class="st">&quot;phase_id_2p&quot;</span>, <span class="dt">terrgrid.id =</span> <span class="dv">2</span>),</a>
+<a class="sourceLine" id="cb58-5" title="5">    <span class="dt">cluster =</span> <span class="st">&quot;cluster&quot;</span>,</a>
+<a class="sourceLine" id="cb58-6" title="6">    <span class="dt">small_area =</span> <span class="kw">list</span>(</a>
+<a class="sourceLine" id="cb58-7" title="7">      <span class="dt">sa.col =</span> <span class="st">&quot;ismallold&quot;</span>, <span class="dt">areas =</span> <span class="kw">c</span>(<span class="st">&quot;1&quot;</span>),</a>
+<a class="sourceLine" id="cb58-8" title="8">      <span class="dt">unbiased =</span> <span class="ot">TRUE</span></a>
+<a class="sourceLine" id="cb58-9" title="9">    )</a>
+<a class="sourceLine" id="cb58-10" title="10">  )</a></code></pre></div>
 <pre><code>## Warning: At least one terrestrial cluster not entirely included within the small area 1.
 ## Zero mean residual assumption for small area maybe violated.
 ## Check mean_Rc_x_hat_G and consider alternative estimator 'psmall'</code></pre>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">  s1 &lt;-<span class="st"> </span>zberg[zberg[[<span class="st">&quot;phase_id_2p&quot;</span>]] ==<span class="st"> </span><span class="dv">1</span>, ]
-  s2 &lt;-<span class="st"> </span>zberg[zberg[[<span class="st">&quot;phase_id_2p&quot;</span>]] ==<span class="st"> </span><span class="dv">2</span>, ]
-  s12 &lt;-<span class="st"> </span><span class="kw">rbind</span>(s1, s2)
-  s12[[<span class="st">&quot;s1&quot;</span>]] &lt;-<span class="st"> </span>s12[[<span class="st">&quot;phase_id_2p&quot;</span>]] %in%<span class="st"> </span><span class="kw">c</span>(<span class="dv">1</span>, <span class="dv">2</span>)
-  s12[[<span class="st">&quot;s2&quot;</span>]] &lt;-<span class="st"> </span>s12[[<span class="st">&quot;phase_id_2p&quot;</span>]] ==<span class="st"> </span><span class="dv">2</span>
-  object &lt;-<span class="st"> </span>maSAE::<span class="kw">saObj</span>(
-    <span class="dt">data =</span> s12,
-    <span class="dt">f =</span> basal ~<span class="st"> </span>stade +<span class="st"> </span>couver +<span class="st"> </span>melange |<span class="st"> </span>ismallold,
-    <span class="dt">s2 =</span> <span class="st">&quot;s2&quot;</span>,
-    <span class="dt">cluster =</span> <span class="st">&quot;cluster&quot;</span>
-  )</code></pre></div>
+<div class="sourceCode" id="cb60"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb60-1" title="1">  s1 &lt;-<span class="st"> </span>zberg[zberg[[<span class="st">&quot;phase_id_2p&quot;</span>]] <span class="op">==</span><span class="st"> </span><span class="dv">1</span>, ]</a>
+<a class="sourceLine" id="cb60-2" title="2">  s2 &lt;-<span class="st"> </span>zberg[zberg[[<span class="st">&quot;phase_id_2p&quot;</span>]] <span class="op">==</span><span class="st"> </span><span class="dv">2</span>, ]</a>
+<a class="sourceLine" id="cb60-3" title="3">  s12 &lt;-<span class="st"> </span><span class="kw">rbind</span>(s1, s2)</a>
+<a class="sourceLine" id="cb60-4" title="4">  s12[[<span class="st">&quot;s1&quot;</span>]] &lt;-<span class="st"> </span>s12[[<span class="st">&quot;phase_id_2p&quot;</span>]] <span class="op">%in%</span><span class="st"> </span><span class="kw">c</span>(<span class="dv">1</span>, <span class="dv">2</span>)</a>
+<a class="sourceLine" id="cb60-5" title="5">  s12[[<span class="st">&quot;s2&quot;</span>]] &lt;-<span class="st"> </span>s12[[<span class="st">&quot;phase_id_2p&quot;</span>]] <span class="op">==</span><span class="st"> </span><span class="dv">2</span></a>
+<a class="sourceLine" id="cb60-6" title="6">  object &lt;-<span class="st"> </span>maSAE<span class="op">::</span><span class="kw">saObj</span>(</a>
+<a class="sourceLine" id="cb60-7" title="7">    <span class="dt">data =</span> s12,</a>
+<a class="sourceLine" id="cb60-8" title="8">    <span class="dt">f =</span> basal <span class="op">~</span><span class="st"> </span>stade <span class="op">+</span><span class="st"> </span>couver <span class="op">+</span><span class="st"> </span>melange <span class="op">|</span><span class="st"> </span>ismallold,</a>
+<a class="sourceLine" id="cb60-9" title="9">    <span class="dt">s2 =</span> <span class="st">&quot;s2&quot;</span>,</a>
+<a class="sourceLine" id="cb60-10" title="10">    <span class="dt">cluster =</span> <span class="st">&quot;cluster&quot;</span></a>
+<a class="sourceLine" id="cb60-11" title="11">  )</a></code></pre></div>
 <pre><code>## include is NULL, automatically adding it as TRUE to data.</code></pre>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">  maSAE &lt;-<span class="st"> </span>maSAE::<span class="kw">predict</span>(object)
-  <span class="kw">compare</span>(maSAE[<span class="dv">2</span>,], forestinventory, <span class="st">&quot;clustered, ext. sae&quot;</span>)</code></pre></div>
+<div class="sourceCode" id="cb62"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb62-1" title="1">  maSAE &lt;-<span class="st"> </span>maSAE<span class="op">::</span><span class="kw">predict</span>(object)</a>
+<a class="sourceLine" id="cb62-2" title="2">  <span class="kw">compare</span>(maSAE[<span class="dv">2</span>,], forestinventory, <span class="st">&quot;clustered, ext. sae&quot;</span>)</a></code></pre></div>
 <pre><code>## Warning in compare(maSAE[2, ], forestinventory, &quot;clustered, ext. sae&quot;):
 ## Differing results from maSAE and forestinventory: clustered, ext. sae</code></pre>
 <pre><code>## [1] FALSE</code></pre>
 <p>Obviously, something went wrong. The difference to the previous example? <code>zberg</code> contains nominally scaled predictors. If I ignore the cluster design, both packages give the same result:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">  forestinventory &lt;-<span class="st"> </span>forestinventory::<span class="kw">twophase</span>(
-    <span class="dt">formula =</span> basal ~<span class="st"> </span>stade +<span class="st"> </span>couver +<span class="st"> </span>melange, <span class="dt">data =</span> zberg,
-    <span class="dt">phase_id =</span> <span class="kw">list</span>(<span class="dt">phase.col =</span> <span class="st">&quot;phase_id_2p&quot;</span>, <span class="dt">terrgrid.id =</span> <span class="dv">2</span>),
-    <span class="dt">small_area =</span> <span class="kw">list</span>(
-      <span class="dt">sa.col =</span> <span class="st">&quot;ismallold&quot;</span>, <span class="dt">areas =</span> <span class="kw">c</span>(<span class="st">&quot;1&quot;</span>),
-      <span class="dt">unbiased =</span> <span class="ot">TRUE</span>
-    )
-  )
-  object &lt;-<span class="st"> </span>maSAE::<span class="kw">saObj</span>(
-    <span class="dt">data =</span> s12,
-    <span class="dt">f =</span> basal ~<span class="st"> </span>stade +<span class="st"> </span>couver +<span class="st"> </span>melange |<span class="st"> </span>ismallold,
-    <span class="dt">s2 =</span> <span class="st">&quot;s2&quot;</span>,
-  )
-  maSAE &lt;-<span class="st"> </span>maSAE::<span class="kw">predict</span>(object)
-  <span class="kw">compare</span>(maSAE[<span class="dv">2</span>,], forestinventory, <span class="st">&quot;clustered, ext. sae&quot;</span>)</code></pre></div>
+<div class="sourceCode" id="cb65"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb65-1" title="1">  forestinventory &lt;-<span class="st"> </span>forestinventory<span class="op">::</span><span class="kw">twophase</span>(</a>
+<a class="sourceLine" id="cb65-2" title="2">    <span class="dt">formula =</span> basal <span class="op">~</span><span class="st"> </span>stade <span class="op">+</span><span class="st"> </span>couver <span class="op">+</span><span class="st"> </span>melange, <span class="dt">data =</span> zberg,</a>
+<a class="sourceLine" id="cb65-3" title="3">    <span class="dt">phase_id =</span> <span class="kw">list</span>(<span class="dt">phase.col =</span> <span class="st">&quot;phase_id_2p&quot;</span>, <span class="dt">terrgrid.id =</span> <span class="dv">2</span>),</a>
+<a class="sourceLine" id="cb65-4" title="4">    <span class="dt">small_area =</span> <span class="kw">list</span>(</a>
+<a class="sourceLine" id="cb65-5" title="5">      <span class="dt">sa.col =</span> <span class="st">&quot;ismallold&quot;</span>, <span class="dt">areas =</span> <span class="kw">c</span>(<span class="st">&quot;1&quot;</span>),</a>
+<a class="sourceLine" id="cb65-6" title="6">      <span class="dt">unbiased =</span> <span class="ot">TRUE</span></a>
+<a class="sourceLine" id="cb65-7" title="7">    )</a>
+<a class="sourceLine" id="cb65-8" title="8">  )</a>
+<a class="sourceLine" id="cb65-9" title="9">  object &lt;-<span class="st"> </span>maSAE<span class="op">::</span><span class="kw">saObj</span>(</a>
+<a class="sourceLine" id="cb65-10" title="10">    <span class="dt">data =</span> s12,</a>
+<a class="sourceLine" id="cb65-11" title="11">    <span class="dt">f =</span> basal <span class="op">~</span><span class="st"> </span>stade <span class="op">+</span><span class="st"> </span>couver <span class="op">+</span><span class="st"> </span>melange <span class="op">|</span><span class="st"> </span>ismallold,</a>
+<a class="sourceLine" id="cb65-12" title="12">    <span class="dt">s2 =</span> <span class="st">&quot;s2&quot;</span>,</a>
+<a class="sourceLine" id="cb65-13" title="13">  )</a>
+<a class="sourceLine" id="cb65-14" title="14">  maSAE &lt;-<span class="st"> </span>maSAE<span class="op">::</span><span class="kw">predict</span>(object)</a>
+<a class="sourceLine" id="cb65-15" title="15">  <span class="kw">compare</span>(maSAE[<span class="dv">2</span>,], forestinventory, <span class="st">&quot;clustered, ext. sae&quot;</span>)</a></code></pre></div>
 <pre><code>## [1] TRUE</code></pre>
 <p>I do not know where that comes from. But since <code>maSAE</code> has very structured code compared to <code>forestinventory</code> (<code>maSAE</code> needs about 500 lines of code for its prediction functions, <code>forestinventory</code> more than 2200), I am biased to believe <code>maSAE</code>.</p>
 </div>

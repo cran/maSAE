@@ -6,7 +6,9 @@
 \alias{data.frameOrNULL-class}
 \alias{references}
 \title{Class \code{"characterOrNULL"}}
-\format{chr}
+\format{
+chr
+}
 \description{
 the  _union_ of classes \code{character} and  \code{NULL}
 

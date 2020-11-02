@@ -1,7 +1,7 @@
 Type: Package
 Package: maSAE
 Title: Mandallaz' Model-Assisted Small Area Estimators
-Version: 2.0.1
+Version: 2.0.2
 Authors@R: 
     c(person(given = "Andreas Dominik",
              family = "Cullmann",
@@ -21,16 +21,18 @@ Description: An S4 implementation of the unbiased extension of
     standard bias correction, the generalised regression estimator.
 License: BSD_2_clause + file LICENSE
 URL: https://gitlab.com/fvafrCU/maSAE
+Depends: R (>= 3.6.0)
 Imports: methods, stats
-Suggests: devtools, forestinventory, knitr, microbenchmark, nlme,
-        pkgload, rmarkdown, rprojroot, RUnit, R.rsp, testthat
+Suggests: devtools, forestinventory, JoSAE, knitr, microbenchmark,
+        nlme, pkgload, rmarkdown, rprojroot, rsae, RUnit, R.rsp, sae,
+        testthat
 VignetteBuilder: utils, knitr, R.rsp
-RoxygenNote: 7.0.2
+RoxygenNote: 7.1.1
 NeedsCompilation: no
-Packaged: 2020-03-23 13:59:16 UTC; qwer
+Packaged: 2020-11-02 20:19:33 UTC; qwer
 Author: Andreas Dominik Cullmann [aut, cre],
   Daniel Mandallaz [ctb],
   Alexander Francis Massey [ctb]
 Maintainer: Andreas Dominik Cullmann <fvafrcu@mailbox.org>
 Repository: CRAN
-Date/Publication: 2020-03-23 14:50:02 UTC
+Date/Publication: 2020-11-02 20:40:03 UTC
