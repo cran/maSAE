@@ -42,7 +42,7 @@ Mandallaz, D. 2013
 Design-based properties of some small-area estimators in forest
 inventory with two-phase sampling.
 Canadian Journal of Forest Research \bold{43}(5), pp. 441--449.
-doi: \href{http://dx.doi.org/10.1139/cjfr-2012-0381}{10.1139/cjfr-2012-0381}.
+\doi{10.1139/cjfr-2012-0381}.
 }
 
 \cite{
@@ -51,7 +51,7 @@ New regression estimators in forest inventories with two-phase sampling and part
 exhaustive information: a design-based Monte Carlo approach with applications to
 small-area estimation.
 Canadian Journal of Forest Research \bold{43}(11), pp. 1023--1031.
-doi: \href{http://dx.doi.org/10.1139/cjfr-2013-0181}{10.1139/cjfr-2013-0181}.
+\doi{10.1139/cjfr-2013-0181}.
 }
 
 \cite{
@@ -59,7 +59,7 @@ Mandallaz, D. 2014
 A three-phase sampling extension of the generalized regression
 estimator with partially exhaustive information.
 Canadian Journal of Forest Research \bold{44}(4), pp. 383--388.
-doi: \href{http://dx.doi.org/10.1139/cjfr-2013-0449}{10.1139/cjfr-2013-0449}.
+\doi{10.1139/cjfr-2013-0449}.
 }
 }
 \seealso{

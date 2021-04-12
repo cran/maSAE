@@ -1,0 +1,48 @@
+This is BibTeX, Version 0.99d (TeX Live 2019/dev/Debian)
+Capacity: max_strings=100000, hash_size=100000, hash_prime=85009
+The top-level auxiliary file: A_Taxonomy_of_Estimators.aux
+The style file: unsrt.bst
+Database file #1: bib.bib
+Warning--empty institution in hill2017
+You've used 7 entries,
+            1791 wiz_defined-function locations,
+            481 strings with 4750 characters,
+and the built_in function-call counts, 1169 in all, are:
+= -- 107
+> -- 39
+< -- 0
++ -- 17
+- -- 10
+* -- 64
+:= -- 215
+add.period$ -- 22
+call.type$ -- 7
+change.case$ -- 11
+chr.to.int$ -- 0
+cite$ -- 8
+duplicate$ -- 51
+empty$ -- 118
+format.name$ -- 10
+if$ -- 252
+int.to.chr$ -- 0
+int.to.str$ -- 7
+missing$ -- 3
+newline$ -- 39
+num.names$ -- 7
+pop$ -- 11
+preamble$ -- 1
+purify$ -- 0
+quote$ -- 0
+skip$ -- 14
+stack$ -- 0
+substring$ -- 54
+swap$ -- 3
+text.length$ -- 0
+text.prefix$ -- 0
+top$ -- 0
+type$ -- 0
+warning$ -- 1
+while$ -- 10
+width$ -- 8
+write$ -- 80
+(There was 1 warning)

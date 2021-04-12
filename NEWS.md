@@ -1,3 +1,7 @@
+# maSAE 2.0.3
+
+* Removed the vignettes "A Taxonomy of Estimators" and "A Comparison of maSAE to forestinventory".
+
 # maSAE 2.0.2
 
 * Added `JoSAE`, `rsae` and `sae` to the Suggests-Field in file DESCRIPTION.

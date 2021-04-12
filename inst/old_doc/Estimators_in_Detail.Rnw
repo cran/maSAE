@@ -1,0 +1,272 @@
+%\VignetteIndexEntry{Estimators in Detail}
+\documentclass[a4paper]{article}
+\usepackage{xfrac}
+\usepackage{booktabs}
+\usepackage{longtable}            
+\usepackage{pdflscape}
+\usepackage[usenames,dvipsnames]{color}
+\usepackage{listings}
+\lstset{ %
+basicstyle=\footnotesize
+, commentstyle=\color{PineGreen}
+, numberstyle=\tiny\color{Gray}
+, rulecolor=\color{Black}
+, keywordstyle=\color{Blue}
+, stringstyle=\color{Sepia}
+, showstringspaces=false
+, language=R
+}
+\usepackage[utf8]{inputenc}
+\title{Estimators in Detail}
+\author{Andreas Dominik Cullmann}
+
+\SweaveOpts{echo=false}
+\SweaveOpts{eval=false}
+\SweaveOpts{print=false}
+\SweaveOpts{width=60}
+\begin{document}
+\maketitle
+\providecommand{\rpack}[1]{package \texttt{#1}}
+\providecommand{\rdata}[1]{\texttt{#1}}
+\providecommand{\rcode}[1]{\texttt{#1}}
+\providecommand{\eZ}{\mathcal{Z}}
+\providecommand{\strongrule}{\midrule[2pt]}
+\providecommand{\lightrule}{\midrule[0.4pt]}
+\providecommand{\vR}{\frac{1}{n_{s_2,G}}\hat{V}(\hat{R}_{s_2,G}(x))}
+\providecommand{\mR}{\bar{\hat{R}}_{s_2,G}(x)}
+\providecommand{\vRc}{\frac{1}{n_{s_2,G}}\hat{V}(\hat{R}_{c,s_2,G}(x))}
+\providecommand{\mRc}{\bar{\hat{R}}_{c,s_2,G}(x)}
+\section{Introduction}
+\paragraph{Superscripts}
+For partially exhaustive auxiliary information, 
+Mandallaz (\cite[p.~1023]{Man13b}, \cite[p.~383f]{Man13c} defines 
+$Z^t(x) = Z^{(1)t}(x)+Z^{(2)t}(x)$ 
+whereas Hill \cite[p.~4 and p.~18]{hill2017} defines 
+$Z^t(x) = Z^{(0)t}(x)+Z^{(1)t}(x)$.
+I will stick with Mandallaz' notation, changing $Z^{(0)t}(x)$ to $Z^{(1)t}(x)$
+in Hill's formulae!
+
+\paragraph{Indices}
+Mandallaz and Hill inconsistently uses the indices $_2$ and $_{s_2}$,
+they really both denote the same: the set
+$s_2$.
+For the sets $s_0$ and $s_1$ they consistently use $_0$ and $_1$.
+I have change all set indices to $s_{[012]}$.
+
+
+
+Hill uses $\bar{Z}_{0,G}^{(1)}$ (and $\bar{Z}_{0}^{(1)}$ which
+(\cite[p.~18]{hill2017}) is the exact mean). So I do drop the index,
+which is misleadingly referring to some set (and I do so for
+$\bar{\eZ}_{0,G}^{(1)}$).
+
+
+Mandallaz uses $\bar{\hat{R}}_{2,G}$ when calculating the variance of the
+residuals in G, for example in a2.26, where  $\bar{\hat{R}}_{2,G}$ is clearly
+$\bar{\hat{R}}(x)$ while summing over $s_2$ and $G$. I use the latter form.
+
+\paragraph{References}
+I reference \cite{Man12a.e} as a1,
+\cite{Man13a} as a2,
+\cite{Man13b.e} as b1,
+\cite{Man13b} as b2,
+\cite{Man13c.e} as c1,
+\cite{Man13c} as c2 and
+\cite{hill2017} as h.
+
+
+
+
+\paragraph{Estimators}
+
+In tables~\ref{tab:unclustered2} and \ref{tab:unclustered3},
+we see the estimators for the two- and three-phase non-clustered sampling
+designs.
+The estimators are grouped by the type of auxiliary information: exhaustive (for
+two-phase sampling only, three-phase sampling with full exhaustive auxiliary
+information is just two-phase sampling with full exhaustive auxiliary
+information with more observations),
+non-exhaustive and partially exhaustive.
+In each block the (pseudo) synthetic the (pseudo) small and the
+(pseudo) extended estimator and their variances are given.
+
+I have replaced
+the empirical mean and variance of the Residuals in G for clustered
+sampling,
+$$\frac{\sum_{x\in s_2,G}{M(x)\hat{R}_c(x)}}{\sum_{x\in s_2,G}{M(x)}}$$
+and
+$$\frac{1}{n_{s_2,G}-1} \sum_{x\in
+s_2,G}{\left(\frac{M(x)}{\bar{M}(x)}\right)^2 (\hat{R}_c(x)
+-\bar{\hat{R}}_c(x))^2},$$
+by their shorter notations
+$\bar{\hat{R}}_{c,s_2,G}(x)$ and 
+$\hat{V}(\hat{R}_{c,s_2,G}(x))$
+and likewise for non-clustered sampling.
+
+
+Looking at the estimators for partially exhaustive auxiliary information
+we see that the estimators and variances are identical for two- and three-phase sampling.
+This is due to the fact that 
+\cite{hill2017} implemented the partially exhaustive auxiliary information using
+a full and a reduced model. So they see it as three-phase
+sampling where \cite{Man13b} clearly see it as two-phase sampling with partially
+exhaustive auxiliary information.
+
+
+
+Tables~\ref{tab:clustered2} and \ref{tab:clustered3} give the same information for clustered sampling
+designs.
+
+
+
+{
+    \fontsize{8}{11}\selectfont
+    \input{unclustered.tex}
+    \input{clustered.tex}
+}
+
+
+<<echo=true, eval=true>>==
+
+fake_weights <- function(df) {
+    df[["weights"]] <- 1
+    df[["weights"]][df[["x2"]] == 0] <- 0.12
+    return(df)
+}
+suppressWarnings(rm(s1, s2, s0))
+data("s1", "s2", "s0", package = "maSAE")
+s0$x1 <- s0$x3 <- NULL
+s0 <- fake_weights(s0)
+s1 <- fake_weights(s1)
+s2 <- fake_weights(s2)
+s12 <- maSAE::bind_data(s1, s2)
+s012 <- maSAE::bind_data(s1, s2, s0)
+tm <- data.frame(x1 = c(150, 200), x2 = c(23, 23), x3 = c(7, 7.5), g = c("a", "b"))
+tm_p <- data.frame(x2 = c(23, 23), g = c("a", "b"))
+
+#% unclustered
+
+##% un-weighted
+###% two-phase
+####% partially exhaustive 
+object <- maSAE::saObj(data = s12, f = y ~ x1 + x2 + x3 | g, s2 = "phase2", smallAreaMeans = tm_p)
+(out <- maSAE::predict(object, use_lm = FALSE))
+outlm <- maSAE::predict(object, use_lm = TRUE)
+RUnit::checkEquals(out, outlm)
+
+####% exhaustive 
+object <- maSAE::saObj(data = s12, f = y ~ x1 + x2 + x3 | g, s2 = "phase2", smallAreaMeans = tm)
+(out <- maSAE::predict(object, use_lm = FALSE))
+outlm <- maSAE::predict(object, use_lm = TRUE)
+RUnit::checkEquals(out, outlm)
+
+####% non-exhaustive 
+object <- maSAE::saObj(data = s12, f = y ~ x1 + x2 + x3 | g, s2 = "phase2")
+(out <- maSAE::predict(object, use_lm = FALSE))
+outlm <- maSAE::predict(object, use_lm = TRUE)
+RUnit::checkEquals(out, outlm)
+
+###% three-phase
+object <- maSAE::saObj(data = s012, f = y ~ x1 + x2 + x3 | g, s1 = "phase1", s2 = "phase2")
+(out <- maSAE::predict(object, use_lm = FALSE))
+outlm <- maSAE::predict(object, use_lm = TRUE)
+RUnit::checkEquals(out, outlm)
+
+##% weighted
+###% two-phase
+####% partially exhaustive 
+object <- maSAE::saObj(data = s12, f = y ~ x1 + x2 + x3 | g, 
+                       s2 = "phase2", smallAreaMeans = tm_p, 
+                       auxiliaryWeights = "weights")
+(out <- maSAE::predict(object, use_lm = FALSE))
+outlm <- maSAE::predict(object, use_lm = TRUE)
+RUnit::checkEquals(out, outlm)
+
+####% exhaustive 
+object <- maSAE::saObj(data = s12, f = y ~ x1 + x2 + x3 | g, 
+                       s2 = "phase2", smallAreaMeans = tm, 
+                       auxiliaryWeights = "weights")
+(out <- maSAE::predict(object, use_lm = FALSE))
+outlm <- maSAE::predict(object, use_lm = TRUE)
+RUnit::checkEquals(out, outlm)
+
+####% non-exhaustive 
+object <- maSAE::saObj(data = s12, f = y ~ x1 + x2 + x3 | g, 
+                       s2 = "phase2", 
+                       auxiliaryWeights = "weights")
+(out <- maSAE::predict(object, use_lm = FALSE))
+outlm <- maSAE::predict(object, use_lm = TRUE)
+RUnit::checkEquals(out, outlm)
+
+###% three-phase
+object <- maSAE::saObj(data = s012, f = y ~ x1 + x2 + x3 | g, 
+                       s1 = "phase1", s2 = "phase2", 
+                       auxiliaryWeights = "weights")
+(out <- maSAE::predict(object, use_lm = FALSE))
+outlm <- maSAE::predict(object, use_lm = TRUE)
+RUnit::checkEquals(out, outlm)
+
+#% clustered
+##% un-weighted
+###% two-phase
+####% partially exhaustive 
+object <- maSAE::saObj(data = s12, f = y ~ x1 + x2 + x3 | g, s2 = "phase2", smallAreaMeans = tm_p, cluster = "clustid")
+(out <- maSAE::predict(object, use_lm = FALSE))
+outlm <- maSAE::predict(object, use_lm = TRUE)
+RUnit::checkEquals(out, outlm)
+
+####% exhaustive 
+object <- maSAE::saObj(data = s12, f = y ~ x1 + x2 + x3 | g, s2 = "phase2", smallAreaMeans = tm, cluster = "clustid")
+(out <- maSAE::predict(object, use_lm = FALSE))
+outlm <- maSAE::predict(object, use_lm = TRUE)
+RUnit::checkEquals(out, outlm)
+
+####% non-exhaustive 
+object <- maSAE::saObj(data = s12, f = y ~ x1 + x2 + x3 | g, s2 = "phase2", cluster = "clustid")
+(out <- maSAE::predict(object, use_lm = FALSE))
+outlm <- maSAE::predict(object, use_lm = TRUE)
+RUnit::checkEquals(out, outlm)
+
+###% three-phase
+object <- maSAE::saObj(data = s012, f = y ~ x1 + x2 + x3 | g, s1 = "phase1", s2 = "phase2", cluster = "clustid")
+(out <- maSAE::predict(object, use_lm = FALSE))
+outlm <- maSAE::predict(object, use_lm = TRUE)
+RUnit::checkEquals(out, outlm)
+
+
+##% weighted
+###% two-phase
+####% partially exhaustive 
+object <- maSAE::saObj(data = s12, f = y ~ x1 + x2 + x3 | g, s2 = "phase2", smallAreaMeans = tm_p, cluster = "clustid", 
+                       auxiliaryWeights = "weights")
+(out <- maSAE::predict(object, use_lm = FALSE))
+outlm <- maSAE::predict(object, use_lm = TRUE)
+RUnit::checkEquals(out, outlm)
+
+####% exhaustive 
+object <- maSAE::saObj(data = s12, f = y ~ x1 + x2 + x3 | g, s2 = "phase2", smallAreaMeans = tm, cluster = "clustid", 
+                       auxiliaryWeights = "weights")
+(out <- maSAE::predict(object, use_lm = FALSE))
+outlm <- maSAE::predict(object, use_lm = TRUE)
+RUnit::checkEquals(out, outlm)
+
+####% non-exhaustive 
+object <- maSAE::saObj(data = s12, f = y ~ x1 + x2 + x3 | g, s2 = "phase2", cluster = "clustid", 
+                       auxiliaryWeights = "weights")
+(out <- maSAE::predict(object, use_lm = FALSE))
+outlm <- maSAE::predict(object, use_lm = TRUE)
+RUnit::checkEquals(out, outlm)
+
+###% three-phase
+object <- maSAE::saObj(data = s012, f = y ~ x1 + x2 + x3 | g, s1 = "phase1", s2 = "phase2", cluster = "clustid", 
+                       auxiliaryWeights = "weights")
+(out <- maSAE::predict(object, use_lm = FALSE))
+(outlm <- maSAE::predict(object, use_lm = TRUE))
+RUnit::checkEquals(out, outlm)
+
+
+@
+\bibliographystyle{unsrt}
+\bibliography{bib}
+
+\end{document}

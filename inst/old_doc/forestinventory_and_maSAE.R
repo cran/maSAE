@@ -2,6 +2,7 @@
 library("forestinventory")
 library("maSAE")
 
+
 ## -----------------------------------------------------------------------------
 clean <- function(x, which = NULL) {
     if (identical(FALSE, which)) {
@@ -31,14 +32,17 @@ compare <- function(maSAE, forestinventory, message = NULL) {
     return(TRUE)
 }
 
+
 ## -----------------------------------------------------------------------------
 data(grisons, package = "forestinventory")
+
 
 ## -----------------------------------------------------------------------------
 formula.s0 <- tvol ~ mean # reduced model:
 formula.s1 <- tvol ~ mean + stddev + max + q75 # full model
 formula.clust.s0 <- basal ~ stade
 formula.clust.s1 <- basal ~ stade + couver + melange
+
 
 
 ## -----------------------------------------------------------------------------
@@ -64,6 +68,7 @@ truemeans.G.partially <- truemeans.G[, -which(names(truemeans.G) %in% c("stddev"
 tm.partially <- tm[, -which(names(tm) %in% c("stddev", "mean"))]
 
 
+
 ## -----------------------------------------------------------------------------
 summary(twophase(formula = formula.s1, 
                  data = grisons,
@@ -73,6 +78,7 @@ summary(twophase(formula = formula.s1,
                                    unbiased = TRUE),
                  boundary_weights = "boundary_weights"
                  ))
+
 
 ## -----------------------------------------------------------------------------
 maSAE <- predict(saObj(data = s12,
@@ -90,8 +96,10 @@ forestinventory <- twophase(formula = formula.s1,
                             boundary_weights = "boundary_weights"
                             )
 
+
 ## -----------------------------------------------------------------------------
 compare(maSAE, forestinventory, "two-phase, ext. pseudo sae")
+
 
 ## -----------------------------------------------------------------------------
 wrap_two <- function(...) {
@@ -124,9 +132,11 @@ mb <- mbmb(
            check = "equivalent"
            )
 
+
 ## -----------------------------------------------------------------------------
 print(mb)
 microbenchmark:::autoplot.microbenchmark(mb)
+
 
 
 ## -----------------------------------------------------------------------------
@@ -140,12 +150,14 @@ forestinventory <- twophase(formula = formula.s1,
                             exhaustive = truemeans.G)
 summary(forestinventory)
 
+
 ## -----------------------------------------------------------------------------
 maSAE <- predict(saObj(data = s12, 
                        f = update(formula.s1, ~ . | smallarea),
                        s2 = 's2',
                        smallAreaMeans = tm))
 compare(maSAE, forestinventory, "two-phase, ext. sae")
+
 
 ## -----------------------------------------------------------------------------
 mb <- mbmb(
@@ -165,6 +177,7 @@ mb <- mbmb(
            check = "equivalent")
 print(mb)
 microbenchmark:::autoplot.microbenchmark(mb)
+
 
 ## -----------------------------------------------------------------------------
 truemeans.G <- data.frame(Intercept = rep(1, 4),
@@ -188,6 +201,7 @@ tm[["smallarea"]] <- row.names(tm)
 tm[["Intercept"]] <- NULL
 
 
+
 ## -----------------------------------------------------------------------------
 summary(threephase(formula.s0,
                    formula.s1,
@@ -197,6 +211,7 @@ summary(threephase(formula.s0,
                                    unbiased = TRUE),
                    boundary_weights = "boundary_weights"
                    ))
+
 
 ## -----------------------------------------------------------------------------
 forestinventory <- threephase(formula.s0,
@@ -215,8 +230,10 @@ maSAE <- predict(saObj(data = s012,
                        s2 = 's2'))
 
 
+
 ## -----------------------------------------------------------------------------
 compare(maSAE, forestinventory, "three-phase, ext. pseudo sae")
+
 
 ## -----------------------------------------------------------------------------
 wrap_three <- function(...) {
@@ -250,6 +267,7 @@ mb <- mbmb(
 print(mb)
 microbenchmark:::autoplot.microbenchmark(mb)
 
+
 ## -----------------------------------------------------------------------------
 try(twophase(formula = formula.s1, 
              data = grisons,
@@ -263,6 +281,7 @@ predict(saObj(data = s12,
               f = update(formula.s1, ~ . | smallarea),
               s2 = 's2',
               smallAreaMeans = tm.partially))
+
 
 
 ## -----------------------------------------------------------------------------
@@ -284,6 +303,7 @@ try(predict(saObj(data = s012,
               smallAreaMeans = tm)))
 
 
+
 ## -----------------------------------------------------------------------------
 extsynth_3p <- threephase(formula.s0, formula.s1, data = grisons,
                           phase_id = list(phase.col = "phase_id_3p",
@@ -295,6 +315,7 @@ extsynth_3p <- threephase(formula.s0, formula.s1, data = grisons,
                           )
 extsynth_3p$estimation
 
+
 ## -----------------------------------------------------------------------------
 s12_3p$s1 <- NULL
 s12_3p$phase_id_2p <- NULL
@@ -305,6 +326,7 @@ maSAE <- predict(saObj(data = s12_3p,
                        s2 = 's2', smallAreaMeans = tm)
 )
 compare(maSAE, extsynth_3p, "three-phase, ext. sae")
+
 
 
 ## -----------------------------------------------------------------------------
@@ -322,6 +344,7 @@ mb <- mbmb(
            check = "equivalent")
 print(mb)
 microbenchmark:::autoplot.microbenchmark(mb)
+
 
 
 ## -----------------------------------------------------------------------------
@@ -356,45 +379,47 @@ print(mb)
 microbenchmark:::autoplot.microbenchmark(mb)
 
 
-## -----------------------------------------------------------------------------
-  data("zberg", package = "forestinventory")
-  forestinventory <- forestinventory::twophase(
-    formula = basal ~ stade + couver + melange, data = zberg,
-    phase_id = list(phase.col = "phase_id_2p", terrgrid.id = 2),
-    cluster = "cluster",
-    small_area = list(
-      sa.col = "ismallold", areas = c("1"),
-      unbiased = TRUE
-    )
-  )
-  s1 <- zberg[zberg[["phase_id_2p"]] == 1, ]
-  s2 <- zberg[zberg[["phase_id_2p"]] == 2, ]
-  s12 <- rbind(s1, s2)
-  s12[["s1"]] <- s12[["phase_id_2p"]] %in% c(1, 2)
-  s12[["s2"]] <- s12[["phase_id_2p"]] == 2
-  object <- maSAE::saObj(
-    data = s12,
-    f = basal ~ stade + couver + melange | ismallold,
-    s2 = "s2",
-    cluster = "cluster"
-  )
-  maSAE <- maSAE::predict(object)
-  compare(maSAE[2,], forestinventory, "clustered, ext. sae")
 
 ## -----------------------------------------------------------------------------
-  forestinventory <- forestinventory::twophase(
-    formula = basal ~ stade + couver + melange, data = zberg,
-    phase_id = list(phase.col = "phase_id_2p", terrgrid.id = 2),
-    small_area = list(
-      sa.col = "ismallold", areas = c("1"),
-      unbiased = TRUE
-    )
+data("zberg", package = "forestinventory")
+forestinventory <- forestinventory::twophase(
+  formula = basal ~ stade + couver + melange, data = zberg,
+  phase_id = list(phase.col = "phase_id_2p", terrgrid.id = 2),
+  cluster = "cluster",
+  small_area = list(
+    sa.col = "ismallold", areas = c("1"),
+    unbiased = TRUE
   )
-  object <- maSAE::saObj(
-    data = s12,
-    f = basal ~ stade + couver + melange | ismallold,
-    s2 = "s2",
+)
+s1 <- zberg[zberg[["phase_id_2p"]] == 1, ]
+s2 <- zberg[zberg[["phase_id_2p"]] == 2, ]
+s12 <- rbind(s1, s2)
+s12[["s1"]] <- s12[["phase_id_2p"]] %in% c(1, 2)
+s12[["s2"]] <- s12[["phase_id_2p"]] == 2
+object <- maSAE::saObj(
+  data = s12,
+  f = basal ~ stade + couver + melange | ismallold,
+  s2 = "s2",
+  cluster = "cluster"
+)
+maSAE <- maSAE::predict(object)
+compare(maSAE[2,], forestinventory, "clustered, ext. sae")
+
+
+## -----------------------------------------------------------------------------
+forestinventory <- forestinventory::twophase(
+  formula = basal ~ stade + couver + melange, data = zberg,
+  phase_id = list(phase.col = "phase_id_2p", terrgrid.id = 2),
+  small_area = list(
+    sa.col = "ismallold", areas = c("1"),
+    unbiased = TRUE
   )
-  maSAE <- maSAE::predict(object)
-  compare(maSAE[2,], forestinventory, "clustered, ext. sae")
+)
+object <- maSAE::saObj(
+  data = s12,
+  f = basal ~ stade + couver + melange | ismallold,
+  s2 = "s2",
+)
+maSAE <- maSAE::predict(object)
+compare(maSAE[2,], forestinventory, "clustered, ext. sae")
 

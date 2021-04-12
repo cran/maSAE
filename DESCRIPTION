@@ -1,7 +1,7 @@
 Type: Package
 Package: maSAE
 Title: Mandallaz' Model-Assisted Small Area Estimators
-Version: 2.0.2
+Version: 2.0.3
 Authors@R: 
     c(person(given = "Andreas Dominik",
              family = "Cullmann",
@@ -29,10 +29,10 @@ Suggests: devtools, forestinventory, JoSAE, knitr, microbenchmark,
 VignetteBuilder: utils, knitr, R.rsp
 RoxygenNote: 7.1.1
 NeedsCompilation: no
-Packaged: 2020-11-02 20:19:33 UTC; qwer
+Packaged: 2021-04-12 09:20:38 UTC; qwer
 Author: Andreas Dominik Cullmann [aut, cre],
   Daniel Mandallaz [ctb],
   Alexander Francis Massey [ctb]
 Maintainer: Andreas Dominik Cullmann <fvafrcu@mailbox.org>
 Repository: CRAN
-Date/Publication: 2020-11-02 20:40:03 UTC
+Date/Publication: 2021-04-12 09:40:02 UTC

@@ -234,7 +234,7 @@ setClass(
 #' Design-based properties of some small-area estimators in forest
 #' inventory with two-phase sampling.
 #' Canadian Journal of Forest Research \bold{43}(5), pp. 441--449.
-#' doi: \href{http://dx.doi.org/10.1139/cjfr-2012-0381}{10.1139/cjfr-2012-0381}.
+#' \doi{10.1139/cjfr-2012-0381}.
 #' }
 #'
 #' @family classes

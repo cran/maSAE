@@ -1,0 +1,1750 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN"
+    "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+<meta http-equiv="Content-Type" content="application/xhtml+xml; charset=UTF-8" />
+<meta name="generator" content="AsciiDoc 8.6.10" />
+<title>A Comparison of maSAE to forestinventory</title>
+<style type="text/css">
+/* Shared CSS for AsciiDoc xhtml11 and html5 backends */
+
+/* Default font. */
+body {
+  font-family: Georgia,serif;
+}
+
+/* Title font. */
+h1, h2, h3, h4, h5, h6,
+div.title, caption.title,
+thead, p.table.header,
+#toctitle,
+#author, #revnumber, #revdate, #revremark,
+#footer {
+  font-family: Arial,Helvetica,sans-serif;
+}
+
+body {
+  margin: 1em 5% 1em 5%;
+}
+
+a {
+  color: blue;
+  text-decoration: underline;
+}
+a:visited {
+  color: fuchsia;
+}
+
+em {
+  font-style: italic;
+  color: navy;
+}
+
+strong {
+  font-weight: bold;
+  color: #083194;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  color: #527bbd;
+  margin-top: 1.2em;
+  margin-bottom: 0.5em;
+  line-height: 1.3;
+}
+
+h1, h2, h3 {
+  border-bottom: 2px solid silver;
+}
+h2 {
+  padding-top: 0.5em;
+}
+h3 {
+  float: left;
+}
+h3 + * {
+  clear: left;
+}
+h5 {
+  font-size: 1.0em;
+}
+
+div.sectionbody {
+  margin-left: 0;
+}
+
+hr {
+  border: 1px solid silver;
+}
+
+p {
+  margin-top: 0.5em;
+  margin-bottom: 0.5em;
+}
+
+ul, ol, li > p {
+  margin-top: 0;
+}
+ul > li     { color: #aaa; }
+ul > li > * { color: black; }
+
+.monospaced, code, pre {
+  font-family: "Courier New", Courier, monospace;
+  font-size: inherit;
+  color: navy;
+  padding: 0;
+  margin: 0;
+}
+pre {
+  white-space: pre-wrap;
+}
+
+#author {
+  color: #527bbd;
+  font-weight: bold;
+  font-size: 1.1em;
+}
+#email {
+}
+#revnumber, #revdate, #revremark {
+}
+
+#footer {
+  font-size: small;
+  border-top: 2px solid silver;
+  padding-top: 0.5em;
+  margin-top: 4.0em;
+}
+#footer-text {
+  float: left;
+  padding-bottom: 0.5em;
+}
+#footer-badges {
+  float: right;
+  padding-bottom: 0.5em;
+}
+
+#preamble {
+  margin-top: 1.5em;
+  margin-bottom: 1.5em;
+}
+div.imageblock, div.exampleblock, div.verseblock,
+div.quoteblock, div.literalblock, div.listingblock, div.sidebarblock,
+div.admonitionblock {
+  margin-top: 1.0em;
+  margin-bottom: 1.5em;
+}
+div.admonitionblock {
+  margin-top: 2.0em;
+  margin-bottom: 2.0em;
+  margin-right: 10%;
+  color: #606060;
+}
+
+div.content { /* Block element content. */
+  padding: 0;
+}
+
+/* Block element titles. */
+div.title, caption.title {
+  color: #527bbd;
+  font-weight: bold;
+  text-align: left;
+  margin-top: 1.0em;
+  margin-bottom: 0.5em;
+}
+div.title + * {
+  margin-top: 0;
+}
+
+td div.title:first-child {
+  margin-top: 0.0em;
+}
+div.content div.title:first-child {
+  margin-top: 0.0em;
+}
+div.content + div.title {
+  margin-top: 0.0em;
+}
+
+div.sidebarblock > div.content {
+  background: #ffffee;
+  border: 1px solid #dddddd;
+  border-left: 4px solid #f0f0f0;
+  padding: 0.5em;
+}
+
+div.listingblock > div.content {
+  border: 1px solid #dddddd;
+  border-left: 5px solid #f0f0f0;
+  background: #f8f8f8;
+  padding: 0.5em;
+}
+
+div.quoteblock, div.verseblock {
+  padding-left: 1.0em;
+  margin-left: 1.0em;
+  margin-right: 10%;
+  border-left: 5px solid #f0f0f0;
+  color: #888;
+}
+
+div.quoteblock > div.attribution {
+  padding-top: 0.5em;
+  text-align: right;
+}
+
+div.verseblock > pre.content {
+  font-family: inherit;
+  font-size: inherit;
+}
+div.verseblock > div.attribution {
+  padding-top: 0.75em;
+  text-align: left;
+}
+/* DEPRECATED: Pre version 8.2.7 verse style literal block. */
+div.verseblock + div.attribution {
+  text-align: left;
+}
+
+div.admonitionblock .icon {
+  vertical-align: top;
+  font-size: 1.1em;
+  font-weight: bold;
+  text-decoration: underline;
+  color: #527bbd;
+  padding-right: 0.5em;
+}
+div.admonitionblock td.content {
+  padding-left: 0.5em;
+  border-left: 3px solid #dddddd;
+}
+
+div.exampleblock > div.content {
+  border-left: 3px solid #dddddd;
+  padding-left: 0.5em;
+}
+
+div.imageblock div.content { padding-left: 0; }
+span.image img { border-style: none; vertical-align: text-bottom; }
+a.image:visited { color: white; }
+
+dl {
+  margin-top: 0.8em;
+  margin-bottom: 0.8em;
+}
+dt {
+  margin-top: 0.5em;
+  margin-bottom: 0;
+  font-style: normal;
+  color: navy;
+}
+dd > *:first-child {
+  margin-top: 0.1em;
+}
+
+ul, ol {
+    list-style-position: outside;
+}
+ol.arabic {
+  list-style-type: decimal;
+}
+ol.loweralpha {
+  list-style-type: lower-alpha;
+}
+ol.upperalpha {
+  list-style-type: upper-alpha;
+}
+ol.lowerroman {
+  list-style-type: lower-roman;
+}
+ol.upperroman {
+  list-style-type: upper-roman;
+}
+
+div.compact ul, div.compact ol,
+div.compact p, div.compact p,
+div.compact div, div.compact div {
+  margin-top: 0.1em;
+  margin-bottom: 0.1em;
+}
+
+tfoot {
+  font-weight: bold;
+}
+td > div.verse {
+  white-space: pre;
+}
+
+div.hdlist {
+  margin-top: 0.8em;
+  margin-bottom: 0.8em;
+}
+div.hdlist tr {
+  padding-bottom: 15px;
+}
+dt.hdlist1.strong, td.hdlist1.strong {
+  font-weight: bold;
+}
+td.hdlist1 {
+  vertical-align: top;
+  font-style: normal;
+  padding-right: 0.8em;
+  color: navy;
+}
+td.hdlist2 {
+  vertical-align: top;
+}
+div.hdlist.compact tr {
+  margin: 0;
+  padding-bottom: 0;
+}
+
+.comment {
+  background: yellow;
+}
+
+.footnote, .footnoteref {
+  font-size: 0.8em;
+}
+
+span.footnote, span.footnoteref {
+  vertical-align: super;
+}
+
+#footnotes {
+  margin: 20px 0 20px 0;
+  padding: 7px 0 0 0;
+}
+
+#footnotes div.footnote {
+  margin: 0 0 5px 0;
+}
+
+#footnotes hr {
+  border: none;
+  border-top: 1px solid silver;
+  height: 1px;
+  text-align: left;
+  margin-left: 0;
+  width: 20%;
+  min-width: 100px;
+}
+
+div.colist td {
+  padding-right: 0.5em;
+  padding-bottom: 0.3em;
+  vertical-align: top;
+}
+div.colist td img {
+  margin-top: 0.3em;
+}
+
+@media print {
+  #footer-badges { display: none; }
+}
+
+#toc {
+  margin-bottom: 2.5em;
+}
+
+#toctitle {
+  color: #527bbd;
+  font-size: 1.1em;
+  font-weight: bold;
+  margin-top: 1.0em;
+  margin-bottom: 0.1em;
+}
+
+div.toclevel0, div.toclevel1, div.toclevel2, div.toclevel3, div.toclevel4 {
+  margin-top: 0;
+  margin-bottom: 0;
+}
+div.toclevel2 {
+  margin-left: 2em;
+  font-size: 0.9em;
+}
+div.toclevel3 {
+  margin-left: 4em;
+  font-size: 0.9em;
+}
+div.toclevel4 {
+  margin-left: 6em;
+  font-size: 0.9em;
+}
+
+span.aqua { color: aqua; }
+span.black { color: black; }
+span.blue { color: blue; }
+span.fuchsia { color: fuchsia; }
+span.gray { color: gray; }
+span.green { color: green; }
+span.lime { color: lime; }
+span.maroon { color: maroon; }
+span.navy { color: navy; }
+span.olive { color: olive; }
+span.purple { color: purple; }
+span.red { color: red; }
+span.silver { color: silver; }
+span.teal { color: teal; }
+span.white { color: white; }
+span.yellow { color: yellow; }
+
+span.aqua-background { background: aqua; }
+span.black-background { background: black; }
+span.blue-background { background: blue; }
+span.fuchsia-background { background: fuchsia; }
+span.gray-background { background: gray; }
+span.green-background { background: green; }
+span.lime-background { background: lime; }
+span.maroon-background { background: maroon; }
+span.navy-background { background: navy; }
+span.olive-background { background: olive; }
+span.purple-background { background: purple; }
+span.red-background { background: red; }
+span.silver-background { background: silver; }
+span.teal-background { background: teal; }
+span.white-background { background: white; }
+span.yellow-background { background: yellow; }
+
+span.big { font-size: 2em; }
+span.small { font-size: 0.6em; }
+
+span.underline { text-decoration: underline; }
+span.overline { text-decoration: overline; }
+span.line-through { text-decoration: line-through; }
+
+div.unbreakable { page-break-inside: avoid; }
+
+
+/*
+ * xhtml11 specific
+ *
+ * */
+
+div.tableblock {
+  margin-top: 1.0em;
+  margin-bottom: 1.5em;
+}
+div.tableblock > table {
+  border: 3px solid #527bbd;
+}
+thead, p.table.header {
+  font-weight: bold;
+  color: #527bbd;
+}
+p.table {
+  margin-top: 0;
+}
+/* Because the table frame attribute is overriden by CSS in most browsers. */
+div.tableblock > table[frame="void"] {
+  border-style: none;
+}
+div.tableblock > table[frame="hsides"] {
+  border-left-style: none;
+  border-right-style: none;
+}
+div.tableblock > table[frame="vsides"] {
+  border-top-style: none;
+  border-bottom-style: none;
+}
+
+
+/*
+ * html5 specific
+ *
+ * */
+
+table.tableblock {
+  margin-top: 1.0em;
+  margin-bottom: 1.5em;
+}
+thead, p.tableblock.header {
+  font-weight: bold;
+  color: #527bbd;
+}
+p.tableblock {
+  margin-top: 0;
+}
+table.tableblock {
+  border-width: 3px;
+  border-spacing: 0px;
+  border-style: solid;
+  border-color: #527bbd;
+  border-collapse: collapse;
+}
+th.tableblock, td.tableblock {
+  border-width: 1px;
+  padding: 4px;
+  border-style: solid;
+  border-color: #527bbd;
+}
+
+table.tableblock.frame-topbot {
+  border-left-style: hidden;
+  border-right-style: hidden;
+}
+table.tableblock.frame-sides {
+  border-top-style: hidden;
+  border-bottom-style: hidden;
+}
+table.tableblock.frame-none {
+  border-style: hidden;
+}
+
+th.tableblock.halign-left, td.tableblock.halign-left {
+  text-align: left;
+}
+th.tableblock.halign-center, td.tableblock.halign-center {
+  text-align: center;
+}
+th.tableblock.halign-right, td.tableblock.halign-right {
+  text-align: right;
+}
+
+th.tableblock.valign-top, td.tableblock.valign-top {
+  vertical-align: top;
+}
+th.tableblock.valign-middle, td.tableblock.valign-middle {
+  vertical-align: middle;
+}
+th.tableblock.valign-bottom, td.tableblock.valign-bottom {
+  vertical-align: bottom;
+}
+
+
+/*
+ * manpage specific
+ *
+ * */
+
+body.manpage h1 {
+  padding-top: 0.5em;
+  padding-bottom: 0.5em;
+  border-top: 2px solid silver;
+  border-bottom: 2px solid silver;
+}
+body.manpage h2 {
+  border-style: none;
+}
+body.manpage div.sectionbody {
+  margin-left: 3em;
+}
+
+@media print {
+  body.manpage div#toc { display: none; }
+}
+
+
+@media screen {
+  body {
+    max-width: 50em; /* approximately 80 characters wide */
+    margin-left: 16em;
+  }
+
+  #toc {
+    position: fixed;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    width: 13em;
+    padding: 0.5em;
+    padding-bottom: 1.5em;
+    margin: 0;
+    overflow: auto;
+    border-right: 3px solid #f8f8f8;
+    background-color: white;
+  }
+
+  #toc .toclevel1 {
+    margin-top: 0.5em;
+  }
+
+  #toc .toclevel2 {
+    margin-top: 0.25em;
+    display: list-item;
+    color: #aaaaaa;
+  }
+
+  #toctitle {
+    margin-top: 0.5em;
+  }
+}
+</style>
+<script type="text/javascript">
+/*<![CDATA[*/
+var asciidoc = {  // Namespace.
+
+/////////////////////////////////////////////////////////////////////
+// Table Of Contents generator
+/////////////////////////////////////////////////////////////////////
+
+/* Author: Mihai Bazon, September 2002
+ * http://students.infoiasi.ro/~mishoo
+ *
+ * Table Of Content generator
+ * Version: 0.4
+ *
+ * Feel free to use this script under the terms of the GNU General Public
+ * License, as long as you do not remove or alter this notice.
+ */
+
+ /* modified by Troy D. Hanson, September 2006. License: GPL */
+ /* modified by Stuart Rackham, 2006, 2009. License: GPL */
+
+// toclevels = 1..4.
+toc: function (toclevels) {
+
+  function getText(el) {
+    var text = "";
+    for (var i = el.firstChild; i != null; i = i.nextSibling) {
+      if (i.nodeType == 3 /* Node.TEXT_NODE */) // IE doesn't speak constants.
+        text += i.data;
+      else if (i.firstChild != null)
+        text += getText(i);
+    }
+    return text;
+  }
+
+  function TocEntry(el, text, toclevel) {
+    this.element = el;
+    this.text = text;
+    this.toclevel = toclevel;
+  }
+
+  function tocEntries(el, toclevels) {
+    var result = new Array;
+    var re = new RegExp('[hH]([1-'+(toclevels+1)+'])');
+    // Function that scans the DOM tree for header elements (the DOM2
+    // nodeIterator API would be a better technique but not supported by all
+    // browsers).
+    var iterate = function (el) {
+      for (var i = el.firstChild; i != null; i = i.nextSibling) {
+        if (i.nodeType == 1 /* Node.ELEMENT_NODE */) {
+          var mo = re.exec(i.tagName);
+          if (mo && (i.getAttribute("class") || i.getAttribute("className")) != "float") {
+            result[result.length] = new TocEntry(i, getText(i), mo[1]-1);
+          }
+          iterate(i);
+        }
+      }
+    }
+    iterate(el);
+    return result;
+  }
+
+  var toc = document.getElementById("toc");
+  if (!toc) {
+    return;
+  }
+
+  // Delete existing TOC entries in case we're reloading the TOC.
+  var tocEntriesToRemove = [];
+  var i;
+  for (i = 0; i < toc.childNodes.length; i++) {
+    var entry = toc.childNodes[i];
+    if (entry.nodeName.toLowerCase() == 'div'
+     && entry.getAttribute("class")
+     && entry.getAttribute("class").match(/^toclevel/))
+      tocEntriesToRemove.push(entry);
+  }
+  for (i = 0; i < tocEntriesToRemove.length; i++) {
+    toc.removeChild(tocEntriesToRemove[i]);
+  }
+
+  // Rebuild TOC entries.
+  var entries = tocEntries(document.getElementById("content"), toclevels);
+  for (var i = 0; i < entries.length; ++i) {
+    var entry = entries[i];
+    if (entry.element.id == "")
+      entry.element.id = "_toc_" + i;
+    var a = document.createElement("a");
+    a.href = "#" + entry.element.id;
+    a.appendChild(document.createTextNode(entry.text));
+    var div = document.createElement("div");
+    div.appendChild(a);
+    div.className = "toclevel" + entry.toclevel;
+    toc.appendChild(div);
+  }
+  if (entries.length == 0)
+    toc.parentNode.removeChild(toc);
+},
+
+
+/////////////////////////////////////////////////////////////////////
+// Footnotes generator
+/////////////////////////////////////////////////////////////////////
+
+/* Based on footnote generation code from:
+ * http://www.brandspankingnew.net/archive/2005/07/format_footnote.html
+ */
+
+footnotes: function () {
+  // Delete existing footnote entries in case we're reloading the footnodes.
+  var i;
+  var noteholder = document.getElementById("footnotes");
+  if (!noteholder) {
+    return;
+  }
+  var entriesToRemove = [];
+  for (i = 0; i < noteholder.childNodes.length; i++) {
+    var entry = noteholder.childNodes[i];
+    if (entry.nodeName.toLowerCase() == 'div' && entry.getAttribute("class") == "footnote")
+      entriesToRemove.push(entry);
+  }
+  for (i = 0; i < entriesToRemove.length; i++) {
+    noteholder.removeChild(entriesToRemove[i]);
+  }
+
+  // Rebuild footnote entries.
+  var cont = document.getElementById("content");
+  var spans = cont.getElementsByTagName("span");
+  var refs = {};
+  var n = 0;
+  for (i=0; i<spans.length; i++) {
+    if (spans[i].className == "footnote") {
+      n++;
+      var note = spans[i].getAttribute("data-note");
+      if (!note) {
+        // Use [\s\S] in place of . so multi-line matches work.
+        // Because JavaScript has no s (dotall) regex flag.
+        note = spans[i].innerHTML.match(/\s*\[([\s\S]*)]\s*/)[1];
+        spans[i].innerHTML =
+          "[<a id='_footnoteref_" + n + "' href='#_footnote_" + n +
+          "' title='View footnote' class='footnote'>" + n + "</a>]";
+        spans[i].setAttribute("data-note", note);
+      }
+      noteholder.innerHTML +=
+        "<div class='footnote' id='_footnote_" + n + "'>" +
+        "<a href='#_footnoteref_" + n + "' title='Return to text'>" +
+        n + "</a>. " + note + "</div>";
+      var id =spans[i].getAttribute("id");
+      if (id != null) refs["#"+id] = n;
+    }
+  }
+  if (n == 0)
+    noteholder.parentNode.removeChild(noteholder);
+  else {
+    // Process footnoterefs.
+    for (i=0; i<spans.length; i++) {
+      if (spans[i].className == "footnoteref") {
+        var href = spans[i].getElementsByTagName("a")[0].getAttribute("href");
+        href = href.match(/#.*/)[0];  // Because IE return full URL.
+        n = refs[href];
+        spans[i].innerHTML =
+          "[<a href='#_footnote_" + n +
+          "' title='View footnote' class='footnote'>" + n + "</a>]";
+      }
+    }
+  }
+},
+
+install: function(toclevels) {
+  var timerId;
+
+  function reinstall() {
+    asciidoc.footnotes();
+    if (toclevels) {
+      asciidoc.toc(toclevels);
+    }
+  }
+
+  function reinstallAndRemoveTimer() {
+    clearInterval(timerId);
+    reinstall();
+  }
+
+  timerId = setInterval(reinstall, 500);
+  if (document.addEventListener)
+    document.addEventListener("DOMContentLoaded", reinstallAndRemoveTimer, false);
+  else
+    window.onload = reinstallAndRemoveTimer;
+}
+
+}
+asciidoc.install(2);
+/*]]>*/
+</script>
+</head>
+<body class="article">
+<div id="header">
+<h1>A Comparison of maSAE to forestinventory</h1>
+<span id="revdate">2020-03-13, 13:16:56</span>
+<div id="toc">
+  <div id="toctitle">Table of Contents</div>
+  <noscript><p><b>JavaScript must be enabled in your browser to display the table of contents.</b></p></noscript>
+</div>
+</div>
+<div id="content">
+<div class="sect1">
+<h2 id="_what_is_this_about">What is this about?</h2>
+<div class="sectionbody">
+<div class="paragraph"><p>In 2016, Andreas Hill published package
+<a href="https://CRAN.R-project.org/package=forestinventory">forestinventory</a>.
+We thought about merging the packages, but never actually got to it:
+<code>maSAE</code> is S4, <code>forestinventory</code> is S3, both of us are busy doing other stuff.
+So I am trying to at least compare functionality of both packages.</p></div>
+<div class="listingblock">
+<div class="content"><!-- Generator: GNU source-highlight
+by Lorenzo Bettini
+http://www.lorenzobettini.it
+http://www.gnu.org/software/src-highlite -->
+<pre><tt>library(<span style="color: #FF0000">"forestinventory"</span>)
+library(<span style="color: #FF0000">"maSAE"</span>)</tt></pre></div></div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_setup">Setup</h2>
+<div class="sectionbody">
+<div class="paragraph"><p>I need some helpers for checking and comparing results from
+<code>maSAE</code> and <code>forestinventory</code>:</p></div>
+<div class="listingblock">
+<div class="content"><!-- Generator: GNU source-highlight
+by Lorenzo Bettini
+http://www.lorenzobettini.it
+http://www.gnu.org/software/src-highlite -->
+<pre><tt>clean &lt;- function(x, which = NULL) {
+    <span style="font-weight: bold"><span style="color: #0000FF">if</span></span> (identical(FALSE, which)) {
+        res &lt;- as.matrix(unname(x[TRUE, TRUE]))
+    } <span style="font-weight: bold"><span style="color: #0000FF">else</span></span> {
+        <span style="font-weight: bold"><span style="color: #0000FF">if</span></span> (is.null(which)) {
+            <span style="font-weight: bold"><span style="color: #0000FF">if</span></span> (all(c( <span style="color: #FF0000">"small_area"</span>, <span style="color: #FF0000">"prediction"</span>, <span style="color: #FF0000">"variance"</span>) <span style="color: #990000">%in%</span> names(x))) {
+                res &lt;- as.matrix(unname(x[TRUE, 1:3]))
+            } <span style="font-weight: bold"><span style="color: #0000FF">else</span></span> {
+                res &lt;- as.matrix(unname(x[[<span style="color: #FF0000">"estimation"</span>]][TRUE, c(<span style="color: #FF0000">"area"</span>, <span style="color: #FF0000">"estimate"</span>, <span style="color: #FF0000">"g_variance"</span>)]))
+            }
+        } <span style="font-weight: bold"><span style="color: #0000FF">else</span></span> {
+            res &lt;- as.matrix(unname(x[TRUE, c(1, grep(which, names(x)))]))
+        }
+    }
+    return(res)
+}
+
+compare &lt;- function(maSAE, forestinventory, message = NULL) {
+    <span style="font-weight: bold"><span style="color: #0000FF">if</span></span>(! isTRUE(all.equal(clean(maSAE), clean(forestinventory),
+                          check.attributes = FALSE))) {
+        message &lt;- c(<span style="color: #FF0000">"Differing results from maSAE and forestinventory: "</span>,
+                     message)
+        warning(message)
+        return(FALSE)
+    }
+    return(TRUE)
+}</tt></pre></div></div>
+<div class="paragraph"><p>I use the grisons data set from <code>forestinventory</code>:</p></div>
+<div class="listingblock">
+<div class="content"><!-- Generator: GNU source-highlight
+by Lorenzo Bettini
+http://www.lorenzobettini.it
+http://www.gnu.org/software/src-highlite -->
+<pre><tt>data(grisons, package = <span style="color: #FF0000">"forestinventory"</span>)</tt></pre></div></div>
+<div class="paragraph"><p>I define regression models for simple and cluster sampling:</p></div>
+<div class="listingblock">
+<div class="content"><!-- Generator: GNU source-highlight
+by Lorenzo Bettini
+http://www.lorenzobettini.it
+http://www.gnu.org/software/src-highlite -->
+<pre><tt>formula.s0 &lt;- tvol ~ mean <span style="font-style: italic"><span style="color: #9A1900"># reduced model:</span></span>
+formula.s1 &lt;- tvol ~ mean + stddev + max + q75 <span style="font-style: italic"><span style="color: #9A1900"># full model</span></span>
+formula.clust.s0 &lt;- basal ~ stade
+formula.clust.s1 &lt;- basal ~ stade + couver + melange</tt></pre></div></div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_two_phase">Two-Phase</h2>
+<div class="sectionbody">
+<div class="paragraph"><p>Some data handling,
+true means are taken from
+<a href="https://CRAN.R-project.org/package=forestinventory/vignettes/forestinventory_vignette.pdf">forestinventory+s vignette</a>. :</p></div>
+<div class="listingblock">
+<div class="content"><!-- Generator: GNU source-highlight
+by Lorenzo Bettini
+http://www.lorenzobettini.it
+http://www.gnu.org/software/src-highlite -->
+<pre><tt>truemeans.G &lt;- data.frame(Intercept = rep(1, 4),
+                          mean = c(12.85, 12.21, 9.33, 10.45),
+                          stddev = c(9.31, 9.47, 7.90, 8.36),
+                          max = c(34.92, 35.36, 28.81, 30.22),
+                          q75 = c(19.77, 19.16, 15.40, 16.91))
+rownames(truemeans.G) &lt;- c(<span style="color: #FF0000">"A"</span>, <span style="color: #FF0000">"B"</span>, <span style="color: #FF0000">"C"</span>, <span style="color: #FF0000">"D"</span>)
+
+<span style="font-style: italic"><span style="color: #9A1900"># data adjustments</span></span>
+s1 &lt;- grisons[grisons[[<span style="color: #FF0000">"phase_id_2p"</span>]] == 1, ]
+s2 &lt;- grisons[grisons[[<span style="color: #FF0000">"phase_id_2p"</span>]] == 2, ]
+s12 &lt;- rbind(s1, s2)
+s12$s1 &lt;- s12$phase_id_2p <span style="color: #990000">%in%</span> c(1, 2)
+s12$s2 &lt;- s12$phase_id_2p == 2
+
+tm &lt;- truemeans.G
+tm[[<span style="color: #FF0000">"smallarea"</span>]] &lt;- row.names(tm)
+tm[[<span style="color: #FF0000">"Intercept"</span>]] &lt;- NULL
+
+truemeans.G.partially &lt;- truemeans.G[, -which(names(truemeans.G) <span style="color: #990000">%in%</span> c(<span style="color: #FF0000">"stddev"</span>, <span style="color: #FF0000">"mean"</span>))]
+tm.partially &lt;- tm[, -which(names(tm) <span style="color: #990000">%in%</span> c(<span style="color: #FF0000">"stddev"</span>, <span style="color: #FF0000">"mean"</span>))]</tt></pre></div></div>
+<div class="sect2">
+<h3 id="_no_exhaustive_auxiliary_information">No Exhaustive Auxiliary Information</h3>
+<div class="paragraph"><p>This is the estimation given on bottom of page 15 of
+<a href="https://CRAN.R-project.org/package=forestinventory/vignettes/forestinventory_vignette.pdf">forestinventory+s vignette</a>:</p></div>
+<div class="listingblock">
+<div class="content"><!-- Generator: GNU source-highlight
+by Lorenzo Bettini
+http://www.lorenzobettini.it
+http://www.gnu.org/software/src-highlite -->
+<pre><tt>summary(twophase(formula = formula.s1,
+                 data = grisons,
+                 phase_id = list(phase.col = <span style="color: #FF0000">"phase_id_2p"</span>, terrgrid.id = 2),
+                 small_area = list(sa.col = <span style="color: #FF0000">"smallarea"</span>,
+                                   areas = c(<span style="color: #FF0000">"A"</span>, <span style="color: #FF0000">"B"</span>,<span style="color: #FF0000">"C"</span>, <span style="color: #FF0000">"D"</span>),
+                                   unbiased = TRUE),
+                 boundary_weights = <span style="color: #FF0000">"boundary_weights"</span>
+                 ))</tt></pre></div></div>
+<div class="listingblock">
+<div class="content">
+<pre><code>##
+## Two-phase small area estimation
+##
+## Call:
+## twophase(formula = formula.s1, data = grisons, phase_id = list(phase.col = "phase_id_2p",
+##     terrgrid.id = 2), small_area = list(sa.col = "smallarea",
+##     areas = c("A", "B", "C", "D"), unbiased = TRUE), boundary_weights = "boundary_weights")
+##
+## Method used:
+## Extended pseudosynthetic small area estimator
+##
+## Regression Model:
+## tvol ~ mean + stddev + max + q75 + smallarea
+##
+## Estimation results:
+##  area estimate ext_variance g_variance  n1 n2 n1G n2G r.squared
+##     A 391.9356     995.5602   1017.633 306 67  94  19 0.6526503
+##     B 419.7231    1214.6053   1019.191 306 67  81  17 0.6428854
+##     C 328.8600     916.2266   1036.791 306 67  66  15 0.6430018
+##     D 373.9497    1272.7056   1110.245 306 67  65  16 0.6556178
+##
+## 'boundary_weight'- option was used to calculate weighted means of auxiliary variables</code></pre>
+</div></div>
+<div class="paragraph"><p>Now I+m using both packages to make predictions:</p></div>
+<div class="listingblock">
+<div class="content"><!-- Generator: GNU source-highlight
+by Lorenzo Bettini
+http://www.lorenzobettini.it
+http://www.gnu.org/software/src-highlite -->
+<pre><tt>maSAE &lt;- predict(saObj(data = s12,
+                       f = update(formula.s1, ~ . | smallarea),
+                       auxiliaryWeights = <span style="color: #FF0000">"boundary_weights"</span>,
+                       s2 = <span style="color: #FF0000">'s2'</span>)
+)
+
+forestinventory &lt;- twophase(formula = formula.s1,
+                            data = grisons,
+                            phase_id = list(phase.col = <span style="color: #FF0000">"phase_id_2p"</span>, terrgrid.id = 2),
+                            small_area = list(sa.col = <span style="color: #FF0000">"smallarea"</span>,
+                                              areas = c(<span style="color: #FF0000">"A"</span>, <span style="color: #FF0000">"B"</span>,<span style="color: #FF0000">"C"</span>, <span style="color: #FF0000">"D"</span>),
+                                              unbiased = TRUE),
+                            boundary_weights = <span style="color: #FF0000">"boundary_weights"</span>
+                            )</tt></pre></div></div>
+<div class="paragraph"><p>Both packages deliver the same results:</p></div>
+<div class="listingblock">
+<div class="content"><!-- Generator: GNU source-highlight
+by Lorenzo Bettini
+http://www.lorenzobettini.it
+http://www.gnu.org/software/src-highlite -->
+<pre><tt>compare(maSAE, forestinventory, <span style="color: #FF0000">"two-phase, ext. pseudo sae"</span>)</tt></pre></div></div>
+<div class="listingblock">
+<div class="content">
+<pre><code>## [1] TRUE</code></pre>
+</div></div>
+<div class="paragraph"><p>Now I benchmark them, calculating the small, synthetic and extended synthetic estimators:</p></div>
+<div class="listingblock">
+<div class="content"><!-- Generator: GNU source-highlight
+by Lorenzo Bettini
+http://www.lorenzobettini.it
+http://www.gnu.org/software/src-highlite -->
+<pre><tt>wrap_two &lt;- function(...) {
+    dots &lt;- list(...)
+    dots$small_area$unbiased &lt;- TRUE
+    ex &lt;- do.call(twophase, dots)$estimation
+    dots$psmall &lt;- TRUE
+    small &lt;- do.call(twophase, dots)$estimation
+    dots$psmall &lt;- FALSE
+    dots$small_area$unbiased &lt;- FALSE
+    synth &lt;- do.call(twophase, dots)$estimation
+    cbind(ex[TRUE, c(<span style="color: #FF0000">"estimate"</span>, <span style="color: #FF0000">"g_variance"</span>)],
+          synth[TRUE, c(<span style="color: #FF0000">"estimate"</span>, <span style="color: #FF0000">"g_variance"</span>)],
+          small[TRUE, c(<span style="color: #FF0000">"estimate"</span>, <span style="color: #FF0000">"g_variance"</span>)])
+
+}
+mbmb &lt;- microbenchmark::microbenchmark
+mb &lt;- mbmb(
+           forestinventory = wrap_two(formula = formula.s1,
+                                    data = grisons,
+                                    phase_id = list(phase.col = <span style="color: #FF0000">"phase_id_2p"</span>, terrgrid.id = 2),
+                                    small_area = list(sa.col = <span style="color: #FF0000">"smallarea"</span>,
+                                                      areas = c(<span style="color: #FF0000">"A"</span>, <span style="color: #FF0000">"B"</span>,<span style="color: #FF0000">"C"</span>, <span style="color: #FF0000">"D"</span>),
+                                                      unbiased = TRUE)
+                                    ),
+           maSAE = predict(saObj(data = s12,
+                                 f = update(formula.s1, ~ . | smallarea),
+                                 s2 = <span style="color: #FF0000">'s2'</span>
+                                 ))[, -1],
+           check = <span style="color: #FF0000">"equivalent"</span>
+           )</tt></pre></div></div>
+<div class="paragraph"><p><code>maSAE</code> seems a bit faster:</p></div>
+<div class="listingblock">
+<div class="content"><!-- Generator: GNU source-highlight
+by Lorenzo Bettini
+http://www.lorenzobettini.it
+http://www.gnu.org/software/src-highlite -->
+<pre><tt>print(mb)</tt></pre></div></div>
+<div class="listingblock">
+<div class="content">
+<pre><code>## Unit: milliseconds
+##             expr      min        lq      mean    median        uq       max
+##  forestinventory 99.82881 100.87952 111.31355 110.27632 112.14146 235.67957
+##            maSAE 46.87428  47.32818  52.04255  48.83249  57.21007  69.40275
+##  neval
+##    100
+##    100</code></pre>
+</div></div>
+<div class="listingblock">
+<div class="content"><!-- Generator: GNU source-highlight
+by Lorenzo Bettini
+http://www.lorenzobettini.it
+http://www.gnu.org/software/src-highlite -->
+<pre><tt>microbenchmark:::autoplot.microbenchmark(mb)</tt></pre></div></div>
+<div class="listingblock">
+<div class="content"><!-- Generator: GNU source-highlight
+by Lorenzo Bettini
+http://www.lorenzobettini.it
+http://www.gnu.org/software/src-highlite -->
+<pre><tt><span style="font-style: italic"><span style="color: #9A1900">## Coordinate system already present. Adding new coordinate system, which will replace the existing one.</span></span>
+</tt></pre></div></div>
+<div class="imageblock">
+<div class="content">
+<img src="figure/unnamed-chunk-10-1.pdf" alt="plot of chunk unnamed-chunk-10" />
+</div>
+<div class="title">Figure 1. plot of chunk unnamed-chunk-10</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_full_exhaustive_auxiliary_information">Full Exhaustive Auxiliary Information</h3>
+<div class="paragraph"><p>The estimation given on page 17 of
+<a href="https://CRAN.R-project.org/package=forestinventory/vignettes/forestinventory_vignette.pdf">forestinventory+s vignette</a> is
+ (there are no boundary weights here):</p></div>
+<div class="listingblock">
+<div class="content"><!-- Generator: GNU source-highlight
+by Lorenzo Bettini
+http://www.lorenzobettini.it
+http://www.gnu.org/software/src-highlite -->
+<pre><tt>forestinventory &lt;- twophase(formula = formula.s1,
+                            data = grisons,
+                            phase_id = list(phase.col = <span style="color: #FF0000">"phase_id_2p"</span>,
+                                            terrgrid.id = 2),
+                            small_area = list(sa.col =<span style="color: #FF0000">"smallarea"</span>,
+                                              areas = c(<span style="color: #FF0000">"A"</span>, <span style="color: #FF0000">"B"</span>, <span style="color: #FF0000">"C"</span>, <span style="color: #FF0000">"D"</span>),
+                                              unbiased = TRUE),
+                            exhaustive = truemeans.G)
+summary(forestinventory)</tt></pre></div></div>
+<div class="listingblock">
+<div class="content">
+<pre><code>##
+## Two-phase small area estimation
+##
+## Call:
+## twophase(formula = formula.s1, data = grisons, phase_id = list(phase.col = "phase_id_2p",
+##     terrgrid.id = 2), small_area = list(sa.col = "smallarea",
+##     areas = c("A", "B", "C", "D"), unbiased = TRUE), exhaustive = truemeans.G)
+##
+## Method used:
+## Extended synthetic small area estimator
+##
+## Regression Model:
+## tvol ~ mean + stddev + max + q75 + smallarea
+##
+## Estimation results:
+##  area estimate ext_variance g_variance  n1 n2 n1G n2G r.squared
+##     A 372.6930     744.3658   696.5739 Inf 67 Inf  19 0.6526503
+##     B 387.5116     693.8576   708.1105 Inf 67 Inf  17 0.6428854
+##     C 334.8314     838.3953   801.4303 Inf 67 Inf  15 0.6430018
+##     D 405.9667     940.3149   890.9536 Inf 67 Inf  16 0.6556178</code></pre>
+</div></div>
+<div class="paragraph"><p>Again, predictions from both packages are identical:</p></div>
+<div class="listingblock">
+<div class="content"><!-- Generator: GNU source-highlight
+by Lorenzo Bettini
+http://www.lorenzobettini.it
+http://www.gnu.org/software/src-highlite -->
+<pre><tt>maSAE &lt;- predict(saObj(data = s12,
+                       f = update(formula.s1, ~ . | smallarea),
+                       s2 = <span style="color: #FF0000">'s2'</span>,
+                       smallAreaMeans = tm))
+compare(maSAE, forestinventory, <span style="color: #FF0000">"two-phase, ext. sae"</span>)</tt></pre></div></div>
+<div class="listingblock">
+<div class="content">
+<pre><code>## [1] TRUE</code></pre>
+</div></div>
+<div class="paragraph"><p>The benchmarks again:</p></div>
+<div class="listingblock">
+<div class="content"><!-- Generator: GNU source-highlight
+by Lorenzo Bettini
+http://www.lorenzobettini.it
+http://www.gnu.org/software/src-highlite -->
+<pre><tt>mb &lt;- mbmb(
+           forestinventory = wrap_two(formula = formula.s1,
+                                            data = grisons,
+                                            phase_id = list(phase.col = <span style="color: #FF0000">"phase_id_2p"</span>,
+                                                            terrgrid.id = 2),
+                                            small_area = list(sa.col =<span style="color: #FF0000">"smallarea"</span>,
+                                                              areas = c(<span style="color: #FF0000">"A"</span>, <span style="color: #FF0000">"B"</span>, <span style="color: #FF0000">"C"</span>, <span style="color: #FF0000">"D"</span>),
+                                                              unbiased = TRUE),
+                                            exhaustive = truemeans.G),
+           maSAE = predict(saObj(data = s12,
+                                       f = update(formula.s1, ~ . | smallarea),
+                                       s2 = <span style="color: #FF0000">'s2'</span>,
+                                       smallAreaMeans = tm))[, -1],
+
+           check = <span style="color: #FF0000">"equivalent"</span>)
+print(mb)</tt></pre></div></div>
+<div class="listingblock">
+<div class="content">
+<pre><code>## Unit: milliseconds
+##             expr      min       lq     mean   median       uq       max neval
+##  forestinventory 77.70466 78.43906 87.69586 87.39151 89.08470 228.46098   100
+##            maSAE 46.08046 46.53541 52.91265 49.40216 56.94793  77.34464   100</code></pre>
+</div></div>
+<div class="listingblock">
+<div class="content"><!-- Generator: GNU source-highlight
+by Lorenzo Bettini
+http://www.lorenzobettini.it
+http://www.gnu.org/software/src-highlite -->
+<pre><tt>microbenchmark:::autoplot.microbenchmark(mb)</tt></pre></div></div>
+<div class="listingblock">
+<div class="content"><!-- Generator: GNU source-highlight
+by Lorenzo Bettini
+http://www.lorenzobettini.it
+http://www.gnu.org/software/src-highlite -->
+<pre><tt><span style="font-style: italic"><span style="color: #9A1900">## Coordinate system already present. Adding new coordinate system, which will replace the existing one.</span></span>
+</tt></pre></div></div>
+<div class="imageblock">
+<div class="content">
+<img src="figure/unnamed-chunk-13-1.pdf" alt="plot of chunk unnamed-chunk-13" />
+</div>
+<div class="title">Figure 2. plot of chunk unnamed-chunk-13</div>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_three_phase">Three-Phase</h2>
+<div class="sectionbody">
+<div class="paragraph"><p>Some data handling,
+true means are taken from
+<a href="https://CRAN.R-project.org/package=forestinventory/vignettes/forestinventory_vignette.pdf">forestinventory+s vignette</a>. :</p></div>
+<div class="listingblock">
+<div class="content"><!-- Generator: GNU source-highlight
+by Lorenzo Bettini
+http://www.lorenzobettini.it
+http://www.gnu.org/software/src-highlite -->
+<pre><tt>truemeans.G &lt;- data.frame(Intercept = rep(1, 4),
+                          mean = c(12.85, 12.21, 9.33, 10.45))
+rownames(truemeans.G) &lt;- c(<span style="color: #FF0000">"A"</span>, <span style="color: #FF0000">"B"</span>, <span style="color: #FF0000">"C"</span>, <span style="color: #FF0000">"D"</span>)
+
+<span style="font-style: italic"><span style="color: #9A1900">## data adjustments</span></span>
+s12_3p &lt;- grisons[grisons[[<span style="color: #FF0000">"phase_id_3p"</span>]] <span style="color: #990000">%in%</span> c(1,2), ]
+s0 &lt;- grisons[grisons[[<span style="color: #FF0000">"phase_id_3p"</span>]] ==0 , ]
+s12_3p$s1 &lt;- s12_3p$phase_id_3p <span style="color: #990000">%in%</span> c(1, 2)
+s12_3p$s2 &lt;- s12_3p$phase_id_3p == 2
+s0$s1 &lt;- s0$s2 &lt;- FALSE
+predictors_s0 &lt;- all.vars(formula.s0)[-1]
+predictors_s1 &lt;- all.vars(formula.s1)[-1]
+eval(parse(text=(paste0(<span style="color: #FF0000">"s0$"</span>,
+                        setdiff(predictors_s1, predictors_s0),
+                        <span style="color: #FF0000">" &lt;- NA"</span>))))
+s012 &lt;- rbind(s0, s12_3p)
+tm &lt;- truemeans.G
+tm[[<span style="color: #FF0000">"smallarea"</span>]] &lt;- row.names(tm)
+tm[[<span style="color: #FF0000">"Intercept"</span>]] &lt;- NULL</tt></pre></div></div>
+<div class="sect2">
+<h3 id="_no_exhaustive_auxiliary_information_2">No Exhaustive Auxiliary Information</h3>
+<div class="paragraph"><p>The estimation given on page 23 of
+<a href="https://CRAN.R-project.org/package=forestinventory/vignettes/forestinventory_vignette.pdf">forestinventory+s vignette</a> is:</p></div>
+<div class="listingblock">
+<div class="content"><!-- Generator: GNU source-highlight
+by Lorenzo Bettini
+http://www.lorenzobettini.it
+http://www.gnu.org/software/src-highlite -->
+<pre><tt>summary(threephase(formula.s0,
+                   formula.s1,
+                   data = grisons,
+                   phase_id = list(phase.col = <span style="color: #FF0000">"phase_id_3p"</span>, s1.id = 1, terrgrid.id = 2),
+                   small_area=list(sa.col = <span style="color: #FF0000">"smallarea"</span>, areas = c(<span style="color: #FF0000">"A"</span>, <span style="color: #FF0000">"B"</span>, <span style="color: #FF0000">"C"</span>, <span style="color: #FF0000">"D"</span>),
+                                   unbiased = TRUE),
+                   boundary_weights = <span style="color: #FF0000">"boundary_weights"</span>
+                   ))</tt></pre></div></div>
+<div class="listingblock">
+<div class="content">
+<pre><code>##
+## Three-phase small area estimation
+##
+## Call:
+## threephase(formula.s0 = formula.s0, formula.s1 = formula.s1,
+##     data = grisons, phase_id = list(phase.col = "phase_id_3p",
+##         s1.id = 1, terrgrid.id = 2), small_area = list(sa.col = "smallarea",
+##         areas = c("A", "B", "C", "D"), unbiased = TRUE), boundary_weights = "boundary_weights")
+##
+## Method used:
+## Extended pseudosynthetic small area estimator
+##
+## Full Regression Model:
+## tvol ~ mean + stddev + max + q75 + smallarea
+##
+## Reduced Regression Model:
+## tvol ~ mean + smallarea
+##
+## Estimation results:
+##  area estimate ext_variance g_variance  n0  n1 n2 n0G n1G n2G r.squared_reduced
+##     A 395.1882    1901.2107  1858.2042 306 128 40  94  38  12         0.5454824
+##     B 389.8329    1846.9952  1816.6552 306 128 40  81  34  11         0.5354637
+##     C 321.9967     722.7413   763.0731 306 128 40  66  28   8         0.5282291
+##     D 365.4938    2248.9395  1930.6881 306 128 40  65  28   9         0.5339996
+##  r.squared_full
+##       0.7242913
+##       0.7171512
+##       0.7172375
+##       0.7268820
+##
+## 'boundary_weight'- option was used to calculate weighted means of auxiliary variables</code></pre>
+</div></div>
+<div class="paragraph"><p><em>Wait, the <code>ext_variance</code> differs, but that+s a problem with <code>forestinventory</code>&#8230;</em></p></div>
+<div class="paragraph"><p>I make predictions omitting the boundary weights:</p></div>
+<div class="listingblock">
+<div class="content"><!-- Generator: GNU source-highlight
+by Lorenzo Bettini
+http://www.lorenzobettini.it
+http://www.gnu.org/software/src-highlite -->
+<pre><tt>forestinventory &lt;- threephase(formula.s0,
+                              formula.s1,
+                              data = grisons,
+                              phase_id = list(phase.col = <span style="color: #FF0000">"phase_id_3p"</span>, s1.id = 1, terrgrid.id = 2),
+                              small_area=list(sa.col = <span style="color: #FF0000">"smallarea"</span>, areas = c(<span style="color: #FF0000">"A"</span>, <span style="color: #FF0000">"B"</span>, <span style="color: #FF0000">"C"</span>, <span style="color: #FF0000">"D"</span>),
+                                              unbiased = TRUE),
+                              boundary_weights = <span style="color: #FF0000">"boundary_weights"</span>
+                              )
+
+maSAE &lt;- predict(saObj(data = s012,
+                       f = update(formula.s1, ~ . | smallarea),
+                       s1 = <span style="color: #FF0000">'s1'</span>,
+                       auxiliaryWeights = <span style="color: #FF0000">"boundary_weights"</span>,
+                       s2 = <span style="color: #FF0000">'s2'</span>))</tt></pre></div></div>
+<div class="listingblock">
+<div class="content"><!-- Generator: GNU source-highlight
+by Lorenzo Bettini
+http://www.lorenzobettini.it
+http://www.gnu.org/software/src-highlite -->
+<pre><tt><span style="font-style: italic"><span style="color: #9A1900">## n(s0) &gt;&gt; n(s1) should hold, but you've given s1 resulting in n(s1)/n(s0) =  0.418300653594771</span></span>
+</tt></pre></div></div>
+<div class="listingblock">
+<div class="content"><!-- Generator: GNU source-highlight
+by Lorenzo Bettini
+http://www.lorenzobettini.it
+http://www.gnu.org/software/src-highlite -->
+<pre><tt>compare(maSAE, forestinventory, <span style="color: #FF0000">"three-phase, ext. pseudo sae"</span>)</tt></pre></div></div>
+<div class="listingblock">
+<div class="content">
+<pre><code>## [1] TRUE</code></pre>
+</div></div>
+<div class="paragraph"><p>The benchmarks again:</p></div>
+<div class="listingblock">
+<div class="content"><!-- Generator: GNU source-highlight
+by Lorenzo Bettini
+http://www.lorenzobettini.it
+http://www.gnu.org/software/src-highlite -->
+<pre><tt>wrap_three &lt;- function(...) {
+    dots &lt;- list(...)
+    dots$small_area$unbiased &lt;- TRUE
+    ex &lt;- do.call(threephase, dots)$estimation
+    dots$psmall &lt;- TRUE
+    small &lt;- do.call(threephase, dots)$estimation
+    dots$psmall &lt;- FALSE
+    dots$small_area$unbiased &lt;- FALSE
+    synth &lt;- do.call(threephase, dots)$estimation
+    cbind(ex[TRUE, c(<span style="color: #FF0000">"estimate"</span>, <span style="color: #FF0000">"g_variance"</span>)],
+          synth[TRUE, c(<span style="color: #FF0000">"estimate"</span>, <span style="color: #FF0000">"g_variance"</span>)],
+          small[TRUE, c(<span style="color: #FF0000">"estimate"</span>, <span style="color: #FF0000">"g_variance"</span>)])
+
+}
+mb &lt;- mbmb(
+           forestinventory = wrap_three(formula.s0,
+                              formula.s1,
+                              data = grisons,
+                              phase_id = list(phase.col = <span style="color: #FF0000">"phase_id_3p"</span>, s1.id = 1, terrgrid.id = 2),
+                              small_area=list(sa.col = <span style="color: #FF0000">"smallarea"</span>, areas = c(<span style="color: #FF0000">"A"</span>, <span style="color: #FF0000">"B"</span>, <span style="color: #FF0000">"C"</span>, <span style="color: #FF0000">"D"</span>),
+                                              unbiased = TRUE)
+                              ),
+           maSAE = predict(suppressMessages(saObj(data = s012,
+                       f = update(formula.s1, ~ . | smallarea),
+                       s1 = <span style="color: #FF0000">'s1'</span>,
+                       s2 = <span style="color: #FF0000">'s2'</span>)))[, -1],
+
+           check = <span style="color: #FF0000">"equivalent"</span>)
+print(mb)</tt></pre></div></div>
+<div class="listingblock">
+<div class="content">
+<pre><code>## Unit: milliseconds
+##             expr       min       lq      mean   median        uq      max neval
+##  forestinventory 167.78761 171.6586 184.15908 178.2274 186.79755 336.3791   100
+##            maSAE  77.24488  78.4896  87.95672  87.8197  90.44643 130.4617   100</code></pre>
+</div></div>
+<div class="listingblock">
+<div class="content"><!-- Generator: GNU source-highlight
+by Lorenzo Bettini
+http://www.lorenzobettini.it
+http://www.gnu.org/software/src-highlite -->
+<pre><tt>microbenchmark:::autoplot.microbenchmark(mb)</tt></pre></div></div>
+<div class="listingblock">
+<div class="content"><!-- Generator: GNU source-highlight
+by Lorenzo Bettini
+http://www.lorenzobettini.it
+http://www.gnu.org/software/src-highlite -->
+<pre><tt><span style="font-style: italic"><span style="color: #9A1900">## Coordinate system already present. Adding new coordinate system, which will replace the existing one.</span></span>
+</tt></pre></div></div>
+<div class="imageblock">
+<div class="content">
+<img src="figure/unnamed-chunk-18-1.pdf" alt="plot of chunk unnamed-chunk-18" />
+</div>
+<div class="title">Figure 3. plot of chunk unnamed-chunk-18</div>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_partially_exhaustive_auxiliary_information">Partially Exhaustive Auxiliary Information</h2>
+<div class="sectionbody">
+<div class="paragraph"><p>Funny: <code>forestinventory</code> can+t deal with partially exhaustive auxiliary information for two-phase sampling:</p></div>
+<div class="listingblock">
+<div class="content"><!-- Generator: GNU source-highlight
+by Lorenzo Bettini
+http://www.lorenzobettini.it
+http://www.gnu.org/software/src-highlite -->
+<pre><tt>try(twophase(formula = formula.s1,
+             data = grisons,
+             phase_id = list(phase.col = <span style="color: #FF0000">"phase_id_2p"</span>,
+                             terrgrid.id = 2),
+             small_area = list(sa.col =<span style="color: #FF0000">"smallarea"</span>,
+                               areas = c(<span style="color: #FF0000">"A"</span>, <span style="color: #FF0000">"B"</span>, <span style="color: #FF0000">"C"</span>, <span style="color: #FF0000">"D"</span>),
+                               unbiased = TRUE),
+             exhaustive = truemeans.G.partially))</tt></pre></div></div>
+<div class="listingblock">
+<div class="content">
+<pre><code>## Error in names(Z_bar_1G) &lt;- colnames(design_matrix.s2) :
+##   'names' attribute [6] must be the same length as the vector [4]</code></pre>
+</div></div>
+<div class="listingblock">
+<div class="content"><!-- Generator: GNU source-highlight
+by Lorenzo Bettini
+http://www.lorenzobettini.it
+http://www.gnu.org/software/src-highlite -->
+<pre><tt>predict(saObj(data = s12,
+              f = update(formula.s1, ~ . | smallarea),
+              s2 = <span style="color: #FF0000">'s2'</span>,
+              smallAreaMeans = tm.partially))</tt></pre></div></div>
+<div class="listingblock">
+<div class="content">
+<pre><code>##   small_area prediction variance   psynth var_psynth   psmall var_psmall
+## 1          A   371.0402 712.3895 401.8953   287.3151 373.9803  1048.5674
+## 2          B   398.9159 944.4190 398.5562   303.4478 399.4579   996.5841
+## 3          C   330.4869 863.1605 334.5188   261.8389 330.6825  1104.9620
+## 4          D   384.7398 999.1490 345.1298   227.8379 380.9174  1203.8859</code></pre>
+</div></div>
+<div class="paragraph"><p>Whereas <code>maSAE</code> can+t deal with partially exhaustive auxiliary information for three-phase sampling:</p></div>
+<div class="listingblock">
+<div class="content"><!-- Generator: GNU source-highlight
+by Lorenzo Bettini
+http://www.lorenzobettini.it
+http://www.gnu.org/software/src-highlite -->
+<pre><tt>summary(forestinventory &lt;- threephase(formula.s0,
+                              formula.s1,
+                              data = grisons,
+                              phase_id = list(phase.col = <span style="color: #FF0000">"phase_id_3p"</span>, s1.id = 1, terrgrid.id = 2),
+                              small_area = list(sa.col = <span style="color: #FF0000">"smallarea"</span>, areas = c(<span style="color: #FF0000">"A"</span>, <span style="color: #FF0000">"B"</span>, <span style="color: #FF0000">"C"</span>, <span style="color: #FF0000">"D"</span>),
+                                                unbiased = TRUE),
+                              exhaustive = truemeans.G))</tt></pre></div></div>
+<div class="listingblock">
+<div class="content">
+<pre><code>##
+## Three-phase small area estimation
+##
+## Call:
+## threephase(formula.s0 = formula.s0, formula.s1 = formula.s1,
+##     data = grisons, phase_id = list(phase.col = "phase_id_3p",
+##         s1.id = 1, terrgrid.id = 2), small_area = list(sa.col = "smallarea",
+##         areas = c("A", "B", "C", "D"), unbiased = TRUE), exhaustive = truemeans.G)
+##
+## Method used:
+## Extended synthetic small area estimator
+##
+## Full Regression Model:
+## tvol ~ mean + stddev + max + q75 + smallarea
+##
+## Reduced Regression Model:
+## tvol ~ mean + smallarea
+##
+## Estimation results:
+##  area estimate ext_variance g_variance  n0  n1 n2 n0G n1G n2G r.squared_reduced
+##     A 380.7982    1642.0551  1524.8061 Inf 128 40 Inf  38  12         0.5454824
+##     B 368.8658    1501.2108  1530.6216 Inf 128 40 Inf  34  11         0.5354637
+##     C 325.7081     640.2232   541.0235 Inf 128 40 Inf  28   8         0.5282291
+##     D 389.3585    1961.1322  1753.9986 Inf 128 40 Inf  28   9         0.5339996
+##  r.squared_full
+##       0.7242913
+##       0.7171512
+##       0.7172375
+##       0.7268820</code></pre>
+</div></div>
+<div class="listingblock">
+<div class="content"><!-- Generator: GNU source-highlight
+by Lorenzo Bettini
+http://www.lorenzobettini.it
+http://www.gnu.org/software/src-highlite -->
+<pre><tt>try(predict(saObj(data = s012,
+              f = update(formula.s1, ~ . | smallarea),
+              s2 = <span style="color: #FF0000">'s2'</span>,
+              s1 = <span style="color: #FF0000">'s1'</span>,
+              smallAreaMeans = tm)))</tt></pre></div></div>
+<div class="listingblock">
+<div class="content"><!-- Generator: GNU source-highlight
+by Lorenzo Bettini
+http://www.lorenzobettini.it
+http://www.gnu.org/software/src-highlite -->
+<pre><tt><span style="font-style: italic"><span style="color: #9A1900">## n(s0) &gt;&gt; n(s1) should hold, but you've given s1 resulting in n(s1)/n(s0) =  0.418300653594771</span></span>
+</tt></pre></div></div>
+<div class="listingblock">
+<div class="content">
+<pre><code>## Error in h(simpleError(msg, call)) :
+##   error in evaluating the argument 'object' in selecting a method for function 'predict': invalid class "saeObj" object: Got both partial true means and s1. There is no theoretical description for this so far!</code></pre>
+</div></div>
+<div class="paragraph"><p>I do not see what three-phase partially exhaustive information would be.
+So: is partially exhaustive auxiliary information two- or three-phase?</p></div>
+<div class="sect2">
+<h3 id="_is_partially_exhaustive_auxiliary_information_two_or_three_phase">Is Partially Exhaustive Auxiliary Information Two- or Three-Phase?</h3>
+<div class="paragraph"><p>The (first) estimation given on page 22 of
+<a href="https://CRAN.R-project.org/package=forestinventory/vignettes/forestinventory_vignette.pdf">forestinventory+s vignette</a> is:</p></div>
+<div class="listingblock">
+<div class="content"><!-- Generator: GNU source-highlight
+by Lorenzo Bettini
+http://www.lorenzobettini.it
+http://www.gnu.org/software/src-highlite -->
+<pre><tt>extsynth_3p &lt;- threephase(formula.s0, formula.s1, data = grisons,
+                          phase_id = list(phase.col = <span style="color: #FF0000">"phase_id_3p"</span>,
+                                          s1.id = 1, terrgrid.id = 2),
+                          small_area = list(sa.col = <span style="color: #FF0000">"smallarea"</span>, areas = c(<span style="color: #FF0000">"A"</span>, <span style="color: #FF0000">"B"</span>, <span style="color: #FF0000">"C"</span>, <span style="color: #FF0000">"D"</span>),
+                                            unbiased = TRUE),
+                          exhaustive = truemeans.G,
+                          boundary_weights = <span style="color: #FF0000">"boundary_weights"</span>
+                          )
+extsynth_3p$estimation</tt></pre></div></div>
+<div class="listingblock">
+<div class="content">
+<pre><code>##   area estimate ext_variance g_variance  n0  n1 n2 n0G n1G n2G
+## 1    A 382.6405    1642.0551  1518.7407 Inf 128 40 Inf  38  12
+## 2    B 368.9013    1501.2108  1530.5759 Inf 128 40 Inf  34  11
+## 3    C 325.3720     640.2232   543.2681 Inf 128 40 Inf  28   8
+## 4    D 388.0325    1961.1322  1756.0906 Inf 128 40 Inf  28   9
+##   r.squared_reduced r.squared_full
+## 1         0.5454824      0.7242913
+## 2         0.5354637      0.7171512
+## 3         0.5282291      0.7172375
+## 4         0.5339996      0.7268820</code></pre>
+</div></div>
+<div class="listingblock">
+<div class="content"><!-- Generator: GNU source-highlight
+by Lorenzo Bettini
+http://www.lorenzobettini.it
+http://www.gnu.org/software/src-highlite -->
+<pre><tt>s12_3p$s1 &lt;- NULL
+s12_3p$phase_id_2p &lt;- NULL
+s12_3p$phase_id_3p &lt;- NULL
+maSAE &lt;- predict(saObj(data = s12_3p,
+                       f = update(formula.s1, ~ . | smallarea),
+                       auxiliaryWeights = <span style="color: #FF0000">"boundary_weights"</span>,
+                       s2 = <span style="color: #FF0000">'s2'</span>, smallAreaMeans = tm)
+)
+compare(maSAE, extsynth_3p, <span style="color: #FF0000">"three-phase, ext. sae"</span>)</tt></pre></div></div>
+<div class="listingblock">
+<div class="content">
+<pre><code>## [1] TRUE</code></pre>
+</div></div>
+<div class="paragraph"><p>So this is a two-phase setup, <code>forestinventory</code> seems to need the three-phase setup (the reduced model)
+to identify the partially exhaustive part of the auxiliary information.
+The corresponding publication is</p></div>
+<div class="literalblock">
+<div class="content">
+<pre><code>Daniel Mandallaz, Jochen Breschan, and Andreas Hill. New regression
+estimators in forest inventories with two-phase sampling and partially
+exhaustive information: a design-based Monte Carlo approach with applications
+to small-area estimation.
+In: Canadian Journal of Forest Research 43.11 (2013), pp. 1023-1031.
+doi: 10.1139/cjfr-2013-0181.</code></pre>
+</div></div>
+<div class="paragraph"><p>The benchmarks again:</p></div>
+<div class="listingblock">
+<div class="content"><!-- Generator: GNU source-highlight
+by Lorenzo Bettini
+http://www.lorenzobettini.it
+http://www.gnu.org/software/src-highlite -->
+<pre><tt>mb &lt;- mbmb(
+           forestinventory = wrap_three(formula.s0,
+                              formula.s1,
+                              data = grisons,
+                              phase_id = list(phase.col = <span style="color: #FF0000">"phase_id_3p"</span>, s1.id = 1, terrgrid.id = 2),
+                              small_area = list(sa.col = <span style="color: #FF0000">"smallarea"</span>, areas = c(<span style="color: #FF0000">"A"</span>, <span style="color: #FF0000">"B"</span>, <span style="color: #FF0000">"C"</span>, <span style="color: #FF0000">"D"</span>),
+                                                unbiased = TRUE),
+                              exhaustive = truemeans.G),
+           maSAE = predict(suppressMessages(saObj(data = s12_3p,
+                       f = update(formula.s1, ~ . | smallarea),
+                       s2 = <span style="color: #FF0000">'s2'</span>, smallAreaMeans = tm)))[, -1],
+           check = <span style="color: #FF0000">"equivalent"</span>)
+print(mb)</tt></pre></div></div>
+<div class="listingblock">
+<div class="content">
+<pre><code>## Unit: milliseconds
+##             expr       min        lq      mean   median        uq      max
+##  forestinventory 158.09697 160.52206 165.98454 161.8343 167.84556 207.4526
+##            maSAE  74.87462  75.96267  86.72364  85.5007  87.85716 269.2849
+##  neval
+##    100
+##    100</code></pre>
+</div></div>
+<div class="listingblock">
+<div class="content"><!-- Generator: GNU source-highlight
+by Lorenzo Bettini
+http://www.lorenzobettini.it
+http://www.gnu.org/software/src-highlite -->
+<pre><tt>microbenchmark:::autoplot.microbenchmark(mb)</tt></pre></div></div>
+<div class="listingblock">
+<div class="content"><!-- Generator: GNU source-highlight
+by Lorenzo Bettini
+http://www.lorenzobettini.it
+http://www.gnu.org/software/src-highlite -->
+<pre><tt><span style="font-style: italic"><span style="color: #9A1900">## Coordinate system already present. Adding new coordinate system, which will replace the existing one.</span></span>
+</tt></pre></div></div>
+<div class="imageblock">
+<div class="content">
+<img src="figure/unnamed-chunk-23-1.pdf" alt="plot of chunk unnamed-chunk-23" />
+</div>
+<div class="title">Figure 4. plot of chunk unnamed-chunk-23</div>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_cluster_sampling">Cluster Sampling</h2>
+<div class="sectionbody">
+<div class="paragraph"><p>I adapt data from <code>maSAE</code> to  section 6.2 of
+<a href="https://CRAN.R-project.org/package=forestinventory/vignettes/forestinventory_vignette.pdf">forestinventory+s vignette</a>:</p></div>
+<div class="listingblock">
+<div class="content"><!-- Generator: GNU source-highlight
+by Lorenzo Bettini
+http://www.lorenzobettini.it
+http://www.gnu.org/software/src-highlite -->
+<pre><tt>suppressWarnings(rm(<span style="color: #FF0000">"s1"</span> ,<span style="color: #FF0000">"s2"</span>, <span style="color: #FF0000">"s12"</span>))
+data(<span style="color: #FF0000">"s1"</span>, <span style="color: #FF0000">"s2"</span>, package = <span style="color: #FF0000">"maSAE"</span>)
+s12 &lt;- bind_data(s1, s2)
+<span style="font-style: italic"><span style="color: #9A1900"># adapt for forestinventory</span></span>
+s12[[<span style="color: #FF0000">"g"</span>]][is.na(s12[[<span style="color: #FF0000">"g"</span>]])] &lt;- <span style="color: #FF0000">"a"</span>
+s12[[<span style="color: #FF0000">"phase"</span>]]  &lt;-  s12[[<span style="color: #FF0000">"phase1"</span>]] + s12[[<span style="color: #FF0000">"phase2"</span>]]
+maSAE &lt;- predict(suppressMessages(saObj(data = s12, f = y ~x1 + x2 + x3 | g,
+              s2 = <span style="color: #FF0000">"phase2"</span>, cluster = <span style="color: #FF0000">"clustid"</span>)))
+extpsynth.clust &lt;- twophase(y ~x1 + x2 + x3,
+         data = s12,
+         cluster = <span style="color: #FF0000">"clustid"</span>,
+         phase_id = list(phase.col = <span style="color: #FF0000">"phase"</span>, s1.id = 1, terrgrid.id = 2),
+         small_area = list(sa.col = <span style="color: #FF0000">"g"</span>, areas = c(<span style="color: #FF0000">"a"</span>, <span style="color: #FF0000">"b"</span>),
+                           unbiased = TRUE))
+compare(maSAE, extpsynth.clust, <span style="color: #FF0000">"three-phase, ext. sae"</span>)</tt></pre></div></div>
+<div class="listingblock">
+<div class="content">
+<pre><code>## [1] TRUE</code></pre>
+</div></div>
+<div class="listingblock">
+<div class="content"><!-- Generator: GNU source-highlight
+by Lorenzo Bettini
+http://www.lorenzobettini.it
+http://www.gnu.org/software/src-highlite -->
+<pre><tt>mb &lt;- mbmb(
+           forestinventory = clean(twophase(y ~x1 + x2 + x3,
+         data = s12,
+         cluster = <span style="color: #FF0000">"clustid"</span>,
+         phase_id = list(phase.col = <span style="color: #FF0000">"phase"</span>, s1.id = 1, terrgrid.id = 2),
+         small_area = list(sa.col = <span style="color: #FF0000">"g"</span>, areas = c(<span style="color: #FF0000">"a"</span>, <span style="color: #FF0000">"b"</span>),
+                           unbiased = TRUE))),
+           maSAE = clean(predict(suppressMessages(saObj(data = s12, f = y ~x1 + x2 + x3 | g,
+              s2 = <span style="color: #FF0000">"phase2"</span>, cluster = <span style="color: #FF0000">"clustid"</span>)))),
+
+           check = <span style="color: #FF0000">"equivalent"</span>)
+print(mb)</tt></pre></div></div>
+<div class="listingblock">
+<div class="content">
+<pre><code>## Unit: milliseconds
+##             expr       min        lq      mean    median        uq       max
+##  forestinventory 110.35891 120.21952 122.49845 121.84451 123.32627 257.67614
+##            maSAE  43.12993  43.79442  47.65953  44.19827  52.97338  80.74552
+##  neval
+##    100
+##    100</code></pre>
+</div></div>
+<div class="listingblock">
+<div class="content"><!-- Generator: GNU source-highlight
+by Lorenzo Bettini
+http://www.lorenzobettini.it
+http://www.gnu.org/software/src-highlite -->
+<pre><tt>microbenchmark:::autoplot.microbenchmark(mb)</tt></pre></div></div>
+<div class="listingblock">
+<div class="content"><!-- Generator: GNU source-highlight
+by Lorenzo Bettini
+http://www.lorenzobettini.it
+http://www.gnu.org/software/src-highlite -->
+<pre><tt><span style="font-style: italic"><span style="color: #9A1900">## Coordinate system already present. Adding new coordinate system, which will replace the existing one.</span></span>
+</tt></pre></div></div>
+<div class="imageblock">
+<div class="content">
+<img src="figure/unnamed-chunk-24-1.pdf" alt="plot of chunk unnamed-chunk-24" />
+</div>
+<div class="title">Figure 5. plot of chunk unnamed-chunk-24</div>
+</div>
+<div class="paragraph"><p>Now I use the example given in  section 6.2 of
+<a href="https://CRAN.R-project.org/package=forestinventory/vignettes/forestinventory_vignette.pdf">forestinventory+s vignette</a>:</p></div>
+<div class="listingblock">
+<div class="content"><!-- Generator: GNU source-highlight
+by Lorenzo Bettini
+http://www.lorenzobettini.it
+http://www.gnu.org/software/src-highlite -->
+<pre><tt>data(<span style="color: #FF0000">"zberg"</span>, package = <span style="color: #FF0000">"forestinventory"</span>)
+forestinventory &lt;- forestinventory::twophase(
+  formula = basal ~ stade + couver + melange, data = zberg,
+  phase_id = list(phase.col = <span style="color: #FF0000">"phase_id_2p"</span>, terrgrid.id = 2),
+  cluster = <span style="color: #FF0000">"cluster"</span>,
+  small_area = list(
+    sa.col = <span style="color: #FF0000">"ismallold"</span>, areas = c(<span style="color: #FF0000">"1"</span>),
+    unbiased = TRUE
+  )
+)</tt></pre></div></div>
+<div class="listingblock">
+<div class="content"><!-- Generator: GNU source-highlight
+by Lorenzo Bettini
+http://www.lorenzobettini.it
+http://www.gnu.org/software/src-highlite -->
+<pre><tt><span style="font-style: italic"><span style="color: #9A1900">## Warning: At least one terrestrial cluster not entirely included within the small area 1.</span></span>
+<span style="font-style: italic"><span style="color: #9A1900">## Zero mean residual assumption for small area maybe violated.</span></span>
+<span style="font-style: italic"><span style="color: #9A1900">## Check mean_Rc_x_hat_G and consider alternative estimator 'psmall'</span></span>
+</tt></pre></div></div>
+<div class="listingblock">
+<div class="content"><!-- Generator: GNU source-highlight
+by Lorenzo Bettini
+http://www.lorenzobettini.it
+http://www.gnu.org/software/src-highlite -->
+<pre><tt>s1 &lt;- zberg[zberg[[<span style="color: #FF0000">"phase_id_2p"</span>]] == 1, ]
+s2 &lt;- zberg[zberg[[<span style="color: #FF0000">"phase_id_2p"</span>]] == 2, ]
+s12 &lt;- rbind(s1, s2)
+s12[[<span style="color: #FF0000">"s1"</span>]] &lt;- s12[[<span style="color: #FF0000">"phase_id_2p"</span>]] <span style="color: #990000">%in%</span> c(1, 2)
+s12[[<span style="color: #FF0000">"s2"</span>]] &lt;- s12[[<span style="color: #FF0000">"phase_id_2p"</span>]] == 2
+object &lt;- maSAE::saObj(
+  data = s12,
+  f = basal ~ stade + couver + melange | ismallold,
+  s2 = <span style="color: #FF0000">"s2"</span>,
+  cluster = <span style="color: #FF0000">"cluster"</span>
+)</tt></pre></div></div>
+<div class="listingblock">
+<div class="content"><!-- Generator: GNU source-highlight
+by Lorenzo Bettini
+http://www.lorenzobettini.it
+http://www.gnu.org/software/src-highlite -->
+<pre><tt><span style="font-style: italic"><span style="color: #9A1900">## include is NULL, automatically adding it as TRUE to data.</span></span>
+</tt></pre></div></div>
+<div class="listingblock">
+<div class="content"><!-- Generator: GNU source-highlight
+by Lorenzo Bettini
+http://www.lorenzobettini.it
+http://www.gnu.org/software/src-highlite -->
+<pre><tt>maSAE &lt;- maSAE::predict(object)
+compare(maSAE[2,], forestinventory, <span style="color: #FF0000">"clustered, ext. sae"</span>)</tt></pre></div></div>
+<div class="listingblock">
+<div class="content"><!-- Generator: GNU source-highlight
+by Lorenzo Bettini
+http://www.lorenzobettini.it
+http://www.gnu.org/software/src-highlite -->
+<pre><tt><span style="font-style: italic"><span style="color: #9A1900">## Warning in compare(maSAE[2, ], forestinventory, "clustered, ext. sae"):</span></span>
+<span style="font-style: italic"><span style="color: #9A1900">## Differing results from maSAE and forestinventory: clustered, ext. sae</span></span>
+</tt></pre></div></div>
+<div class="listingblock">
+<div class="content">
+<pre><code>## [1] FALSE</code></pre>
+</div></div>
+<div class="paragraph"><p>Obviously, something went wrong. The difference to the previous example? <code>zberg</code> contains nominally scaled predictors.
+If I ignore the cluster design, both packages give the same result:</p></div>
+<div class="listingblock">
+<div class="content"><!-- Generator: GNU source-highlight
+by Lorenzo Bettini
+http://www.lorenzobettini.it
+http://www.gnu.org/software/src-highlite -->
+<pre><tt>forestinventory &lt;- forestinventory::twophase(
+  formula = basal ~ stade + couver + melange, data = zberg,
+  phase_id = list(phase.col = <span style="color: #FF0000">"phase_id_2p"</span>, terrgrid.id = 2),
+  small_area = list(
+    sa.col = <span style="color: #FF0000">"ismallold"</span>, areas = c(<span style="color: #FF0000">"1"</span>),
+    unbiased = TRUE
+  )
+)
+object &lt;- maSAE::saObj(
+  data = s12,
+  f = basal ~ stade + couver + melange | ismallold,
+  s2 = <span style="color: #FF0000">"s2"</span>,
+)
+maSAE &lt;- maSAE::predict(object)
+compare(maSAE[2,], forestinventory, <span style="color: #FF0000">"clustered, ext. sae"</span>)</tt></pre></div></div>
+<div class="listingblock">
+<div class="content">
+<pre><code>## [1] TRUE</code></pre>
+</div></div>
+<div class="paragraph"><p>I do not know where that comes from. But since <code>maSAE</code> has very structured code compared to <code>forestinventory</code>
+(<code>maSAE</code> needs about 500 lines of code for its prediction functions, <code>forestinventory</code> more than 2200), I am biased to
+believe <code>maSAE</code>.</p></div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_conclusion">Conclusion</h2>
+<div class="sectionbody">
+<div class="ulist"><ul>
+<li>
+<p>
+Both packages give mostly identical results, but different ones for clustered sampling designs with nominally scaled predictors.
+</p>
+</li>
+<li>
+<p>
+<code>forestinventory</code> views partially exhaustive auxiliary information as a
+three-phase setup, <code>maSAE</code> (following Mandallaz' publications) uses a two-phase setup, but both packages give identical results after some data tweaking.
+</p>
+</li>
+<li>
+<p>
+<code>maSAE</code> seems to be a bit faster.
+</p>
+</li>
+<li>
+<p>
+<code>forestinventory</code> has global estimators implemented.
+</p>
+</li>
+</ul></div>
+</div>
+</div>
+</div>
+<div id="footnotes"><hr /></div>
+<div id="footer">
+<div id="footer-text">
+Last updated
+ 2020-11-19 23:00:12 CET
+</div>
+</div>
+</body>
+</html>
